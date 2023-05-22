@@ -85,11 +85,11 @@ public class GoodsController {
                 .sorted(Comparator.comparing(Record::getTime))
                 .collect(Collectors.toList());
         model.addAttribute("records", records_after_adjust);
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(records_after_adjust);
-        json = json.replaceAll("&", "\u0026");
-        System.out.println(json);
-        model.addAttribute("json", json);
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json = mapper.writeValueAsString(records_after_adjust);
+//        json = json.replaceAll("&", "\u0026");
+//        System.out.println(json);
+//        model.addAttribute("json", json);
         return "good";
     }
 

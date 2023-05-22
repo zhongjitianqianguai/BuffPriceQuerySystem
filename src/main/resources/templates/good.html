@@ -146,36 +146,45 @@
 </div>
 </div>
 
-<script type="text/javascript">
-    let myChart = echarts.init(document.getElementById('myChart'));
-
-    let json=JSON.stringify([[${json}]]);
-
+<script type="text/javascript" th:inline="javascript">
+    let myChart;
+    myChart = echarts.init(document.getElementById('myChart'));
+    let json=[[${records}]];
     let data=[]
+    for (let i = 0; i < json.length; i++) {
+        data.push({name:json[i]['time'],value:[json[i]['time'],json[i]["price"]]})
+    }
     option = {
 
         tooltip: {
+            triggerOn: 'mousemove',
+            showContent: true,
+            show:true,
             trigger: 'axis',
-            axisPointer: {
-                animation: false
-            }
+            snap:true,
+            axisPointer:{
+                type:'cross',
+                show:true
+            },
+            formatter: {}
         },
         xAxis: {
             type: 'time',
             splitLine: {
                 show: false
-            }
+            },
         },
         yAxis: {
 
-            // boundaryGap: [0, '100%'],
+            boundaryGap: [0, '100%'],
             type: 'value',
             axisLabel: {
                 formatter: '￥{value}'
             },
             splitLine: {
                 show: false
-            }
+            },
+
         },
         series: [
             {
