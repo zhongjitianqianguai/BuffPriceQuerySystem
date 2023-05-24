@@ -42,4 +42,13 @@ public class GoodsService {
     public List<Good> getGoodByPriceSortSearchDesc(String goods_name,int offset, int limit){
         return goodsMapper.getGoodByPriceSortSearchDesc(goods_name,offset,limit);
     }
+    public List<Good> getGoodsByPriceBetween(double minPrice, double maxPrice, int offset, int limit){
+        return goodsMapper.getGoodsByPriceBetween(minPrice,maxPrice,offset,limit);
+    }
+    public List<Good> getGoodByPriceSortBetweenAsc(double minPrice, double maxPrice, int offset, int limit){
+        return goodsMapper.getGoodByPriceSortBetweenAsc(minPrice,maxPrice,offset,limit);
+    }
+    public List<Good> getGoodByPriceSortBetweenDesc(double minPrice, double maxPrice, int offset, int limit){
+        return goodsMapper.getGoodByPriceSortBetweenDesc(minPrice,maxPrice,offset,limit);
+    }
 }

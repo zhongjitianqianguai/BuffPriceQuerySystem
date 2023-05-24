@@ -1,12 +1,22 @@
 package com.tianqianguai.buffpricequerysystem.entity;
 
 public class User {
+    int id;
     String username;
     String password;
 
-    public User(String username, String password) {
+    public User(int id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

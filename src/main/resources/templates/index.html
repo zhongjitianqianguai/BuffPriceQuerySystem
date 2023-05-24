@@ -17,7 +17,6 @@
         <div class="nav">
             <ul>
                 <li class="on"><a href="/home"><strong>饰品市场</strong></a></li>
-
             </ul>
         </div>
         <div class="nav nav_entries">
@@ -26,7 +25,7 @@
             </h3>
             </div>
             <ul>
-                <li><a href="javascript:void(0)" onclick="loginModule.showLogin()">登录/注册</a></li>
+                <li><a href="javascript:void(0)" >登录/注册</a></li>
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
@@ -52,12 +51,12 @@
                 <div class="w-Checkbox" name="preview_screenshots"  id="preview_screenshots"
                      style="display:none"></div>
                 <div class="w-Counter" id="j_counter" style="line-height: 0;margin: 0 32px;">
-                    <div class="w-Counter-input w-Counter-input3"> ¥<input type="text" class="i_Text" name="min_price"
+                    <div class="w-Counter-input w-Counter-input3"> ¥<input type="text" class="i_Text" name="min_price" th:value="${between_min=='0'?null:between_min}"
                                                                            placeholder="最低价" >-¥<input
-                            type="text" class="i_Text" name="max_price" placeholder="最高价" ></div>
+                            type="text" class="i_Text" name="max_price" placeholder="最高价" th:value="${between_max=='999999'?null:between_max}"></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
                                                                             class="i_Btn i_Btn_sub i_Btn_small">清除</a><a
-                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small">确定</a></div>
+                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit">确定</a></div>
                 </div>
                 <div class="w-Select-Multi w-Select-scroll " style="visibility: visible; width: 98px;"
                      name="sort_by">
@@ -97,10 +96,8 @@
             <div class="clear"></div>
         </div>
         <div class="market-card" id="j_market_card">
-
             <div class="list_card" id="j_list_card">
                 <ul class="card_csgo">
-
                     <li th:each="good:${first_goods}">
                         <a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}">
                             <img class="lazy"
@@ -178,9 +175,31 @@
             }else if ([[${search}]]!=null){
                 window.location.href = '/home?sort=' + sort_type + '&search=' + [[${search}]]
                 return
+            }else if ([[${between_min}]]!=null||[[${between_max}]]!=null){
+                window.location.href = '/home?sort=' + sort_type + '&between_min=' + [[${between_min}]] + '&between_max=' + [[${between_max}]]
+                return
             }
             window.location.href = '/home?sort=' + sort_type
 
+        })
+        $('#between_submit').click(function () {
+            let between_min = $('input[name="min_price"]').val()
+            let between_max = $('input[name="max_price"]').val()
+            if (between_min === '' && between_max === '') {
+                alert('请至少输入一个价格区间')
+                return
+            }
+            if (between_min !== '' && between_max !== ''&&between_min > between_max) {
+                alert('最小值不能大于最大值')
+                return
+            }
+            if (between_min === '') {
+                between_min = 0
+            }
+            if (between_max === '') {
+                between_max = 999999
+            }
+            window.location.href = '/home?between_min=' + between_min + '&between_max=' + between_max
         })
     })
 </script>

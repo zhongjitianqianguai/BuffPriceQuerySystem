@@ -24,7 +24,7 @@
         </div>
         <div class="nav nav_entries">
             <ul>
-                <li><a href="javascript:void(0)" onclick="loginModule.showLogin()">登录/注册</a></li>
+                <li><a href="javascript:void(0)" >登录/注册</a></li>
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
@@ -61,8 +61,7 @@
                     </div>
                 <div class="detail-cont">
                     <div>
-                        <div class="l_Right detail-fav"><span id="weapon_case_entry" onclick="weapon_case.show()"><i
-                                class="icon2x icon_weaponbox"></i></span>
+                        <div class="l_Right detail-fav">
                             <div>
                                 <div data-target-type="2" data-target-id="927346" class="add-bookmark"><span>收藏</span><i
                                         class="icon icon_fav"></i></div>
@@ -355,6 +354,16 @@
             };
             myChart.setOption(option);
 
+        })
+        $('add-bookmark').click(function () {
+            let goods_id=[[${goods_id}]]
+            $.post('/add_bookmark', {goods_id: goods_id,user_id:[[${user.getId()}]]}, function (data) {
+                if (data['code'] === 200) {
+                    alert('收藏成功')
+                } else {
+                    alert('收藏失败')
+                }
+            })
         })
     })
 

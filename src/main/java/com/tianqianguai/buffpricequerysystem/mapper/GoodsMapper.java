@@ -30,4 +30,11 @@ public interface GoodsMapper {
     List<Good> getGoodByPriceSortCategoryDesc(int offset, int limit,String category);
     @Select("select * from buff_goods where category=#{category} order by now_price asc  limit #{offset},#{limit}")
     List<Good> getGoodByPriceSortCategoryAsc(int offset, int limit,String category);
+
+    @Select("select * from buff_goods where now_price between #{minPrice} and #{maxPrice} limit #{offset},#{limit}")
+    List<Good> getGoodsByPriceBetween(double minPrice, double maxPrice, int offset, int limit);
+    @Select("select * from buff_goods where now_price between #{minPrice} and #{maxPrice} order by now_price asc limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortBetweenAsc(double minPrice, double maxPrice, int offset, int limit);
+    @Select("select * from buff_goods where now_price between #{minPrice} and #{maxPrice} order by now_price desc limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortBetweenDesc(double minPrice, double maxPrice, int offset, int limit);
 }

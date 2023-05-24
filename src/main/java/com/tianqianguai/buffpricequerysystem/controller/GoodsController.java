@@ -64,6 +64,10 @@ public class GoodsController {
         String category = request.getParameter("category");
         String search = request.getParameter("search");
         String sort = request.getParameter("sort");
+        String between_min= request.getParameter("between_min");
+        String between_max= request.getParameter("between_max");
+        model.addAttribute("between_min", between_min);
+        model.addAttribute("between_max", between_max);
         model.addAttribute("sort", sort);
         model.addAttribute("search", search);
         model.addAttribute("category", category);
@@ -85,17 +89,19 @@ public class GoodsController {
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortCategoryDesc(offset, 20, category);
             }
-            model.addAttribute("first_goods", first_goods);
-            return "index";
         } else if (category != null) {
             first_goods = goodsService.selectGoodsIwantByCategory(offset, 20, category);
-            model.addAttribute("first_goods", first_goods);
-            return "index";
         } else if (search != null&&sort != null) {
             if (sort.equals("asc")) {
                 first_goods = goodsService.getGoodByPriceSortSearchAsc(search,offset, 20);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortSearchDesc(search,offset, 20);
+            }
+        } else if (sort != null && between_max != null && between_min != null) {
+            if (sort.equals("asc")) {
+                first_goods = goodsService.getGoodByPriceSortBetweenAsc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
+            } else if (sort.equals("desc")) {
+                first_goods = goodsService.getGoodByPriceSortBetweenDesc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
             }
         } else if (sort != null) {
             if (sort.equals("asc")) {
@@ -107,6 +113,8 @@ public class GoodsController {
         } else if (search!=null) {
             first_goods=goodsService.getGoodsByName(search,offset,20);
 
+        } else if (between_max!=null&&between_min!=null) {
+            first_goods=goodsService.getGoodsByPriceBetween(Double.parseDouble(between_min),Double.parseDouble(between_max),offset,20);
         } else {
             first_goods = goodsService.getGoodsIwant(offset, 20);
         }
@@ -119,6 +127,7 @@ public class GoodsController {
 
     public String show_good(HttpServletRequest request, Model model) {
         String goods_id = request.getParameter("goods_id");
+        model.addAttribute("goods_id", goods_id);
         Good good = goodsService.getGoodById(goods_id);
         model.addAttribute("good", good);
         List<Record> records = recordService.getGoodRecordById(goods_id);
