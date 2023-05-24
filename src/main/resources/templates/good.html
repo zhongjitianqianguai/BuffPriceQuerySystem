@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh"  xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
     <title>商品详情</title>
     <link rel="stylesheet" href="./css/main.css">
-    <script type="text/javascript" src="./js/lib.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
+    <!--    <script type="text/javascript" src="./js/lib.js"></script>-->
+    <!--    <script type="text/javascript" src="./js/main.js"></script>-->
     <script type="text/javascript" src="./js/echarts.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
+
 
 </head>
 <body class=" csgo  ">
@@ -101,24 +103,36 @@
 
             </div>
 
-            <div id="price-history-type" class="w-Select" name="buff_price_type" init="inited"
+            <div id="price-history-type" class="w-Select" name="buff_price_type"
                  style="width: 100px; visibility: visible;">
-                <h3>在售最低</h3>
+
+
+                <h3 id="price-history-type-all">所有数据</h3>
+                <i class="icon icon_drop"></i>
+                <ul id="price-type" style="width: 100px;">
+
+                    <li value="1" class="on" style="width: 82px;">所有数据</li>
+
+                    <li value="2"  style="width: 82px;">在售最低</li>
+
+                </ul>
             </div>
 
             <div id="price-history-days" class="w-Select" name="days" init="inited"
                  style="width: 100px; visibility: visible;">
 
 
-                <h3>最近7天</h3>
+                <h3 id="days">最近7天</h3>
                 <i class="icon icon_drop"></i>
-                <ul style="width: 100px;">
+                <ul id="price-days" style="width: 100px;">
 
                     <li value="7" data-disabled="false" class="on" style="width: 82px;">最近7天</li>
 
                     <li value="30" data-disabled="false" style="width: 82px;">最近1个月</li>
 
-                    <li value="180" data-disabled="false"  style="width: 82px;">最近6个月</li>
+                    <li value="180" data-disabled="false" style="width: 82px;">最近6个月</li>
+                    <li value="365" data-disabled="false" style="width: 82px;">最近一年</li>
+
 
                 </ul>
             </div>
@@ -136,8 +150,8 @@
                         </div>
                     </div>
                     <div class="clear"></div>
-                    <canvas id="myChart" style="margin-top: -10px; display: block; height: 500px; width: 1000px;"
-                            width="1250" height="625" class="chartjs-render-monitor"></canvas>
+                    <div id="myChart" style="margin-top: -10px; display: block; height: 500px; width: 1000px;"
+                         class="chartjs-render-monitor"></div>
                 </div>
             </div>
         </div>
@@ -147,55 +161,171 @@
 </div>
 
 <script type="text/javascript" th:inline="javascript">
-    let myChart;
-    myChart = echarts.init(document.getElementById('myChart'));
-    let json=[[${records}]];
-    let data=[]
-    for (let i = 0; i < json.length; i++) {
-        data.push({name:json[i]['time'],value:[json[i]['time'],json[i]["price"]]})
-    }
-    option = {
+    $(()=>{
+        let myChart;
+        myChart = echarts.init(document.getElementById('myChart'));
+        let json = [[${all_records}]];
+        let data = []
+        for (let i = 0; i < json.length; i++) {
+            data.push({name: json[i]['time'], value: [json[i]['time'], json[i]["price"]]})
+        }
+        option = {
 
-        tooltip: {
-            triggerOn: 'mousemove',
-            showContent: true,
-            show:true,
-            trigger: 'axis',
-            snap:true,
-            axisPointer:{
-                type:'cross',
-                show:true
-            },
-            formatter: {}
-        },
-        xAxis: {
-            type: 'time',
-            splitLine: {
-                show: false
-            },
-        },
-        yAxis: {
+            tooltip: {
+                show: true,
+                trigger: 'axis',
 
-            boundaryGap: [0, '100%'],
-            type: 'value',
-            axisLabel: {
-                formatter: '￥{value}'
-            },
-            splitLine: {
-                show: false
-            },
 
-        },
-        series: [
-            {
-                name: '当天最低出售价格',
-                type: 'line',
-                showSymbol: false,
-                data: data
+            },
+            xAxis: {
+                type: 'time',
+                splitLine: {
+                    show: false
+                },
+            },
+            yAxis: {
+
+                boundaryGap: [0, '100%'],
+                type: 'value',
+                axisLabel: {
+                    formatter: '￥{value}'
+                },
+                splitLine: {
+                    show: false
+                },
+
+            },
+            series: [
+                {
+                    name: document.getElementById('price-history-type-all').innerText==='所有数据'?'价格:':'当天在售最低:',
+                    type: 'line',
+                    showSymbol: false,
+                    data: data
+                }
+            ]
+        };
+        myChart.setOption(option);
+        $('#price-history-type-all').click(function () {
+            $('#price-type').slideDown()
+        })
+
+        $('#price-type li').click(function () {
+            $('#price-type').slideUp()
+            var type = $(this).text()
+
+            $('#price-history-type-all').text($(this).text())
+            $(this).addClass("on")
+            $(this).siblings().removeClass("on")
+            $('#price-history-type-all').attr('value', $(this).attr('value'))
+            if (type==='在售最低') {
+                json = [[${records}]];
+            } else {
+                json = [[${all_records}]];
             }
-        ]
-    };
-    myChart.setOption(option);
+            let data = []
+            for (let i = 0; i < json.length; i++) {
+                data.push({name: json[i]['time'], value: [json[i]['time'], json[i]["price"]]})
+            }
+            var option = {
+
+                tooltip: {
+                    show: true,
+                    trigger: 'axis',
+
+
+                },
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    },
+                },
+                yAxis: {
+
+                    boundaryGap: [0, '100%'],
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '￥{value}'
+                    },
+                    splitLine: {
+                        show: false
+                    },
+
+                },
+                series: [
+                    {
+                        name: document.getElementById('price-history-type-all').innerText==='所有数据'?'价格:':'当天在售最低:',
+                        type: 'line',
+                        showSymbol: false,
+                        data: data
+                    }
+                ]
+            };
+            myChart.setOption(option);
+
+        })
+        $('#days').click(function () {
+            $('#price-days').slideDown()
+        })
+        $('#price-days li').click(function () {
+            $('#price-days').slideUp()
+            var type = $(this).text()
+
+            $('#days').text($(this).text())
+            $(this).addClass("on")
+            $(this).siblings().removeClass("on")
+            $('#days').attr('value', $(this).attr('value'))
+            if (type==='最近1个月') {
+                json = [[${records}]];
+            } else {
+                json = [[${all_records}]];
+            }
+            let data = []
+            for (let i = 0; i < json.length; i++) {
+                data.push({name: json[i]['time'], value: [json[i]['time'], json[i]["price"]]})
+            }
+            var option = {
+
+                tooltip: {
+                    show: true,
+                    trigger: 'axis',
+
+
+                },
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    },
+                },
+                yAxis: {
+
+                    boundaryGap: [0, '100%'],
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '￥{value}'
+                    },
+                    splitLine: {
+                        show: false
+                    },
+
+                },
+                series: [
+                    {
+                        name: document.getElementById('price-history-type-all').innerText==='所有数据'?'价格:':'当天在售最低:',
+                        type: 'line',
+                        showSymbol: false,
+                        data: data
+                    }
+                ]
+            };
+            myChart.setOption(option);
+
+        })
+    })
+
+
+
 </script>
 </body>
 </html>

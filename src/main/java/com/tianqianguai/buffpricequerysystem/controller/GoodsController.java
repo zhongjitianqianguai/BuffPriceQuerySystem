@@ -69,6 +69,8 @@ public class GoodsController {
         Good good = goodsService.getGoodById(goods_id);
         model.addAttribute("good", good);
         List<Record> records = recordService.getGoodRecordById(goods_id);
+        model.addAttribute("all_records", records);
+
         //使用 Java 8 中的 Stream API 对记录进行处理，按时间分组，得到 Map<String, List<Record>> 类型的照时间字符串的前十个字符（即日期）进行分组。
         Map<String, List<Record>> recordMap = records.stream()
                 .collect(Collectors.groupingBy(r -> r.getTime().substring(0, 10)));
