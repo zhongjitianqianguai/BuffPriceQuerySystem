@@ -16,4 +16,18 @@ public interface GoodsMapper {
     List<Good> selectGoodsIwantByCategory(int offset, int limit,String category);
     @Select("select * from buff_goods where goods_id=#{goods_id}")
     Good getGoodById(String goods_id);
+    @Select("select * from buff_goods where name like  '%' #{goods_name}  '%' limit #{offset},#{limit}")
+    List<Good> getGoodsByName(String goods_name,int offset, int limit);
+    @Select("select * from buff_goods order by now_price asc limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortAsc(int offset, int limit);
+    @Select("select * from buff_goods  order by now_price desc limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortDesc(int offset, int limit);
+    @Select("select * from buff_goods where name like  '%' #{goods_name}  '%' order by now_price desc limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortSearchDesc(String goods_name,int offset, int limit);
+    @Select("select * from buff_goods where name like  '%' #{goods_name}  '%' order by now_price Asc limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortSearchAsc(String goods_name,int offset, int limit);
+    @Select("select * from buff_goods where category=#{category} order by now_price desc  limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortCategoryDesc(int offset, int limit,String category);
+    @Select("select * from buff_goods where category=#{category} order by now_price asc  limit #{offset},#{limit}")
+    List<Good> getGoodByPriceSortCategoryAsc(int offset, int limit,String category);
 }

@@ -6,15 +6,17 @@
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript" src="./js/lib.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
+
 </head>
 <body class=" csgo  ">
 <div class="header l_Clearfix">
     <div class="header-cont l_Layout">
-        <div class="logo"><a href="/?game=csgo"><img src="./images/logo.png" width="77" height="21"></a>
+        <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>
         </div>
         <div class="nav">
             <ul>
-                <li class="on"><a href="/market/csgo"><strong>饰品市场</strong></a></li>
+                <li class="on"><a href="/home"><strong>饰品市场</strong></a></li>
 
             </ul>
         </div>
@@ -22,11 +24,6 @@
             <div class="header-switcher j_drop-handler" data-current="zh-Hans" id="j_lang-switcher"
                  style="display: none;"><h3><i class="icon icon_lang_zh-Hans"></i><i class="icon icon_arr_light"></i>
             </h3>
-                <div class="j_drop"><p data-value="zh-Hans"><i class="icon icon_lang_zh-Hans"></i>中文(简体)</p>
-                    <p data-value="en"><i class="icon icon_lang_en"></i>English</p>
-                    <p data-value="es"><i class="icon icon_lang_es"></i>Español</p>
-                    <p data-value="pt"><i class="icon icon_lang_pt"></i>Português</p>
-                    <p data-value="ru"><i class="icon icon_lang_ru"></i>Русский</p></div>
             </div>
             <ul>
                 <li><a href="javascript:void(0)" onclick="loginModule.showLogin()">登录/注册</a></li>
@@ -52,30 +49,42 @@
     <div class="l_Layout">
         <div class="block-header">
             <div class="l_Right">
-                <div class="w-Checkbox" name="preview_screenshots" value="" id="preview_screenshots"
+                <div class="w-Checkbox" name="preview_screenshots"  id="preview_screenshots"
                      style="display:none"></div>
                 <div class="w-Counter" id="j_counter" style="line-height: 0;margin: 0 32px;">
                     <div class="w-Counter-input w-Counter-input3"> ¥<input type="text" class="i_Text" name="min_price"
-                                                                           placeholder="最低价" pattened="true">-¥<input
-                            type="text" class="i_Text" name="max_price" placeholder="最高价" pattened="true"></div>
+                                                                           placeholder="最低价" >-¥<input
+                            type="text" class="i_Text" name="max_price" placeholder="最高价" ></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
                                                                             class="i_Btn i_Btn_sub i_Btn_small">清除</a><a
                             href="javascript:;" class="i_Btn i_Btn_main i_Btn_small">确定</a></div>
                 </div>
                 <div class="w-Select-Multi w-Select-scroll " style="visibility: visible; width: 98px;"
-                     name="sort_by" default="排序" init="inited"><h3>排序</h3> <i class="icon icon_drop"></i>
-                    <ul style="width: 98px;">
-                        <li><h6 value="">默认</h6></li>
-                        <li><h6 value="price.asc"><span class="w-Order_asc">价格<i class="icon icon_order"></i></span>
+                     name="sort_by">
+                    <h3 id="sort" th:if="${sort!='asc'&&sort!='desc'}">排序</h3> <i class="icon icon_drop"></i>
+                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc">价格<i class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
+                    </h3>
+                    <ul id="sort-type" style="width: 98px;">
+                        <li><h6>默认</h6></li>
+                        <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span>
                         </h6></li>
-                        <li><h6 value="price.desc"><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
+                        <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
                         </h6></li>
-                        <li id="quantity_li"><h6 value="sell_num.desc"><span class="w-Order_des">在售数量<i
-                                class="icon icon_order"></i></span></h6></li>
                     </ul>
                 </div>
-                <div class="w-Search" id="j_search" data-expanded="false" data-loading="false" data-position="below" style="position: relative;"><span> <input type="text" name="search" class="i_Text" placeholder="输入物品名称" size="30" style="width: 150px;" role="combobox" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-owns="autocomplete-result-list-1" > </span> <a id="search_btn_csgo" href="javascript:;" style="padding: 0 16px;"><i class="icon icon_search"></i>搜索</a>
-                    <ul class="j_search-result-list" role="listbox" id="autocomplete-result-list-1" style="position: absolute; z-index: 1; min-width: 100%; box-sizing: border-box; visibility: hidden; pointer-events: none; top: 100%;"></ul>
+                <div class="w-Search" id="j_search" data-expanded="false" data-loading="false" data-position="below"
+                     style="position: relative;"><span> <input type="text" name="search" class="i_Text"
+                                                               placeholder="输入物品名称" size="30"
+                                                               style="width: 150px;" role="combobox" autocomplete="off"
+                                                               autocapitalize="off"  spellcheck="false"
+                                                               aria-autocomplete="list" aria-haspopup="listbox"
+                                                               aria-expanded="false"
+                                                               aria-owns="autocomplete-result-list-1"> </span> <a
+                        id="search_btn_csgo" href="javascript:;" style="padding: 0 16px;"><i
+                        class="icon icon_search"></i>搜索</a>
+                    <ul class="j_search-result-list" role="listbox" id="autocomplete-result-list-1"
+                        style="position: absolute; z-index: 1; min-width: 100%; box-sizing: border-box; visibility: hidden; pointer-events: none; top: 100%;"></ul>
                 </div>
             </div>
             <ul class="tab">
@@ -98,12 +107,14 @@
                                  th:src="${good.getImg_url()}"
                                  width="210" height="138">
                         </a>
-                        <h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}" th:text="${good.getName()}"></a></h3>
+                        <h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}"
+                               th:text="${good.getName()}"></a></h3>
 
                         <p>
-<!--                            <strong class="f_Strong" th:text="'￥'+${good?.getNow_price()}"></strong>-->
+                            <!--                            <strong class="f_Strong" th:text="'￥'+${good?.getNow_price()}"></strong>-->
                             <small class="f_Strong" th:text="'￥'+${good?.getNow_price()}"></small>
-                            <span class="l_Right f_12px f_Bold c_Gray" th:text="'历史最低价格:'+${good.getThe_lowest_price()}">
+                            <span class="l_Right f_12px f_Bold c_Gray"
+                                  th:text="'历史最低价格:'+${good.getThe_lowest_price()}">
 
 
                     </span>
@@ -111,10 +122,10 @@
 
                         <i class="icon icon_check"></i>
 
-                        <span class="tag tag_csgo_wearcategory2" th:text="${good.getTrend()==0.00?'价格趋于平稳':(good.getTrend()>0.00?''+good.getTrend():''+good.getTrend())}"></span>
+                        <span class="tag tag_csgo_wearcategory2"
+                              th:text="${good.getTrend()==0.00?'价格趋于平稳':(good.getTrend()>0.00?'↑ '+good.getTrend()*100+'%':'↓ '+(-good.getTrend())*100+'%')}"></span>
 
                     </li>
-
 
 
                 </ul>
@@ -123,24 +134,55 @@
             <div class="pager card-pager light-theme simple-pagination">
                 <ul>
                     <li th:if="${page==1}" th:class="disabled"><span class="current prev">上一页</span></li>
-                    <li th:if="${page!=1}"><a th:href="'?page='+${page+(-1)}+${category==null?'':'&category='+category}" class="page-link prev">上一页</a></li>
+                    <li th:if="${page!=1}"><a
+                            th:href="'?page='+${page+(-1)}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}"
+                            class="page-link prev">上一页</a></li>
                     <li th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber==page?'active':''}">
-                        <a th:if="${pageNumber != page}" th:href="'?page='+${pageNumber}+${category==null?'':'&category='+category}" class="page-link"
+                        <a th:if="${pageNumber != page}"
+                           th:href="'?page='+${pageNumber}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}"
+                           class="page-link"
                            th:text="${pageNumber}"></a>
                         <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
                     </li>
-                    <li><a th:class="${page==totalPages?'disabled':'page-link next'}" th:href="'?page='+${page+1}+${category==null?'':'&category='+category}">下一页</a></li>
+                    <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
+                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}">下一页</a>
+                    </li>
                 </ul>
             </div>
 
         </div>
     </div>
 
-    </div>
+</div>
 </div>
 
 <script type="text/javascript" th:inline="javascript">
+    $(() => {
+        $('#search_btn_csgo').click(function () {
+            let search = $('input[name="search"]').val()
+            if (search === '') {
+                alert('请输入搜索内容')
+                return
+            }
+            window.location.href = '/home?search=' + search
+        })
+        $('#sort').click(function () {
+            $('#sort-type').slideDown()
+        })
+        $('#sort-type li').click(function () {
+            let sort_type = $(this).attr('id')
+            console.log([[${category}]])
+            if ([[${category}]]!=null) {
+                window.location.href = '/home?sort=' + sort_type + '&category=' + [[${category}]]
+                return
+            }else if ([[${search}]]!=null){
+                window.location.href = '/home?sort=' + sort_type + '&search=' + [[${search}]]
+                return
+            }
+            window.location.href = '/home?sort=' + sort_type
 
+        })
+    })
 </script>
 </body>
 </html>

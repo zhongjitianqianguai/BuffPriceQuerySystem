@@ -14,7 +14,7 @@
 <body class=" csgo  ">
 <div class="header l_Clearfix">
     <div class="header-cont l_Layout">
-        <div class="logo"><a href="/?game=csgo"><img src="./images/logo.png" width="77" height="21"></a>
+        <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>
         </div>
         <div class="nav">
             <ul>
@@ -58,7 +58,7 @@
                             th:src="${good.getImg_url()}"
                             style="max-width:269px;max-height:176px;"></div>
                     <div class="detail-pic-cover"></div>
-                    <i class="icon2x icon_weaponbox" onclick="weapon_case.show()"></i></div>
+                    </div>
                 <div class="detail-cont">
                     <div>
                         <div class="l_Right detail-fav"><span id="weapon_case_entry" onclick="weapon_case.show()"><i
@@ -131,8 +131,8 @@
                     <li value="30" data-disabled="false" style="width: 82px;">最近1个月</li>
 
                     <li value="180" data-disabled="false" style="width: 82px;">最近6个月</li>
-                    <li value="365" data-disabled="false" style="width: 82px;">最近一年</li>
-
+                    <li value="365" data-disabled="false" style="width: 82px;">最近1年</li>
+                    <li value="730" data-disabled="false" style="width: 82px;">最近2年</li>
 
                 </ul>
             </div>
@@ -164,7 +164,7 @@
     $(()=>{
         let myChart;
         myChart = echarts.init(document.getElementById('myChart'));
-        let json = [[${all_records}]];
+        let json = [[${all_records_last7Days}]];
         let data = []
         for (let i = 0; i < json.length; i++) {
             data.push({name: json[i]['time'], value: [json[i]['time'], json[i]["price"]]})
@@ -205,23 +205,41 @@
             ]
         };
         myChart.setOption(option);
+
         $('#price-history-type-all').click(function () {
             $('#price-type').slideDown()
         })
 
         $('#price-type li').click(function () {
             $('#price-type').slideUp()
-            var type = $(this).text()
-
+            let show_type = $(this).text()
+            let day_type= $('#days').text()
             $('#price-history-type-all').text($(this).text())
             $(this).addClass("on")
             $(this).siblings().removeClass("on")
             $('#price-history-type-all').attr('value', $(this).attr('value'))
-            if (type==='在售最低') {
-                json = [[${records}]];
-            } else {
-                json = [[${all_records}]];
+            if (day_type==='最近1个月'&&show_type==='在售最低') {
+                json = [[${lowest_records_lastMonth}]];
+            } else if (day_type==='最近1个月'&&show_type==='所有数据') {
+                json = [[${all_records_lastMonth}]];
+            }else if (day_type==='最近7天'&&show_type==='在售最低') {
+                json = [[${lowest_records_last7Days}]];
+            }else if (day_type==='最近7天'&&show_type==='所有数据') {
+                json = [[${all_records_last7Days}]];
+            }else if (day_type==='最近6个月'&&show_type==='在售最低') {
+                json = [[${lowest_records_last6Months}]];
+            }else if (day_type==='最近6个月'&&show_type==='所有数据') {
+                json = [[${all_records_last6Months}]];
+            }else if (day_type==='最近1年'&&show_type==='在售最低') {
+                json = [[${lowest_records_lastYear}]];
+            }else if (day_type==='最近1年'&&show_type==='所有数据') {
+                json = [[${all_records_lastYear}]];
+            }else if (day_type==='最近2年'&&show_type==='在售最低') {
+                json = [[${lowest_records_last2Years}]];
+            }else if (day_type==='最近2年'&&show_type==='所有数据') {
+                json = [[${all_records_last2Years}]];
             }
+
             let data = []
             for (let i = 0; i < json.length; i++) {
                 data.push({name: json[i]['time'], value: [json[i]['time'], json[i]["price"]]})
@@ -269,16 +287,32 @@
         })
         $('#price-days li').click(function () {
             $('#price-days').slideUp()
-            var type = $(this).text()
-
+            let day_type = $(this).text()
+            let show_type= $('#price-history-type-all').text()
             $('#days').text($(this).text())
             $(this).addClass("on")
             $(this).siblings().removeClass("on")
             $('#days').attr('value', $(this).attr('value'))
-            if (type==='最近1个月') {
-                json = [[${records}]];
-            } else {
-                json = [[${all_records}]];
+            if (day_type==='最近1个月'&&show_type==='在售最低') {
+                json = [[${lowest_records_lastMonth}]];
+            } else if (day_type==='最近1个月'&&show_type==='所有数据') {
+                json = [[${all_records_lastMonth}]];
+            }else if (day_type==='最近7天'&&show_type==='在售最低') {
+                json = [[${lowest_records_last7Days}]];
+            }else if (day_type==='最近7天'&&show_type==='所有数据') {
+                json = [[${all_records_last7Days}]];
+            }else if (day_type==='最近6个月'&&show_type==='在售最低') {
+                json = [[${lowest_records_last6Months}]];
+            }else if (day_type==='最近6个月'&&show_type==='所有数据') {
+                json = [[${all_records_last6Months}]];
+            }else if (day_type==='最近1年'&&show_type==='在售最低') {
+                json = [[${lowest_records_lastYear}]];
+            }else if (day_type==='最近1年'&&show_type==='所有数据') {
+                json = [[${all_records_lastYear}]];
+            }else if (day_type==='最近2年'&&show_type==='在售最低') {
+                json = [[${lowest_records_last2Years}]];
+            }else if (day_type==='最近2年'&&show_type==='所有数据') {
+                json = [[${all_records_last2Years}]];
             }
             let data = []
             for (let i = 0; i < json.length; i++) {
