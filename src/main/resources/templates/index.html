@@ -3,11 +3,34 @@
 <head>
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
     <title>BUFF价格查询系统</title>
+    <style>
+        #login_box{
+            height: 412px;
+            width: 350px;
+            top: 50%;
+            left: 50%;
+
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            background-color: white;
+
+            visibility: hidden;
+            z-index: 3;
+            position: fixed;
+        }
+    </style>
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript" src="./js/lib.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
-
+    <script>
+        function showLogin() {
+            document.getElementById("login_box").style.visibility = "visible";
+        }
+    </script>
 </head>
 <body class=" csgo  ">
 <div class="header l_Clearfix">
@@ -24,8 +47,8 @@
                  style="display: none;"><h3><i class="icon icon_lang_zh-Hans"></i><i class="icon icon_arr_light"></i>
             </h3>
             </div>
-            <ul>
-                <li><a href="javascript:void(0)" >登录/注册</a></li>
+            <ul onclick="showLogin()">
+                <li><a href="javascript:void(0)">登录/注册</a></li>
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
@@ -44,6 +67,9 @@
     </div>
 </div>
 <div class="blank20"></div>
+<div id="login_box">
+    <iframe src="show_login" frameborder="0" width="100%" height="100%"></iframe>
+</div>
 <div class="market-list">
     <div class="l_Layout">
         <div class="block-header">
