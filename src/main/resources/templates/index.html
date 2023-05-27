@@ -3,34 +3,10 @@
 <head>
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
     <title>BUFF价格查询系统</title>
-    <style>
-        #login_box{
-            height: 412px;
-            width: 350px;
-            top: 50%;
-            left: 50%;
-
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            background-color: white;
-
-            visibility: hidden;
-            z-index: 3;
-            position: fixed;
-        }
-    </style>
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript" src="./js/lib.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
-    <script>
-        function showLogin() {
-            document.getElementById("login_box").style.visibility = "visible";
-        }
-    </script>
 </head>
 <body class=" csgo  ">
 <div class="header l_Clearfix">
@@ -42,13 +18,47 @@
                 <li class="on"><a href="/home"><strong>饰品市场</strong></a></li>
             </ul>
         </div>
-        <div class="nav nav_entries">
+        <div th:if="${user!=null}" class="nav nav_entries">
+            <div class="login-user j_drop-handler"><a href=""> <img
+                    width="32" height="32" class="has-store store-online" src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                    onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
+                <i class="icon icon-store store-online"></i> <strong class=""
+                                                                     id="navbar-user-name" th:text="${user.getUsername()}"></strong> </a>
+                <div class="drop-store j_drop">
+                    <div class="store-user"><img
+                            src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                            onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
+                        <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
+                        <p><a href="/logout" class="f_12px">退出登录</a></p></div>
+                </div>
+            </div>
+            <div class="login-user message"><span><a href="/show_message"><i
+                    class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
+            <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
+                <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
+                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                                 data-game="csgo">CS:GO<span class="tag_status"
+                                                             style="display: none;"></span></strong><i
+                        class="icon icon_arr_light"></i></h3>
+                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                            src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
+                            class="tag_status" style="display: none;"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <ul>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong>我的收藏</strong></a>
+                    <i class="icon icon_new" style="display: none;"></i></li>
+            </ul>
+        </div>
+        <div th:if="${user==null}" class="nav nav_entries">
             <div class="header-switcher j_drop-handler" data-current="zh-Hans" id="j_lang-switcher"
                  style="display: none;"><h3><i class="icon icon_lang_zh-Hans"></i><i class="icon icon_arr_light"></i>
             </h3>
             </div>
-            <ul onclick="showLogin()">
-                <li><a href="javascript:void(0)">登录/注册</a></li>
+            <ul>
+                <li><a href="javascript:void(0)" id="login">登录/注册</a></li>
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
@@ -67,19 +77,33 @@
     </div>
 </div>
 <div class="blank20"></div>
-<div id="login_box">
-    <iframe src="show_login" frameborder="0" width="100%" height="100%"></iframe>
+
+<div class="popup popup_login" id="j_popup_login"
+     style="height:250px;width: 372px; margin-top: -240.5px; margin-left: -186px; z-index: 503;">
+    <a class="popup-close" href="javascript:;" id="close_entry">×</a>
+    <div class="login-cont">
+        <div class="login-frame" style="visibility: visible;"><h2 id="j_login-title">帐号登录/注册</h2>
+            <div id="j_login" style="width: 370px; height: 250px;">
+                <iframe frameborder="0" scrolling="no" name="login_frame" id="login_frame"
+                        style="width: 100%; height: 100%; border: none; background: none;"
+                        src="show_login"></iframe>
+            </div>
+
+        </div>
+    </div>
 </div>
 <div class="market-list">
     <div class="l_Layout">
         <div class="block-header">
             <div class="l_Right">
-                <div class="w-Checkbox" name="preview_screenshots"  id="preview_screenshots"
+                <div class="w-Checkbox" name="preview_screenshots" id="preview_screenshots"
                      style="display:none"></div>
                 <div class="w-Counter" id="j_counter" style="line-height: 0;margin: 0 32px;">
-                    <div class="w-Counter-input w-Counter-input3"> ¥<input type="text" class="i_Text" name="min_price" th:value="${between_min=='0'?null:between_min}"
-                                                                           placeholder="最低价" >-¥<input
-                            type="text" class="i_Text" name="max_price" placeholder="最高价" th:value="${between_max=='999999'?null:between_max}"></div>
+                    <div class="w-Counter-input w-Counter-input3"> ¥<input type="text" class="i_Text" name="min_price"
+                                                                           th:value="${between_min=='0'?null:between_min}"
+                                                                           placeholder="最低价">-¥<input
+                            type="text" class="i_Text" name="max_price" placeholder="最高价"
+                            th:value="${between_max=='999999'?null:between_max}"></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
                                                                             class="i_Btn i_Btn_sub i_Btn_small">清除</a><a
                             href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit">确定</a></div>
@@ -102,7 +126,7 @@
                      style="position: relative;"><span> <input type="text" name="search" class="i_Text"
                                                                placeholder="输入物品名称" size="30"
                                                                style="width: 150px;" role="combobox" autocomplete="off"
-                                                               autocapitalize="off"  spellcheck="false"
+                                                               autocapitalize="off" spellcheck="false"
                                                                aria-autocomplete="list" aria-haspopup="listbox"
                                                                aria-expanded="false"
                                                                aria-owns="autocomplete-result-list-1"> </span> <a
@@ -180,7 +204,38 @@
 </div>
 
 <script type="text/javascript" th:inline="javascript">
+    function user_login(name, password) {
+        console.log(name)
+        $.ajax({
+            url: '/login',
+            type: 'post',
+            data: {
+                name: name,
+                password: password
+            },
+            success: function (data) {
+                window.location.reload()
+            }
+        })
+    }
+
     $(() => {
+        $('#j_popup_login').hide()
+        if ([[${user_status}]] === '密码错误') {
+            $('#j_popup_login').show()
+            alert("密码错误请重新登录！！！")
+        } else if ([[${user_status}]] === '用户不存在') {
+            $('#j_popup_login').show()
+            alert("用户不存在请重新登录！！！")
+        }
+
+
+        $('#login').click(function () {
+            $('#j_popup_login').show()
+        })
+        $('#close_entry').click(function () {
+            $('#j_popup_login').hide()
+        })
         $('#search_btn_csgo').click(function () {
             let search = $('input[name="search"]').val()
             if (search === '') {
@@ -195,13 +250,13 @@
         $('#sort-type li').click(function () {
             let sort_type = $(this).attr('id')
             console.log([[${category}]])
-            if ([[${category}]]!=null) {
+            if ([[${category}]] != null) {
                 window.location.href = '/home?sort=' + sort_type + '&category=' + [[${category}]]
                 return
-            }else if ([[${search}]]!=null){
+            } else if ([[${search}]] != null) {
                 window.location.href = '/home?sort=' + sort_type + '&search=' + [[${search}]]
                 return
-            }else if ([[${between_min}]]!=null||[[${between_max}]]!=null){
+            } else if ([[${between_min}]] != null || [[${between_max}]] != null) {
                 window.location.href = '/home?sort=' + sort_type + '&between_min=' + [[${between_min}]] + '&between_max=' + [[${between_max}]]
                 return
             }
@@ -215,7 +270,7 @@
                 alert('请至少输入一个价格区间')
                 return
             }
-            if (between_min !== '' && between_max !== ''&&between_min > between_max) {
+            if (between_min !== '' && between_max !== '' && between_min > between_max) {
                 alert('最小值不能大于最大值')
                 return
             }
@@ -227,6 +282,7 @@
             }
             window.location.href = '/home?between_min=' + between_min + '&between_max=' + between_max
         })
+
     })
 </script>
 </body>

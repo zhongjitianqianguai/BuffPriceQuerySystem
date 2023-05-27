@@ -11,7 +11,7 @@ public class UserService {
     @Autowired
     public UserMapper userMapper;
 
-    public User AdminLogin(User user){
-        return userMapper.AdminLogin(user.getUsername(),user.getPassword());
+    public User getUserByName(String username){
+        return userMapper.getUserByName(username);
     }
 }

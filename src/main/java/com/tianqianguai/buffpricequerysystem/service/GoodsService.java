@@ -51,4 +51,7 @@ public class GoodsService {
     public List<Good> getGoodByPriceSortBetweenDesc(double minPrice, double maxPrice, int offset, int limit){
         return goodsMapper.getGoodByPriceSortBetweenDesc(minPrice,maxPrice,offset,limit);
     }
+    public int changeExpectedPrice(String goods_id,double expected_price){
+        return goodsMapper.changeExpectedPrice(goods_id,expected_price);
+    }
 }

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserMapper {
-    @Select("select * from")
-    public User AdminLogin(String username,String password);
+    @Select("select * from buff_user where name = #{username}")
+    User getUserByName(String username);
 }

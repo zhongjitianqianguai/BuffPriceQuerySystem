@@ -1,8 +1,10 @@
 package com.tianqianguai.buffpricequerysystem.mapper;
 
 import com.tianqianguai.buffpricequerysystem.entity.Good;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -37,4 +39,7 @@ public interface GoodsMapper {
     List<Good> getGoodByPriceSortBetweenAsc(double minPrice, double maxPrice, int offset, int limit);
     @Select("select * from buff_goods where now_price between #{minPrice} and #{maxPrice} order by now_price desc limit #{offset},#{limit}")
     List<Good> getGoodByPriceSortBetweenDesc(double minPrice, double maxPrice, int offset, int limit);
+
+    @Update("update buff_goods set expected_price=#{expected_price} where goods_id=#{goods_id}")
+    int changeExpectedPrice(String goods_id,double expected_price);
 }

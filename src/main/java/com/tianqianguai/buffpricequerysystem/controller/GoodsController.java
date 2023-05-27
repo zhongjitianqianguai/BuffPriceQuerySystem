@@ -3,14 +3,18 @@ package com.tianqianguai.buffpricequerysystem.controller;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tianqianguai.buffpricequerysystem.entity.Collect;
 import com.tianqianguai.buffpricequerysystem.entity.Good;
 import com.tianqianguai.buffpricequerysystem.entity.Record;
+import com.tianqianguai.buffpricequerysystem.entity.User;
+import com.tianqianguai.buffpricequerysystem.service.CollectService;
 import com.tianqianguai.buffpricequerysystem.service.GoodsService;
 import com.tianqianguai.buffpricequerysystem.service.RecordService;
 import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
@@ -29,7 +33,8 @@ public class GoodsController {
     GoodsService goodsService;
     @Autowired
     RecordService recordService;
-
+    @Autowired
+    CollectService collectService;
     public List<Integer> getPageNumbers(int currentPage, int totalPages) {
         List<Integer> pageNumbers = new ArrayList<Integer>();
         int start = Math.max(1, currentPage - 2);
@@ -57,6 +62,20 @@ public class GoodsController {
                 .sorted(Comparator.comparing(Record::getTime))
                 .collect(Collectors.toList());
     }
+    @PostMapping("change_expected_price")
+    public String change_expected_price(HttpServletRequest request, Model model) {
+        String expected_price = request.getParameter("expected_price");
+        String good_id = request.getParameter("goods_id");
+        User user = (User) request.getSession().getAttribute("user");
+        model.addAttribute("user", user);
+        int change_status=goodsService.changeExpectedPrice(good_id, Double.parseDouble(expected_price));
+        if (change_status==1){
+            model.addAttribute("message", "修改成功");
+        }else {
+            model.addAttribute("message", "修改失败");
+        }
+        return "redirect:/show_bookmark";
+    }
 
     @RequestMapping("home")
     public String show_index(HttpServletRequest request, Model model) {
@@ -66,6 +85,10 @@ public class GoodsController {
         String sort = request.getParameter("sort");
         String between_min= request.getParameter("between_min");
         String between_max= request.getParameter("between_max");
+        User user = (User) request.getSession().getAttribute("user");
+        String user_status= (String) request.getSession().getAttribute("user_status");
+        model.addAttribute("user_status", user_status);
+        model.addAttribute("user", user);
         model.addAttribute("between_min", between_min);
         model.addAttribute("between_max", between_max);
         model.addAttribute("sort", sort);
@@ -78,7 +101,6 @@ public class GoodsController {
             offset = (Integer.parseInt(page) - 1) * 20;
         }
         model.addAttribute("page", Integer.parseInt(page));
-        model.addAttribute("pageNumbers", getPageNumbers(Integer.parseInt(page), 58));
         model.addAttribute("pageNumbers", getPageNumbers(Integer.parseInt(page), 58));
         model.addAttribute("totalPages", 58);
 
@@ -130,6 +152,18 @@ public class GoodsController {
         model.addAttribute("goods_id", goods_id);
         Good good = goodsService.getGoodById(goods_id);
         model.addAttribute("good", good);
+        User user = (User) request.getSession().getAttribute("user");
+        String user_status= (String) request.getSession().getAttribute("user_status");
+        model.addAttribute("user_status", user_status);
+        model.addAttribute("user", user);
+        if (user!=null) {
+            Collect collect = collectService.getCollectByUserIdAndGoodId(user.getId(), goods_id);
+            if (collect != null) {
+                model.addAttribute("bookmark_status", "1");
+            } else {
+                model.addAttribute("bookmark_status", "0");
+            }
+        }
         List<Record> records = recordService.getGoodRecordById(goods_id);
         List<Record> last7Days = new ArrayList<>();
         List<Record> lastMonth = new ArrayList<>();

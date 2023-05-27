@@ -4035,7 +4035,7 @@ textarea.i_Text {
 
 .drop-store {
     width: 260px;
-    min-height: 180px;
+    min-height: 90px;
     background: #3a4452;
     border: 1px solid #282F39;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .2);
@@ -9281,7 +9281,7 @@ div.timepicker.disabled .i_Text {
 }
 
 .login-cont {
-    height: 412px;
+    height: 312px;
     padding: 30px 36px 0
 }
 
@@ -9309,7 +9309,7 @@ div.timepicker.disabled .i_Text {
 }
 
 .login-cont .login-frame #j_login {
-    min-height: 300px
+    min-height: 200px
 }
 
 .login-cont .login-frame .w-Checkbox span {
@@ -16330,11 +16330,11 @@ table .pic-cont img {
     height: 20px;
     width: 20px;
     margin-right: 10px;
-    background-image: url(/static/images/nav_msg_norm.png)
+    background-image: url(../images/nav_msg_norm.png)
 }
 
 .nav .message .icon_message:hover {
-    background-image: url(/static/images/nav_msg_hover.png)
+    background-image: url(../images/nav_msg_hover.png)
 }
 
 .header .nav_entries {
