@@ -50,7 +50,7 @@
                 </div>
             </div>
             <ul>
-                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong>我的收藏</strong></a>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
                     <i class="icon icon_new" style="display: none;"></i></li>
             </ul>
         </div>
@@ -73,7 +73,7 @@
                         class="icon icon_menu icon_menu_msg"></i>消息中心<i
                         class="icon icon_new"></i></a></li>
                 <li><a style="background-color: #4b4d53" href="/show_bookmark"><i
-                        class="icon icon_menu icon_menu_fav"></i>我的收藏</a></li>
+                        class="icon icon_menu icon_menu_fav" th:text="#{mybuying}"></i>我的收藏</a></li>
             </ul>
         </div>
     </div>
@@ -82,7 +82,7 @@
             <div class="block-header black">
                 <ul class="tab" id="j_mail-tab"><a href="/user-center/message?type=trade">
                 </a> <a href="/user-center/message?type=system">
-                    <li message_type="system" class="on">系统消息<i class="icon icon_new" style="display: none;"></i></li>
+                    <li message_type="system" class="on" th:text="#{System_messages}">系统消息<i class="icon icon_new" style="display: none;"></i></li>
                 </a></ul>
                 <div class="clear"></div>
             </div>
@@ -90,8 +90,8 @@
                 <table width="100%" class="list_tb">
                     <tbody>
                     <tr>
-                        <th>消息内容</th>
-                        <th width="200">时间</th>
+                        <th th:text="#{Message_content}">消息内容</th>
+                        <th width="200" th:text="#{time}>时间</th>
                     </tr>
                     </tbody>
 
@@ -129,8 +129,8 @@
                 <table width="100%" class="list_tb" style="display: none">
                     <tbody>
                     <tr>
-                        <th>消息内容</th>
-                        <th width="200">时间</th>
+                        <th th:text="#{Message_content}">消息内容</th>
+                        <th width="200" th:text="#{time}">时间</th>
                     </tr>
                     </tbody>
                 </table>

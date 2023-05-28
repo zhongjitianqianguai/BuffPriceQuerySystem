@@ -2051,7 +2051,7 @@ var sendRequest = function (a, i) {
                     var e = t.confirm_entry;
                     Buff.alert({
                         title: e.title,
-                        message: e.message,
+                        message: e.messages,
                         hideCancel: e.button_cancel == "",
                         cancelText: e.button_cancel,
                         hideConfirm: e.button_noted == "" && e.button_open_url == "",
@@ -6286,7 +6286,7 @@ var initLoginModule = function () {
                                         Popup.hide();
                                         Buff.alert({
                                             title: i18n("prompt"),
-                                            message: e.data.message,
+                                            message: e.data.messages,
                                             hideCancel: true,
                                             confirmText: i18n("i_first_look_at_the"),
                                             success: t,
@@ -6967,8 +6967,8 @@ var userProfile = function (e, t, a) {
             removeCookie("unbind_steam_result");
             var t = JSON.parse(e);
             if (!t.success) {
-                if (t.message) {
-                    Buff.toast(t.message, {type: "error"})
+                if (t.messages) {
+                    Buff.toast(t.messages, {type: "error"})
                 }
                 return
             }
@@ -7347,8 +7347,8 @@ var userProfile = function (e, t, a) {
                     }
                     $("#kyc_cert ." + e.data.cert.state).show();
                     $("#kyc_cert .placeholder1").hide();
-                    if (e.data.cert.message) {
-                        $("#kyc_cert ." + e.data.cert.state).find(".message").attr("data-content", e.data.cert.message).show()
+                    if (e.data.cert.messages) {
+                        $("#kyc_cert ." + e.data.cert.state).find(".message").attr("data-content", e.data.cert.messages).show()
                     }
                     $("#kyc_cert .state-text").text(e.data.cert.state);
                     if (["Pending", "Approved"].indexOf(e.data.cert.state) < 0) {
@@ -7803,13 +7803,13 @@ var steamVerifyManager = function (e) {
         removeCookie("steam_verify_result");
         var t = JSON.parse(e);
         if (t.success) {
-            Buff.toast(t.message, {type: "success"});
+            Buff.toast(t.messages, {type: "success"});
             setTimeout(function () {
                 window.location.reload()
             }, 1e3)
         } else {
-            if (t.message) {
-                Buff.toast(t.message, {type: "error"})
+            if (t.messages) {
+                Buff.toast(t.messages, {type: "error"})
             }
             setTimeout(function () {
                 r()
@@ -8929,7 +8929,7 @@ var supplyBuy = function (e) {
                     var t = i.data.pay_confirm;
                     Buff.alert({
                         title: t.title,
-                        message: t.message,
+                        message: t.messages,
                         cancelText: t.button_cancel,
                         confirmText: t.button_noted,
                         cancel: function () {
@@ -9292,7 +9292,7 @@ var bargain = function () {
                         if (e.data.pay_confirm) {
                             Buff.alert({
                                 title: e.data.pay_confirm.title,
-                                message: e.data.pay_confirm.message,
+                                message: e.data.pay_confirm.messages,
                                 confirmText: e.data.pay_confirm.button_noted,
                                 cancelText: e.data.pay_confirm.button_cancel,
                                 success: t
@@ -14331,7 +14331,7 @@ var steamInventory = function (l) {
                             a.push({
                                 label: e.name,
                                 value: e.id,
-                                desc: e.expire_time.message + "&nbsp" + formatTimestamp(e.expire_time.time, "YYYY-MM-DD")
+                                desc: e.expire_time.messages + "&nbsp" + formatTimestamp(e.expire_time.time, "YYYY-MM-DD")
                             });
                             i = true
                         }
@@ -14725,7 +14725,7 @@ var selling = function (t) {
                                 a.push({
                                     label: e.name,
                                     value: e.id,
-                                    desc: e.expire_time.message + "&nbsp" + formatTimestamp(e.expire_time.time, "YYYY-MM-DD")
+                                    desc: e.expire_time.messages + "&nbsp" + formatTimestamp(e.expire_time.time, "YYYY-MM-DD")
                                 })
                             } else {
                                 i[e.id] = e
@@ -14822,7 +14822,7 @@ var selling = function (t) {
                                             l[e.cdkey_id] = {
                                                 value: e.cdkey_id,
                                                 label: t.name,
-                                                desc: t.expire_time.message + "&nbsp" + formatTimestamp(t.expire_time.time, "YYYY-MM-DD")
+                                                desc: t.expire_time.messages + "&nbsp" + formatTimestamp(t.expire_time.time, "YYYY-MM-DD")
                                             };
                                             m[e.cdkey_id] = {
                                                 state: false,
@@ -15336,7 +15336,7 @@ var sellingToDeliver = function (e, t) {
                     if (e.code == "OK") {
                         Buff.alert({
                             title: i18n("cancel_the_shipment"),
-                            message: e.data.message,
+                            message: e.data.messages,
                             cancelText: i18n("i_think_again"),
                             confirmText: i18n("cancel_the_shipment"),
                             success: function () {
@@ -15504,7 +15504,7 @@ var sellingPricing = function () {
                 if (e.data.unusual) {
                     Buff.alert({
                         title: e.data.title,
-                        message: e.data.message,
+                        message: e.data.messages,
                         cancelText: e.data.cancel_text,
                         confirmText: e.data.confirm_text,
                         success: function () {
@@ -18821,7 +18821,7 @@ var Recharge = function () {
                         Buff.alert({
                             type: "warning",
                             title: e.confirm_entry.title,
-                            message: e.confirm_entry.message,
+                            message: e.confirm_entry.messages,
                             cancelText: e.confirm_entry.button_cancel,
                             confirmText: e.confirm_entry.button_noted,
                             success: function () {
@@ -20900,7 +20900,7 @@ var Coupon = function () {
                         Buff.toast(e.error, {type: "error"});
                         return
                     }
-                    Buff.toast(e.data.message, {type: "success"});
+                    Buff.toast(e.data.messages, {type: "success"});
                     setTimeout(function () {
                         location.reload()
                     }, 3e3)

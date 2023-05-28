@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>我的收藏_网易BUFF饰品交易平台</title>
+<head><title th:text="#{collect_title}">我的收藏_网易BUFF饰品交易平台</title>
     <meta property="og:image" content="https://g.fp.ps.netease.com/market/file/6391b1f3672a526e9f383c56lhtp2qta04">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
@@ -15,8 +15,7 @@
         </div>
         <div class="nav">
             <ul>
-                <li class="on"><a href="/home"><strong>饰品市场</strong></a></li>
-
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}">饰品市场</strong></a></li>
             </ul>
         </div>
         <div class="nav nav_entries">
@@ -51,7 +50,7 @@
             </div>
 
             <ul>
-                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong>我的收藏</strong></a>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
                     <i class="icon icon_new" style="display: none;"></i></li>
             </ul>
         </div>
@@ -90,7 +89,7 @@
         <div style="background-color: #132a50" class="g-market-header wiki-select black">
             <div class="cont-tab">
                 <ul>
-                    <li class="on"><a href="/show_bookmark">饰品收藏<i
+                    <li class="on"><a href="/show_bookmark" th:text="#{Jewelry_Collection}">饰品收藏<i
                             class="icon icon_top_cur"></i></a></li>
                 </ul>
                 <div class="clear"></div>
@@ -114,11 +113,11 @@
         <div class="user-record change">
             <table class="list_tb" width="100%">
                 <tr>
-                    <th width="120">饰品</th>
+                    <th width="120" th:text="${Jewelry}">饰品</th>
                     <th width="350"></th>
                     <th width="240" class="t_Left tb-Order " value="asc" id="order-by-price"> 当前在售最低 <i
                             class="icon icon_order"></i></th>
-                    <th width="240" class="t_Left">历史最低价格</th>
+                    <th width="240" class="t_Left" th:text="#{Historical_Lowest_Price}">历史最低价格</th>
                     <th width="240" class="t_Left">修改预期价格&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;取消收藏</th>
                 </tr>
                 <tr th:each="good,iterStat:${goods}">

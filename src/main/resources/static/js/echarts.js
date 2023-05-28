@@ -51543,7 +51543,7 @@
           rootFromParse = result.root;
           assert(rootFromParse != null);
         } catch (e) {
-          throw new Error('Invalid svg format\n' + e.message);
+          throw new Error('Invalid svg format\n' + e.messages);
         } // Note: we keep the covenant that the root has no transform. So always add an extra root.
 
 
@@ -51972,7 +51972,7 @@
         try {
           rawRegions = geoJSON ? parseGeoJSON(geoJSON, nameProperty) : [];
         } catch (e) {
-          throw new Error('Invalid geoJson format\n' + e.message);
+          throw new Error('Invalid geoJson format\n' + e.messages);
         }
 
         fixNanhai(mapName, rawRegions);

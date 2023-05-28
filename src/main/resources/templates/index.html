@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
-    <title>BUFF价格查询系统</title>
+    <title th:text="#{index_title}">BUFF价格查询系统</title>
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript" src="./js/lib.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
@@ -15,7 +15,7 @@
         </div>
         <div class="nav">
             <ul>
-                <li class="on"><a href="/home"><strong>饰品市场</strong></a></li>
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}">饰品市场</strong></a></li>
             </ul>
         </div>
         <div th:if="${user!=null}" class="nav nav_entries">
@@ -58,7 +58,7 @@
             </h3>
             </div>
             <ul>
-                <li><a href="javascript:void(0)" id="login">登录/注册</a></li>
+                <li><a href="javascript:void(0)" id="login" th:text="#{login_or_register}">登录/注册</a></li>
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
@@ -82,7 +82,7 @@
      style="height:250px;width: 372px; margin-top: -240.5px; margin-left: -186px; z-index: 503;">
     <a class="popup-close" href="javascript:;" id="close_entry">×</a>
     <div class="login-cont">
-        <div class="login-frame" style="visibility: visible;"><h2 id="j_login-title">帐号登录/注册</h2>
+        <div class="login-frame" style="visibility: visible;"><h2 id="j_login-title" th:text="#{login_from_title}">帐号登录/注册</h2>
             <div id="j_login" style="width: 370px; height: 250px;">
                 <iframe frameborder="0" scrolling="no" name="login_frame" id="login_frame"
                         style="width: 100%; height: 100%; border: none; background: none;"
@@ -115,7 +115,7 @@
                     <h3 th:if="${sort=='desc'}"><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
                     </h3>
                     <ul id="sort-type" style="width: 98px;">
-                        <li><h6>默认</h6></li>
+                        <li><h6 th:text="#{default}">默认</h6></li>
                         <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span>
                         </h6></li>
                         <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
@@ -137,11 +137,11 @@
                 </div>
             </div>
             <ul class="tab">
-                <li id="holo"><a href="?category=全息">全息印花</a></li>
-                <li id="gold"><a href="?category=金色">金色印花</a></li>
-                <li id="capsule"><a href="?category=胶囊">胶囊</a></li>
-                <li id="bugged-ethereal" style="display:none;">BUG虚灵</li>
-                <li id="bundle" style="display:none;">打包交易</li>
+                <li id="holo"><a href="?category=全息" th:text="#{tab_title1}">全息印花</a></li>
+                <li id="gold"><a href="?category=金色" th:text="#{tab_title2}">金色印花</a></li>
+                <li id="capsule"><a href="?category=胶囊" th:text="#{tab_title3}">胶囊</a></li>
+                <li id="bugged-ethereal" style="display:none;" th:text="#{tab_title4}">BUG虚灵</li>
+                <li id="bundle" style="display:none;" th:text="#{tab_title5}">打包交易</li>
             </ul>
             <div class="clear"></div>
         </div>

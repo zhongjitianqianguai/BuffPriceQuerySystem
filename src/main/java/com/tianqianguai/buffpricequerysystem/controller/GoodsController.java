@@ -10,7 +10,8 @@ import com.tianqianguai.buffpricequerysystem.entity.User;
 import com.tianqianguai.buffpricequerysystem.service.CollectService;
 import com.tianqianguai.buffpricequerysystem.service.GoodsService;
 import com.tianqianguai.buffpricequerysystem.service.RecordService;
-import org.apache.juli.logging.Log;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +30,17 @@ import java.util.stream.Collectors;
 @Controller
 
 public class GoodsController {
+    Log logger = LogFactory.getLog(GoodsController.class);
+
     @Autowired
     GoodsService goodsService;
     @Autowired
     RecordService recordService;
     @Autowired
     CollectService collectService;
+
     public List<Integer> getPageNumbers(int currentPage, int totalPages) {
+        logger.debug("获取页码");
         List<Integer> pageNumbers = new ArrayList<Integer>();
         int start = Math.max(1, currentPage - 2);
         int end = Math.min(totalPages, currentPage + 2);
@@ -46,6 +51,7 @@ public class GoodsController {
     }
 
     public List<Record> getLowestByDay(List<Record> records) {
+        logger.debug("enter getLowestByDay()");
         //使用 Java 8 中的 Stream API 对记录进行处理，按时间分组，得到 Map<String, List<Record>> 类型的照时间字符串的前十个字符（即日期）进行分组。
         Map<String, List<Record>> recordMap = records.stream()
                 .collect(Collectors.groupingBy(r -> r.getTime().substring(0, 10)));
@@ -64,14 +70,18 @@ public class GoodsController {
     }
     @PostMapping("change_expected_price")
     public String change_expected_price(HttpServletRequest request, Model model) {
+        logger.info("enter change_expected_price()");
         String expected_price = request.getParameter("expected_price");
         String good_id = request.getParameter("goods_id");
         User user = (User) request.getSession().getAttribute("user");
+        logger.debug("用户"+user+"修改了"+good_id+"商品");
         model.addAttribute("user", user);
         int change_status=goodsService.changeExpectedPrice(good_id, Double.parseDouble(expected_price));
         if (change_status==1){
+            logger.info("修改完成");
             model.addAttribute("message", "修改成功");
         }else {
+            logger.info("修改失败");
             model.addAttribute("message", "修改失败");
         }
         return "redirect:/show_bookmark";
@@ -79,6 +89,7 @@ public class GoodsController {
 
     @RequestMapping("home")
     public String show_index(HttpServletRequest request, Model model) {
+        logger.info("进入主页");
         String page = request.getParameter("page");
         String category = request.getParameter("category");
         String search = request.getParameter("search");
@@ -106,26 +117,31 @@ public class GoodsController {
 
         List<Good> first_goods = null;
         if (category != null && sort != null) {
+            logger.debug("分类为"+category+"排序为"+sort);
             if (sort.equals("asc")) {
                 first_goods = goodsService.getGoodByPriceSortCategoryAsc(offset, 20, category);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortCategoryDesc(offset, 20, category);
             }
         } else if (category != null) {
+            logger.debug("分类为"+category);
             first_goods = goodsService.selectGoodsIwantByCategory(offset, 20, category);
         } else if (search != null&&sort != null) {
+            logger.debug("搜索为"+search+"排序为"+sort);
             if (sort.equals("asc")) {
                 first_goods = goodsService.getGoodByPriceSortSearchAsc(search,offset, 20);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortSearchDesc(search,offset, 20);
             }
         } else if (sort != null && between_max != null && between_min != null) {
+            logger.debug("排序为"+sort+"价格在"+between_min+"-"+between_max+"之间");
             if (sort.equals("asc")) {
                 first_goods = goodsService.getGoodByPriceSortBetweenAsc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortBetweenDesc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
             }
         } else if (sort != null) {
+            logger.debug("排序为"+sort);
             if (sort.equals("asc")) {
                 first_goods = goodsService.getGoodByPriceSortAsc(offset, 20);
             }
@@ -133,14 +149,19 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortDesc(offset, 20);
             }
         } else if (search!=null) {
+            logger.debug("搜索项目为"+search);
             first_goods=goodsService.getGoodsByName(search,offset,20);
 
         } else if (between_max!=null&&between_min!=null) {
+            logger.debug("价格在"+between_min+"-"+between_max+"之间");
             first_goods=goodsService.getGoodsByPriceBetween(Double.parseDouble(between_min),Double.parseDouble(between_max),offset,20);
         } else {
+            logger.debug("默认排序");
             first_goods = goodsService.getGoodsIwant(offset, 20);
         }
         model.addAttribute("first_goods", first_goods);
+        logger.trace(first_goods);
+        logger.info("to index");
         return "index";
     }
 
@@ -148,6 +169,7 @@ public class GoodsController {
     @RequestMapping("goods")
 
     public String show_good(HttpServletRequest request, Model model) {
+        logger.info("enter show_good()");
         String goods_id = request.getParameter("goods_id");
         model.addAttribute("goods_id", goods_id);
         Good good = goodsService.getGoodById(goods_id);
@@ -158,6 +180,7 @@ public class GoodsController {
         model.addAttribute("user", user);
         if (user!=null) {
             Collect collect = collectService.getCollectByUserIdAndGoodId(user.getId(), goods_id);
+            logger.debug(collect);
             if (collect != null) {
                 model.addAttribute("bookmark_status", "1");
             } else {
@@ -216,6 +239,7 @@ public class GoodsController {
         model.addAttribute("lowest_records_lastYear", getLowestByDay(lastYear));
         model.addAttribute("lowest_records_last2Years", getLowestByDay(last2Years));
 
+        logger.info("to good");
         return "good";
     }
 

@@ -7053,7 +7053,7 @@
                 var s = new h({
                     name: "CompileError",
                     path: t,
-                    message: "template not found: " + i.message,
+                    message: "template not found: " + i.messages,
                     stack: i.stack
                 });
                 if (r.bail) throw s;
@@ -7229,7 +7229,7 @@
                         return e.name + "=" + e.value
                     }).join(",")), e.compileDebug ? (o.push("try{"), n.forEach(function (e) {
                         e.tplToken.type === b.TYPE_EXPRESSION && o.push(C + "=[" + [e.tplToken.line, e.tplToken.start].join(",") + "]"), s.push(c(e.code, e.tplToken)), o.push(d(e.code))
-                    }), o.push("}catch(error){"), o.push("throw {" + ["name:'RuntimeError'", "path:" + P(r), "message:error.message", "line:" + C + "[0]+1", "column:" + C + "[1]+1", "source:" + P(i), "stack:error.stack"].join(",") + "}"), o.push("}")) : n.forEach(function (e) {
+                    }), o.push("}catch(error){"), o.push("throw {" + ["name:'RuntimeError'", "path:" + P(r), "message:error.messages.properties", "line:" + C + "[0]+1", "column:" + C + "[1]+1", "source:" + P(i), "stack:error.stack"].join(",") + "}"), o.push("}")) : n.forEach(function (e) {
                         s.push(c(e.code, e.tplToken)), o.push(d(e.code))
                     }), l && (o.push(S + "=''"), o.push(k + "(" + M + "," + x + "," + T + ")")), o.push("return " + S), o.push("}");
                     var f = o.join("\n");
@@ -7248,7 +7248,7 @@
                         throw{
                             name: "CompileError",
                             path: r,
-                            message: e.message,
+                            message: e.messages,
                             line: g + 1,
                             column: m + 1,
                             source: i,
@@ -7455,7 +7455,7 @@
     }, function (e, t, n) {
         "use strict";
         var i = function (e) {
-            console.error(e.name, e.message)
+            console.error(e.name, e.messages)
         };
         e.exports = i
     }, function (e, t, n) {
@@ -7625,7 +7625,7 @@
         }
 
         function s(e) {
-            var t = e.name, n = e.source, i = e.path, r = e.line, o = e.column, a = e.generated, s = e.message;
+            var t = e.name, n = e.source, i = e.path, r = e.line, o = e.column, a = e.generated, s = e.messages;
             if (!n) return s;
             var l = n.split(/\n/), u = Math.max(r - 3, 0), c = Math.min(l.length, r + 3),
                 d = l.slice(u, c).map(function (e, t) {
@@ -7638,7 +7638,7 @@
         var i = function (n) {
             function i(e) {
                 r(this, i);
-                var t = o(this, n.call(this, e.message));
+                var t = o(this, n.call(this, e.messages));
                 return t.name = "TemplateError", t.message = s(e), Error.captureStackTrace && Error.captureStackTrace(t, t.constructor), t
             }
 
