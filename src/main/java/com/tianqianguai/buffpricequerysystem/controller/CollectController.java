@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 public class CollectController {
-    Log logger = LogFactory.getLog(MessageController.class);
+    Log logger = LogFactory.getLog(CollectController.class);
 
     @Autowired
     CollectService collectService;
