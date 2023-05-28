@@ -12,8 +12,8 @@ public class MailService {
     @Autowired
     MailMapper mailMapper;
 
-    public List<Mail> getMailByUserId(int user_id){
-        return mailMapper.getMailByUserId(user_id);
+    public List<Mail> getMailByUserId(int user_id,int offset, int limit){
+        return mailMapper.getMailByUserId(user_id,offset,limit);
     }
 
 }

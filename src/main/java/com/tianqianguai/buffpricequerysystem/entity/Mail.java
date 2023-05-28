@@ -5,6 +5,7 @@ public class Mail {
     String content;
     String time;
     int user_id;
+    String url;
     public int getId() {
         return id;
     }
@@ -37,10 +38,19 @@ public class Mail {
         this.user_id = user_id;
     }
 
-    public Mail(int id, String content, String time, int user_id) {
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Mail(int id, String content, String time, int user_id, String url) {
         this.id = id;
         this.content = content;
         this.time = time;
         this.user_id = user_id;
+        this.url = url;
     }
 }

@@ -35,7 +35,7 @@
                         <p><a href="/logout" class="f_12px">退出登录</a></p></div>
                 </div>
             </div>
-            <div class="login-user message"><span><a href="/user-center/message?type=trade"><i
+            <div class="login-user message"><span><a href="/show_message"><i
                     class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
@@ -49,12 +49,10 @@
                     </div>
                 </div>
             </div>
-            <ul class="tab" id="j_mail-tab"><a href="/user-center/message?type=trade">
-                <li message_type="trade" class="on">交易消息<i class="icon icon_new" style="display: none;"></i></li>
-            </a> <a href="/user-center/message?type=system">
-                <li message_type="system">系统消息<i class="icon icon_new" style="display: none;"></i></li>
-            </a></ul>
-
+            <ul>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong>我的收藏</strong></a>
+                    <i class="icon icon_new" style="display: none;"></i></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -62,7 +60,7 @@
 
 <div class="l_Layout">
     <div class="cont_panel black">
-        <div class="my-thum" style="background-color: #132a50"><img
+        <div class="my-thum" style="background-color: #4a4e51"><img
                 src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/70/h/70"
                 width="70" height="70"
                 onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
@@ -71,10 +69,10 @@
         </div>
         <div class="my-menu">
             <ul>
-                <li class="on"><a style="background-color: #132a50" href="/show_message"><i
+                <li class="on"><a style="background-color: #4b4d53" href="/show_message"><i
                         class="icon icon_menu icon_menu_msg"></i>消息中心<i
                         class="icon icon_new"></i></a></li>
-                <li><a style="background-color: #132a50" href="/show_bookmark"><i
+                <li><a style="background-color: #4b4d53" href="/show_bookmark"><i
                         class="icon icon_menu icon_menu_fav"></i>我的收藏</a></li>
             </ul>
         </div>
@@ -83,10 +81,8 @@
         <div>
             <div class="block-header black">
                 <ul class="tab" id="j_mail-tab"><a href="/user-center/message?type=trade">
-                    <li message_type="trade" class="on">交易消息<i class="icon icon_new" style="display: none;"></i>
-                    </li>
                 </a> <a href="/user-center/message?type=system">
-                    <li message_type="system">系统消息<i class="icon icon_new" style="display: none;"></i></li>
+                    <li message_type="system" class="on">系统消息<i class="icon icon_new" style="display: none;"></i></li>
                 </a></ul>
                 <div class="clear"></div>
             </div>
@@ -99,122 +95,33 @@
                     </tr>
                     </tbody>
 
-                    <tr>
+                    <tr th:each="mail,iterStat:${mails}">
                         <td>
-                            <div class="msg-title" style="cursor: default">你在售的物品 "AK-47（纪念品） | 钢铁三角洲
-                                (略有磨损)" 已被人购买，请<a href="/market/sell_order/to_deliver?game=csgo"
-                                                            style="text-decoration: underline;">前往发货</a>。温馨提示：未能及时发货将可能导致你的出售功能被封禁，另外注意：令牌确认时要核对买家Steam注册日期等信息，谨防欺诈。
+                            <div class="msg-title" style="cursor: default" >
+                                <a th:href="'/goods?goods_id='+${mail.getUrl()}" th:text="${mail.getContent()}"></a>
                             </div>
-                        </td>
-                        <td class="c_Gray">2023-05-24 21:38:40</td>
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你在售的物品 "MP7 | 陆军斥候 (久经沙场)"
-                                已被人购买，请<a href="/market/sell_order/to_deliver?game=csgo"
-                                                style="text-decoration: underline;">前往发货</a>。温馨提示：未能及时发货将可能导致你的出售功能被封禁，另外注意：令牌确认时要核对买家Steam注册日期等信息，谨防欺诈。
-                            </div>
                         </td>
-                        <td class="c_Gray">2023-05-17 19:35:21</td>
+                        <td class="c_Gray" th:text="${mail.getTime()}"></td>
                     </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你购买的物品 "印花 | shalfey（全息） |
-                                2022年安特卫普锦标赛" 卖家已发货，请<a href="/market/steam_inventory?game=csgo"
-                                                                      style="text-decoration: underline;">前往Steam库存中查看</a>。
-                            </div>
-                        </td>
-                        <td class="c_Gray">2023-05-16 15:38:16</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你购买的物品 "音乐盒 | Scarlxrd: 疤王"
-                                卖家已发货，请<a href="/market/steam_inventory?game=csgo"
-                                                style="text-decoration: underline;">前往Steam库存中查看</a>。
-                            </div>
-                        </td>
-                        <td class="c_Gray">2023-05-13 21:34:23</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你在售的物品 "MP7 | 陆军斥候 (战痕累累)"
-                                已被人购买，请<a href="/market/sell_order/to_deliver?game=csgo"
-                                                style="text-decoration: underline;">前往发货</a>。温馨提示：未能及时发货将可能导致你的出售功能被封禁，另外注意：令牌确认时要核对买家Steam注册日期等信息，谨防欺诈。
-                            </div>
-                        </td>
-                        <td class="c_Gray">2023-05-08 13:08:28</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你出售的物品 "MP7 | 陆军斥候 (战痕累累)" (<a
-                                    href="/market/sell_order/history?game=csgo&amp;search=230508T0322438303"
-                                    style="text-decoration: underline;">订单</a>)，买家发送报价失败，物品已重新上架。请不要随意接受Steam报价，警惕钓鱼诈骗。
-                            </div>
-                        </td>
-                        <td class="c_Gray">2023-05-08 02:47:36</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你购买的物品 "2021年斯德哥尔摩锦标赛竞争组印花胶囊"
-                                （5件）卖家已发货，请<a href="/market/steam_inventory?game=csgo"
-                                                     style="text-decoration: underline;">前往Steam库存中查看</a>。
-                            </div>
-                        </td>
-                        <td class="c_Gray">2023-05-06 17:23:24</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你有1笔求购由于余额不足，已终止求购，<a
-                                    href="/market/buy_order/supplied?game=csgo&amp;buy_order_id="
-                                    style="text-decoration: underline;">查看详情</a></div>
-                        </td>
-                        <td class="c_Gray">2023-05-06 17:22:18</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你购买的物品 "2022年里约热内卢锦标赛传奇组印花胶囊"
-                                卖家已发货，请<a href="/market/steam_inventory?game=csgo"
-                                                style="text-decoration: underline;">前往Steam库存中查看</a>。
-                            </div>
-                        </td>
-                        <td class="c_Gray">2023-05-06 14:45:04</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="msg-title" style="cursor: default">你购买的物品 "印花 | Team Liquid （全息） |
-                                2021年斯德哥尔摩锦标赛" 卖家已发货，请<a href="/market/steam_inventory?game=csgo"
-                                                                        style="text-decoration: underline;">前往Steam库存中查看</a>。
-                            </div>
-                        </td>
-                        <td class="c_Gray">2023-05-06 14:42:04</td>
-                    </tr>
-
                 </table>
-                <div class="nodata" style="display: none;">暂无消息</div>
                 <div class="blank20"></div>
                 <div class="pager light-theme simple-pagination">
                     <ul>
-                        <li class="disabled"><span class="current prev">上一页</span></li>
-                        <li class="active"><span class="current">1</span></li>
-                        <li><a href="#page_num=2" class="page-link">2</a></li>
-                        <li><a href="#page_num=3" class="page-link">3</a></li>
-                        <li><a href="#page_num=4" class="page-link">4</a></li>
-                        <li><a href="#page_num=5" class="page-link">5</a></li>
-                        <li><a href="#page_num=6" class="page-link">6</a></li>
-                        <li><a href="#page_num=7" class="page-link">7</a></li>
-                        <li><a href="#page_num=8" class="page-link">8</a></li>
-                        <li><a href="#page_num=9" class="page-link">9</a></li>
-                        <li><a href="#page_num=10" class="page-link">10</a></li>
-                        <li><a href="#page_num=2" class="page-link next">下一页</a></li>
+                        <li th:if="${page==1}" th:class="disabled"><span class="current prev">上一页</span></li>
+                        <li th:if="${page!=1}"><a
+                                th:href="'?page='+${page+(-1)}"
+                                class="page-link prev">上一页</a></li>
+                        <li th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber==page?'active':''}">
+                            <a th:if="${pageNumber != page}"
+                               th:href="'?page='+${pageNumber}"
+                               class="page-link"
+                               th:text="${pageNumber}"></a>
+                            <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
+                        </li>
+                        <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
+                               th:href="'?page='+${page+1}">下一页</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -244,28 +151,7 @@
 </body>
 <script type="text/javascript" th:inline="javascript">
     $(() => {
-        $('#search_btn_csgo').click(function () {
-            let search = $('input[name="search"]').val()
-            if (search === '') {
-                alert('请输入搜索内容')
-                return
-            }
-            window.location.href = '/show_bookmark?search=' + search
-        })
-        $('.i_Btn_mid').click(function () {
-            let expected_price = prompt('请输入预期价格', '5.00')
-            let goods_id = $(this).attr('id')
-            $.post('/change_expected_price', {goods_id: goods_id, expected_price: expected_price}, function (data) {
-                window.location.reload()
-            })
-        })
-        $('.delete-bookmark').click(function () {
-            let goods_id = $(this).attr('id')
-            let user_id = [[${user?.getId()}]]
-            $.post('/delete_bookmark', {goods_id: goods_id, user_id: user_id, where: 'show_bookmark'}, function (data) {
-                window.location.reload()
-            })
-        })
+
 
     })
 </script>
