@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +30,15 @@ public class MailController {
     }
 
     @RequestMapping("/show_message")
-    public String showMessage(HttpServletRequest request, Model model){
+    public String showMessage(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
         User user=(User)request.getSession().getAttribute("user");
         if (user==null) {
-            //非法请求
+            try {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                return null;
+            } finally {
+                response.flushBuffer();
+            }
         }
         String page = request.getParameter("page");
         int offset = 0;

@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -88,7 +90,7 @@ public class GoodsController {
     }
 
     @RequestMapping("home")
-    public String show_index(HttpServletRequest request, Model model) {
+    public String show_index(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
         logger.info("进入主页");
         String page = request.getParameter("page");
         String category = request.getParameter("category");
@@ -122,6 +124,13 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortCategoryAsc(offset, 20, category);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortCategoryDesc(offset, 20, category);
+            }else {
+                try {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    return null;
+                } finally {
+                    response.flushBuffer();
+                }
             }
         } else if (category != null) {
             logger.debug("分类为"+category);
@@ -132,6 +141,13 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortSearchAsc(search,offset, 20);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortSearchDesc(search,offset, 20);
+            }else {
+                try {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    return null;
+                } finally {
+                    response.flushBuffer();
+                }
             }
         } else if (sort != null && between_max != null && between_min != null) {
             logger.debug("排序为"+sort+"价格在"+between_min+"-"+between_max+"之间");
@@ -139,6 +155,13 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortBetweenAsc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortBetweenDesc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
+            }else {
+                try {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    return null;
+                } finally {
+                    response.flushBuffer();
+                }
             }
         } else if (sort != null) {
             logger.debug("排序为"+sort);
@@ -147,6 +170,13 @@ public class GoodsController {
             }
             else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortDesc(offset, 20);
+            }else {
+                try {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    return null;
+                } finally {
+                    response.flushBuffer();
+                }
             }
         } else if (search!=null) {
             logger.debug("搜索项目为"+search);

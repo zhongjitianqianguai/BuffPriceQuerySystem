@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <link rel="stylesheet" href="./css/main.css">
+
+</head>
+<body class=" csgo  ">
+<div class="header l_Clearfix">
+    <div class="header-cont l_Layout">
+        <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>
+        </div>
+        <div class="nav">
+            <ul>
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}">饰品市场</strong></a></li>
+            </ul>
+        </div>
+        <div th:if="${user!=null}" class="nav nav_entries">
+            <div class="login-user j_drop-handler"><a href=""> <img
+                    width="32" height="32" class="has-store store-online" src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                    onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
+                <i class="icon icon-store store-online"></i> <strong class=""
+                                                                     id="navbar-user-name" th:text="${user.getUsername()}"></strong> </a>
+                <div class="drop-store j_drop">
+                    <div class="store-user"><img
+                            src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                            onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
+                        <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
+                        <p><a href="/logout" class="f_12px">退出登录</a></p></div>
+                </div>
+            </div>
+            <div class="login-user message"><span><a href="/show_message"><i
+                    class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
+            <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
+                <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
+                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                                 data-game="csgo">CS:GO<span class="tag_status"
+                                                             style="display: none;"></span></strong><i
+                        class="icon icon_arr_light"></i></h3>
+                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                            src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
+                            class="tag_status" style="display: none;"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <ul>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong>我的收藏</strong></a>
+                    <i class="icon icon_new" style="display: none;"></i></li>
+            </ul>
+        </div>
+        <div th:if="${user==null}" class="nav nav_entries">
+            <div class="header-switcher j_drop-handler" data-current="zh-Hans" id="j_lang-switcher"
+                 style="display: none;"><h3><i class="icon icon_lang_zh-Hans"></i><i class="icon icon_arr_light"></i>
+            </h3>
+            </div>
+            <ul>
+                <li><a href="javascript:void(0)" id="login" th:text="#{login_or_register}"></a></li>
+            </ul>
+            <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
+                <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
+                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                                 data-game="csgo">CS:GO<span class="tag_status"
+                                                             style="display: none;"></span></strong><i
+                        class="icon icon_arr_light"></i></h3>
+                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                            src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
+                            class="tag_status" style="display: none;"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="blank20"></div>
+<div class="l_Layout">
+    <div class="market-card">
+        <div class="nodata"><p><i class="icon icon_404"></i></p>
+            <p>访问的页面不存在</p></div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<style>.hide-cny {
+    display: none;
+}</style>
+<div style="position: static; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;">
+    <div id="trans-tooltip">
+        <div id="tip-left-top"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-top.png&quot;);"></div>
+        <div id="tip-top"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-top.png&quot;) repeat-x;"></div>
+        <div id="tip-right-top"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-top.png&quot;);"></div>
+        <div id="tip-right"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right.png&quot;) repeat-y;"></div>
+        <div id="tip-right-bottom"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-bottom.png&quot;);"></div>
+        <div id="tip-bottom"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-bottom.png&quot;) repeat-x;"></div>
+        <div id="tip-left-bottom"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-bottom.png&quot;);"></div>
+        <div id="tip-left"
+             style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left.png&quot;);"></div>
+        <div id="trans-content"></div>
+    </div>
+    <div id="tip-arrow-bottom"
+         style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-bottom.png&quot;);"></div>
+    <div id="tip-arrow-top"
+         style="background: url(&quot;chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-top.png&quot;);"></div>
+</div>
+</body>
+</html>

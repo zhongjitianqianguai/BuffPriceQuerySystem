@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
-    <title th:text="#{index_title}">BUFF价格查询系统</title>
+    <title th:text="#{index_title}"></title>
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript" src="./js/lib.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
@@ -58,7 +58,7 @@
             </h3>
             </div>
             <ul>
-                <li><a href="javascript:void(0)" id="login" th:text="#{login_or_register}">登录/注册</a></li>
+                <li><a href="javascript:void(0)" id="login" th:text="#{login_or_register}"></a></li>
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
@@ -115,7 +115,7 @@
                     <h3 th:if="${sort=='desc'}"><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
                     </h3>
                     <ul id="sort-type" style="width: 98px;">
-                        <li><h6 th:text="#{default}">默认</h6></li>
+                        <li><h6 th:text="#{default}"></h6></li>
                         <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span>
                         </h6></li>
                         <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
