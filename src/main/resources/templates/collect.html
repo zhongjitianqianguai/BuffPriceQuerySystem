@@ -31,18 +31,18 @@
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
                         <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-                        <p><a href="/logout" class="f_12px">退出登录</a></p></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}">退出登录</a></p></div>
                 </div>
             </div>
             <div class="login-user message"><span><a href="/show_message"><i
                     class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -76,10 +76,10 @@
         </div>
         <div class="my-menu">
             <ul>
-                <li><a style="background-color: #132a50" href="/show_message"><i
+                <li><a style="background-color: #132a50" href="/show_message" th:text="#{message_center}"><i
                         class="icon icon_menu icon_menu_msg"></i>消息中心<i
                         class="icon icon_new"></i></a></li>
-                <li class="on"><a style="background-color: #132a50" href="/show_bookmark"><i
+                <li class="on"><a style="background-color: #132a50" href="/show_bookmark" th:text="#{mybuying}"><i
                         class="icon icon_menu icon_menu_fav"></i>我的收藏</a></li>
             </ul>
         </div>
@@ -100,7 +100,7 @@
                                                                       name="search" placeholder="输入物品名称"
                                                                       size="30" type="text"> </span> <a
                             id="search_btn_csgo"
-                            href="javascript:;"><i class="icon icon_search"></i>搜索</a></div>
+                            href="javascript:;" th:text="#{search_for}"><i class="icon icon_search"></i>搜索</a></div>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -115,10 +115,10 @@
                 <tr>
                     <th width="120" th:text="${Jewelry}">饰品</th>
                     <th width="350"></th>
-                    <th width="240" class="t_Left tb-Order " value="asc" id="order-by-price"> 当前在售最低 <i
+                    <th width="240" class="t_Left tb-Order " value="asc" id="order-by-price" th:text="#{The_lowest_currently_on_sale}"> 当前在售最低 <i
                             class="icon icon_order"></i></th>
                     <th width="240" class="t_Left" th:text="#{Historical_Lowest_Price}">历史最低价格</th>
-                    <th width="240" class="t_Left">修改预期价格&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;取消收藏</th>
+                    <th width="240" class="t_Left" th:text="#{Modify_expected_price}">修改预期价格&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;取消收藏</th>
                 </tr>
                 <tr th:each="good,iterStat:${goods}">
                     <td>
@@ -149,10 +149,10 @@
             <div class="pager list-pager"></div>
             <div class="pager list-pager light-theme simple-pagination">
                 <ul>
-                    <li th:if="${page==1}" th:class="disabled"><span class="current prev">上一页</span></li>
+                    <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}">上一页</span></li>
                     <li th:if="${page!=1}"><a
                             th:href="'?page='+${page+(-1)}+${search==null?'':'&search='+search}"
-                            class="page-link prev">上一页</a></li>
+                            class="page-link prev" th:text="#{previous_page}">上一页</a></li>
                     <li th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber==page?'active':''}">
                         <a th:if="${pageNumber != page}"
                            th:href="'?page='+${pageNumber}+${search==null?'':'&search='+search}"
@@ -161,7 +161,7 @@
                         <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
                     </li>
                     <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
-                           th:href="'?page='+${page+1}+${search==null?'':'&search='+search}">下一页</a>
+                           th:href="'?page='+${page+1}+${search==null?'':'&search='+search}" th:text="#{next_page}">下一页</a>
                     </li>
                 </ul>
             </div>

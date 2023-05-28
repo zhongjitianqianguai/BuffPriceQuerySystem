@@ -29,7 +29,7 @@
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
                         <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-                        <p><a href="/logout" class="f_12px">退出登录</a></p></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}">退出登录</a></p></div>
                 </div>
             </div>
             <div class="login-user message"><span><a href="/show_message"><i
@@ -40,7 +40,7 @@
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -48,7 +48,7 @@
             </div>
 
             <ul>
-                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong>我的收藏</strong></a>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
                     <i class="icon icon_new" style="display: none;"></i></li>
             </ul>
         </div>
@@ -62,11 +62,11 @@
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -105,20 +105,20 @@
                             type="text" class="i_Text" name="max_price" placeholder="最高价"
                             th:value="${between_max=='999999'?null:between_max}"></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
-                                                                            class="i_Btn i_Btn_sub i_Btn_small">清除</a><a
-                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit">确定</a></div>
+                                                                            class="i_Btn i_Btn_sub i_Btn_small" th:text="#{clean_up}">清除</a><a
+                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit" th:text="#{determine}">确定</a></div>
                 </div>
                 <div class="w-Select-Multi w-Select-scroll " style="visibility: visible; width: 98px;"
                      name="sort_by">
-                    <h3 id="sort" th:if="${sort!='asc'&&sort!='desc'}">排序</h3> <i class="icon icon_drop"></i>
-                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc">价格<i class="icon icon_order"></i></span></h3>
-                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
+                    <h3 id="sort" th:if="${sort!='asc'&&sort!='desc'}" thLtext="#{sort}">排序</h3> <i class="icon icon_drop"></i>
+                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc" th:text="#{prize}">价格<i class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" th:text="#{prize}">价格<i class="icon icon_order"></i></span>
                     </h3>
                     <ul id="sort-type" style="width: 98px;">
                         <li><h6 th:text="#{default}"></h6></li>
-                        <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span>
+                        <li id="asc"><h6><span class="w-Order_asc" th:text="#{prize}">价格<i class="icon icon_order"></i></span>
                         </h6></li>
-                        <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
+                        <li id="desc"><h6><span class="w-Order_des" th:text="#{prize}">价格<i class="icon icon_order"></i></span>
                         </h6></li>
                     </ul>
                 </div>
@@ -130,7 +130,7 @@
                                                                aria-autocomplete="list" aria-haspopup="listbox"
                                                                aria-expanded="false"
                                                                aria-owns="autocomplete-result-list-1"> </span> <a
-                        id="search_btn_csgo" href="javascript:;" style="padding: 0 16px;"><i
+                        id="search_btn_csgo" href="javascript:;" style="padding: 0 16px;" th:text="#{search_for}"><i
                         class="icon icon_search"></i>搜索</a>
                     <ul class="j_search-result-list" role="listbox" id="autocomplete-result-list-1"
                         style="position: absolute; z-index: 1; min-width: 100%; box-sizing: border-box; visibility: hidden; pointer-events: none; top: 100%;"></ul>
@@ -180,7 +180,7 @@
             </div>
             <div class="pager card-pager light-theme simple-pagination">
                 <ul>
-                    <li th:if="${page==1}" th:class="disabled"><span class="current prev">上一页</span></li>
+                    <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}">上一页</span></li>
                     <li th:if="${page!=1}"><a
                             th:href="'?page='+${page+(-1)}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}"
                             class="page-link prev">上一页</a></li>
@@ -192,14 +192,14 @@
                         <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
                     </li>
                     <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
-                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}">下一页</a>
+                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}" th:text="#{next_page}">下一页</a>
                     </li>
                 </ul>
             </div>
 
         </div>
-    </div>
 
+</div>
 </div>
 </div>
 

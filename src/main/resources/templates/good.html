@@ -18,7 +18,7 @@
         </div>
         <div class="nav">
             <ul>
-                <li class="on"><a href="/home"><strong>饰品市场</strong></a></li>
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}">饰品市场</strong></a></li>
 
             </ul>
         </div>
@@ -33,18 +33,18 @@
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
                         <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-                        <p><a href="/logout" class="f_12px">退出登录</a></p></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}">退出登录</a></p></div>
                 </div>
             </div>
             <div class="login-user message"><span><a href="/show_message"><i
                     class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -66,11 +66,11 @@
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -115,15 +115,15 @@
                     <div>
                         <div class="l_Right detail-fav">
                             <div>
-                                <div th:if="${bookmark_status=='0'}"  class="add-bookmark"><span>收藏</span><i
+                                <div th:if="${bookmark_status=='0'}"  class="add-bookmark"><span th:text="#{collect}">收藏</span><i
                                         class="icon icon_fav"></i></div>
-                                <div th:if="${bookmark_status=='1'}"  class="on delete-bookmark"><span>已收藏</span><i class="icon icon_fav"></i></div>
+                                <div th:if="${bookmark_status=='1'}"  class="on delete-bookmark"><span th:text="#{Favorite}">已收藏</span><i class="icon icon_fav"></i></div>
                             </div>
                         </div>
                         <h1 th:text="${good.getName()}"></h1></div>
                     <p><span><label th:text="#{Recent_fluctuations}"> 近期涨跌幅度|</label><span th:text="${good.getTrend()}"></span></span>
                         <span><label th:text="#{Historical_Lowest_Price}"> 历史最低价格|</label><span th:text="${good.getThe_lowest_price()}"></span></span>
-                        <span><label>类型 |</label><span th:text="${good.getCategory()}"></span></span>
+                        <span><label th:text="#{types_of}">类型 |</label><span th:text="${good.getCategory()}"></span></span>
                     </p>
                     <div class="blank20"></div>
                     <div class="line"></div>

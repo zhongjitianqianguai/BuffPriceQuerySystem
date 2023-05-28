@@ -34,11 +34,11 @@
                     class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -46,7 +46,7 @@
             </div>
 
             <ul>
-                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong>我的收藏</strong></a>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
                     <i class="icon icon_new" style="display: none;"></i></li>
             </ul>
         </div>
@@ -64,8 +64,8 @@
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on"><img
-                            src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
+                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
+                            src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo" >CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
 <div class="l_Layout">
     <div class="market-card">
         <div class="nodata"><p><i class="icon icon_404"></i></p>
-            <p>访问的页面不存在</p></div>
+            <p th:text="#{error_404}">访问的页面不存在</p></div>
     </div>
 </div>
 
