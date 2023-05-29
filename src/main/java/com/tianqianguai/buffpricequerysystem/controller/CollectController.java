@@ -5,6 +5,8 @@ import com.tianqianguai.buffpricequerysystem.entity.Good;
 import com.tianqianguai.buffpricequerysystem.entity.User;
 import com.tianqianguai.buffpricequerysystem.service.CollectService;
 import com.tianqianguai.buffpricequerysystem.service.GoodsService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @Controller
 public class CollectController {
+    Log logger = LogFactory.getLog(CollectController.class);
     @Autowired
     CollectService collectService;
     @Autowired
@@ -28,12 +31,16 @@ public class CollectController {
     public String addBookmark(HttpServletRequest request, Model model){
         String good_id=request.getParameter("goods_id");
         String user_id=request.getParameter("user_id");
+        logger.debug("good_id"+good_id+"---user_id"+user_id);
         int status=collectService.addBookmark(good_id,Integer.parseInt(user_id));
         String add_bookmark_status=null;
-        if (status==1)
-            add_bookmark_status="收藏成功";
-        else
-            add_bookmark_status="收藏失败";
+        if (status==1) {
+            logger.info("收藏成功");
+            add_bookmark_status = "收藏成功";
+        }else {
+            logger.info("收藏失败");
+            add_bookmark_status = "收藏失败";
+        }
         model.addAttribute("add_bookmark_status",add_bookmark_status);
         return "redirect:/goods?goods_id="+good_id;
     }
@@ -50,23 +57,31 @@ public class CollectController {
     public String deleteBookmark(HttpServletRequest request, Model model){
         String good_id=request.getParameter("goods_id");
         String user_id=request.getParameter("user_id");
+        logger.debug("good_id"+good_id+"---user_id"+user_id);
         int status=collectService.deleteBookmark(good_id,Integer.parseInt(user_id));
         String add_bookmark_status=null;
-        if (status==1)
-            add_bookmark_status="删除收藏成功";
-        else
-            add_bookmark_status="删除收藏失败";
+        if (status==1) {
+            logger.info("删除收藏成功");
+            add_bookmark_status = "删除收藏成功";
+        }else {
+            logger.info("删除收藏失败");
+            add_bookmark_status = "删除收藏失败";
+        }
         model.addAttribute("add_bookmark_status",add_bookmark_status);
-        if (request.getParameter("where")!=null)
+        if (request.getParameter("where")!=null) {
+            logger.info("回到我的收藏");
             return "redirect:/show_bookmark";
-        else
-            return "redirect:/goods?goods_id="+good_id;
+        }else {
+            logger.info("回到商品详情页");
+            return "redirect:/goods?goods_id=" + good_id;
+        }
     }
     @RequestMapping("/show_bookmark")
     public String showBookmark(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         String page = request.getParameter("page");
         String search = request.getParameter("search");
+        logger.debug("search:"+search);
         int offset = 0;
         if (page == null) {
             page = "1";
@@ -121,6 +136,7 @@ public class CollectController {
             }
         } else {
             try {
+                logger.debug("用户未登录，非法请求");
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
             } finally {
                 response.flushBuffer();

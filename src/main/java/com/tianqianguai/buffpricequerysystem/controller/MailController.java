@@ -3,6 +3,8 @@ package com.tianqianguai.buffpricequerysystem.controller;
 import com.tianqianguai.buffpricequerysystem.entity.Mail;
 import com.tianqianguai.buffpricequerysystem.entity.User;
 import com.tianqianguai.buffpricequerysystem.service.MailService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import java.util.List;
 
 @Controller
 public class MailController {
+    Log logger = LogFactory.getLog(MailController.class);
+
     @Autowired
     MailService mailService;
 
@@ -34,6 +38,7 @@ public class MailController {
         User user=(User)request.getSession().getAttribute("user");
         if (user==null) {
             try {
+                logger.debug("用户未登录，非法请求");
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
                 return null;
             } finally {
@@ -52,6 +57,7 @@ public class MailController {
         model.addAttribute("mails",mails);
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("pageNumbers", getPageNumbers(Integer.parseInt(page), 10));
+        logger.info("显示消息中心页面");
         return "mail";
     }
 }
