@@ -27,7 +27,7 @@
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
                         <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-                        <p><a href="/logout" class="f_12px">退出登录</a></p></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
                 </div>
             </div>
             <div class="login-user message"><span><a href="/show_message"><i
@@ -46,7 +46,7 @@
             </div>
 
             <ul>
-                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}"></strong></a>
                     <i class="icon icon_new" style="display: none;"></i></li>
             </ul>
         </div>

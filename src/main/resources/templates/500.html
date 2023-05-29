@@ -27,7 +27,7 @@
                   src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                   onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
             <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-            <p><a href="/logout" class="f_12px" th:text="#{logout}">退出登录</a></p></div>
+            <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
         </div>
       </div>
       <div class="login-user message"><span><a href="/show_message"><i
@@ -46,7 +46,7 @@
       </div>
 
       <ul>
-        <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
+        <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}"></strong></a>
           <i class="icon icon_new" style="display: none;"></i></li>
       </ul>
     </div>
@@ -60,11 +60,11 @@
       </ul>
       <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
         <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-          <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
+          <strong ><img src="./images/logo_csgo_black.png" class="sel-ico"
                        data-game="csgo">CS:GO<span class="tag_status"
                                                    style="display: none;"></span></strong><i
                 class="icon icon_arr_light"></i></h3>
-          <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
+          <div class="j_drop"><p data-value="csgo" class="on" ><img
                   src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                   class="tag_status" style="display: none;"></span></p>
           </div>
@@ -78,7 +78,7 @@
 <div class="l_Layout">
   <div class="market-card">
     <div class="nodata"><p><i class="icon icon_500"></i></p>
-      <p th:text="#{error_500_text}">不要发起不该发起的请求哦</p></div>
+      <p th:text="#{error_500_text}"></p></div>
   </div>
 </div>
 
