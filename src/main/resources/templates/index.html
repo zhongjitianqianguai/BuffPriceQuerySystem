@@ -15,7 +15,7 @@
         </div>
         <div class="nav">
             <ul>
-                <li class="on"><a href="/home"><strong th:text="#{nav_text1}">饰品市场</strong></a></li>
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}"></strong></a></li>
             </ul>
         </div>
         <div th:if="${user!=null}" class="nav nav_entries">
@@ -29,7 +29,7 @@
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
                         <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-                        <p><a href="/logout" class="f_12px" th:text="#{logout}">退出登录</a></p></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
                 </div>
             </div>
             <div class="login-user message"><span><a href="/show_message"><i
@@ -40,7 +40,7 @@
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
+                    <div class="j_drop"><p data-value="csgo" class="on"><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -48,7 +48,7 @@
             </div>
 
             <ul>
-                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}"></strong></a>
                     <i class="icon icon_new" style="display: none;"></i></li>
             </ul>
         </div>
@@ -66,7 +66,7 @@
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" ><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -82,7 +82,7 @@
      style="height:250px;width: 372px; margin-top: -240.5px; margin-left: -186px; z-index: 503;">
     <a class="popup-close" href="javascript:;" id="close_entry">×</a>
     <div class="login-cont">
-        <div class="login-frame" style="visibility: visible;"><h2 id="j_login-title" th:text="#{login_from_title}">帐号登录/注册</h2>
+        <div class="login-frame" style="visibility: visible;"><h2 id="j_login-title" th:text="#{login_from_title}"></h2>
             <div id="j_login" style="width: 370px; height: 250px;">
                 <iframe frameborder="0" scrolling="no" name="login_frame" id="login_frame"
                         style="width: 100%; height: 100%; border: none; background: none;"
@@ -105,14 +105,14 @@
                             type="text" class="i_Text" name="max_price" placeholder="最高价"
                             th:value="${between_max=='999999'?null:between_max}"></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
-                                                                            class="i_Btn i_Btn_sub i_Btn_small" th:text="#{clean_up}">清除</a><a
-                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit" th:text="#{determine}">确定</a></div>
+                                                                            class="i_Btn i_Btn_sub i_Btn_small" th:text="#{clean_up}"></a><a
+                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit" th:text="#{determine}"></a></div>
                 </div>
                 <div class="w-Select-Multi w-Select-scroll " style="visibility: visible; width: 98px;"
                      name="sort_by">
-                    <h3 id="sort" th:if="${sort!='asc'&&sort!='desc'}" thLtext="#{sort}">排序</h3> <i class="icon icon_drop"></i>
-                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc" th:text="#{prize}">价格<i class="icon icon_order"></i></span></h3>
-                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" th:text="#{prize}">价格<i class="icon icon_order"></i></span>
+                    <h3 id="sort" th:if="${sort!='asc'&&sort!='desc'}" th:text="#{sort}"></h3> <i class="icon icon_drop"></i>
+                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc" th:text="#{prize}"><i class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" th:text="#{prize}"><i class="icon icon_order"></i></span>
                     </h3>
                     <ul id="sort-type" style="width: 98px;">
                         <li><h6 th:text="#{default}"></h6></li>
@@ -130,18 +130,18 @@
                                                                aria-autocomplete="list" aria-haspopup="listbox"
                                                                aria-expanded="false"
                                                                aria-owns="autocomplete-result-list-1"> </span> <a
-                        id="search_btn_csgo" href="javascript:;" style="padding: 0 16px;" th:text="#{search_for}"><i
+                        id="search_btn_csgo" href="javascript:;" style="padding: 0 16px;"><i
                         class="icon icon_search"></i>搜索</a>
                     <ul class="j_search-result-list" role="listbox" id="autocomplete-result-list-1"
                         style="position: absolute; z-index: 1; min-width: 100%; box-sizing: border-box; visibility: hidden; pointer-events: none; top: 100%;"></ul>
                 </div>
             </div>
             <ul class="tab">
-                <li id="holo"><a href="?category=全息" th:text="#{tab_title1}">全息印花</a></li>
-                <li id="gold"><a href="?category=金色" th:text="#{tab_title2}">金色印花</a></li>
-                <li id="capsule"><a href="?category=胶囊" th:text="#{tab_title3}">胶囊</a></li>
-                <li id="bugged-ethereal" style="display:none;" th:text="#{tab_title4}">BUG虚灵</li>
-                <li id="bundle" style="display:none;" th:text="#{tab_title5}">打包交易</li>
+                <li id="holo"><a href="?category=全息" th:text="#{tab_title1}"></a></li>
+                <li id="gold"><a href="?category=金色" th:text="#{tab_title2}"></a></li>
+                <li id="capsule"><a href="?category=胶囊" th:text="#{tab_title3}"></a></li>
+                <li id="bugged-ethereal" style="display:none;" th:text="#{tab_title4}"></li>
+                <li id="bundle" style="display:none;" th:text="#{tab_title5}"></li>
             </ul>
             <div class="clear"></div>
         </div>
@@ -180,10 +180,10 @@
             </div>
             <div class="pager card-pager light-theme simple-pagination">
                 <ul>
-                    <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}">上一页</span></li>
+                    <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}"></span></li>
                     <li th:if="${page!=1}"><a
                             th:href="'?page='+${page+(-1)}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}"
-                            class="page-link prev">上一页</a></li>
+                            class="page-link prev" th:text="#{previous_page}"></a></li>
                     <li th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber==page?'active':''}">
                         <a th:if="${pageNumber != page}"
                            th:href="'?page='+${pageNumber}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}"
@@ -192,7 +192,7 @@
                         <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
                     </li>
                     <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
-                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}" th:text="#{next_page}">下一页</a>
+                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}" th:text="#{next_page}"></a>
                     </li>
                 </ul>
             </div>

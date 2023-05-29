@@ -161,7 +161,7 @@
                         <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
                     </li>
                     <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
-                           th:href="'?page='+${page+1}+${search==null?'':'&search='+search}" th:text="#{next_page}">下一页</a>
+                           th:href="'?page='+${page+1}+${search==null?'':'&search='+search}" th:text="#{next_page}"></a>
                     </li>
                 </ul>
             </div>

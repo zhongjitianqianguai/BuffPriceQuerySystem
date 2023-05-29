@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
-    <title th:text="#{good_page_title}">商品详情</title>
+    <title th:text="#{good_page_title}"></title>
     <link rel="stylesheet" href="./css/main.css">
     <!--    <script type="text/javascript" src="./js/lib.js"></script>-->
     <!--    <script type="text/javascript" src="./js/main.js"></script>-->
@@ -18,7 +18,7 @@
         </div>
         <div class="nav">
             <ul>
-                <li class="on"><a href="/home"><strong th:text="#{nav_text1}">饰品市场</strong></a></li>
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}"></strong></a></li>
 
             </ul>
         </div>
@@ -33,18 +33,18 @@
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
                         <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-                        <p><a href="/logout" class="f_12px" th:text="#{logout}">退出登录</a></p></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
                 </div>
             </div>
             <div class="login-user message"><span><a href="/show_message"><i
                     class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" ><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -52,7 +52,7 @@
             </div>
 
             <ul>
-                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}">我的收藏</strong></a>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}"></strong></a>
                     <i class="icon icon_new" style="display: none;"></i></li>
             </ul>
         </div>
@@ -62,15 +62,15 @@
             </h3>
             </div>
             <ul>
-                <li><a href="javascript:void(0)" id="login" th:text="#{login_or_register}">登录/注册</a></li>
+                <li><a href="javascript:void(0)" id="login" th:text="#{login_or_register}"></a></li>
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong ><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" ><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -85,7 +85,7 @@
      style="height:250px;width: 372px; margin-top: -240.5px; margin-left: -186px; z-index: 503;">
     <a class="popup-close" href="javascript:;" id="close_entry">×</a>
     <div class="login-cont">
-        <div class="login-frame" style="visibility: visible;"><h2 id="j_login-title" th:text="#{login_from_title}">帐号登录/注册</h2>
+        <div class="login-frame" style="visibility: visible;"><h2 id="j_login-title" th:text="#{login_from_title}"></h2>
             <div id="j_login" style="width: 370px; height: 250px;">
                 <iframe frameborder="0" scrolling="no" name="login_frame" id="login_frame"
                         style="width: 100%; height: 100%; border: none; background: none;"
@@ -121,25 +121,25 @@
                             </div>
                         </div>
                         <h1 th:text="${good.getName()}"></h1></div>
-                    <p><span><label th:text="#{Recent_fluctuations}"> 近期涨跌幅度|</label><span th:text="${good.getTrend()}"></span></span>
-                        <span><label th:text="#{Historical_Lowest_Price}"> 历史最低价格|</label><span th:text="${good.getThe_lowest_price()}"></span></span>
-                        <span><label th:text="#{types_of}">类型 |</label><span th:text="${good.getCategory()}"></span></span>
+                    <p><span><label th:text="#{Recent_fluctuations}"></label><span th:text="${good.getTrend()}"></span></span>
+                        <span><label th:text="#{Historical_Lowest_Price}"></label><span th:text="${good.getThe_lowest_price()}"></span></span>
+                        <span><label th:text="#{types_of}"></label><span th:text="${good.getCategory()}"></span></span>
                     </p>
                     <div class="blank20"></div>
                     <div class="line"></div>
                     <div class="blank20"></div>
                     <div class="detail-summ">
-                        <span> <label th:text="#{reference_price}">参考价格 |</label> <strong class="f_Strong"
+                        <span> <label th:text="#{reference_price}"></label> <strong class="f_Strong"
                                                                  th:text="'￥'+${good?.getNow_price()}"></strong> </span>
-                        <a th:text="#{buy}"
+                        <a
                                 th:href="${'https://buff.163.com/goods/'+good.getGoods_id()}"
                                 target="_blank">去Buff市场购买<i class="icon icon_arr_right_small"></i></a></div>
                 </div>
             </div>
             <ul class="tab">
-                <li id="trend" th:text="#{price_trend}">价格走势</li>
-                <li id="bugged-ethereal" style="display:none;" th:text="#{tab_title4}">BUG虚灵</li>
-                <li id="bundle" style="display:none;" th:text="#{tab_title5}">打包交易</li>
+                <li id="trend" th:text="#{price_trend}"></li>
+                <li id="bugged-ethereal" style="display:none;" th:text="#{tab_title4}"></li>
+                <li id="bundle" style="display:none;" th:text="#{tab_title5}"></li>
             </ul>
 
             <div class="clear"></div>
@@ -148,7 +148,7 @@
         <div class="detail-tab-cont">
             <div class="w-Switcher w-Switcher_tab" id="history-type" style="display:inline-block;margin-left:100px;">
 
-                <span value="buff" class="on" th:text="#{BUFF_price_trend}">BUFF价格走势 (人民币)<i class="icon icon_top_cur"></i></span>
+                <span value="buff" class="on">BUFF价格走势 (人民币)<i class="icon icon_top_cur"></i></span>
 
 
             </div>
@@ -157,13 +157,13 @@
                  style="width: 100px; visibility: visible;">
 
 
-                <h3 id="price-history-type-all" th:text="#{price-history-type-all}">所有数据</h3>
+                <h3 id="price-history-type-all" th:text="#{price-history-type-all}"></h3>
                 <i class="icon icon_drop"></i>
                 <ul id="price-type" style="width: 100px;">
 
-                    <li value="1" class="on" style="width: 82px;" th:text="#{price-history-type-all}">所有数据</li>
+                    <li value="1" class="on" style="width: 82px;" th:text="#{price-history-type-all}"></li>
 
-                    <li value="2"  style="width: 82px;" th:text="#{Lowest_on_sale}">在售最低</li>
+                    <li value="2"  style="width: 82px;" th:text="#{Lowest_on_sale}"></li>
 
                 </ul>
             </div>
@@ -172,17 +172,17 @@
                  style="width: 100px; visibility: visible;">
 
 
-                <h3 id="days" th:text="#{Last_7_days}">最近7天</h3>
+                <h3 id="days" th:text="#{Last_7_days}"></h3>
                 <i class="icon icon_drop"></i>
                 <ul id="price-days" style="width: 100px;">
 
-                    <li value="7" data-disabled="false" class="on" style="width: 82px;" th:text="#{Last_7_days}">最近7天</li>
+                    <li value="7" data-disabled="false" class="on" style="width: 82px;" th:text="#{Last_7_days}"></li>
 
-                    <li value="30" data-disabled="false" style="width: 82px;" th:text="#{Last_month}">最近1个月</li>
+                    <li value="30" data-disabled="false" style="width: 82px;" th:text="#{Last_month}"></li>
 
-                    <li value="180" data-disabled="false" style="width: 82px;" th:text="#{Last_6_months}">最近6个月</li>
-                    <li value="365" data-disabled="false" style="width: 82px;" th:text="#{Last_year}">最近1年</li>
-                    <li value="730" data-disabled="false" style="width: 82px;" th:text="#{Last_2_year}">最近2年</li>
+                    <li value="180" data-disabled="false" style="width: 82px;" th:text="#{Last_6_months}"></li>
+                    <li value="365" data-disabled="false" style="width: 82px;" th:text="#{Last_year}"></li>
+                    <li value="730" data-disabled="false" style="width: 82px;" th:text="#{Last_2_year}"></li>
 
                 </ul>
             </div>
