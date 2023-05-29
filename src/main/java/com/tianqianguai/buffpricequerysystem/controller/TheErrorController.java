@@ -17,13 +17,13 @@ public class TheErrorController implements ErrorController {
     Log logger = LogFactory.getLog(TheErrorController.class);
 
     @RequestMapping("/error")
-    public ModelAndView handle404Error(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView handleError(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();
         if (response.getStatus() == 404) {
             logger.debug("404错误");
             modelAndView.setViewName("404");
             modelAndView.addObject("errorCode", response.getStatus());
-            modelAndView.addObject("errorMessage", "Sorry, the requested page was not found.");
+            modelAndView.addObject("errorMessage", "抱歉，访问的页面不存在。");
         } else if (response.getStatus() == 500) {
             logger.debug("500错误");
             modelAndView.setViewName("500");

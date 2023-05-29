@@ -4,8 +4,6 @@
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
     <title th:text="#{good_page_title}"></title>
     <link rel="stylesheet" href="./css/main.css">
-    <!--    <script type="text/javascript" src="./js/lib.js"></script>-->
-    <!--    <script type="text/javascript" src="./js/main.js"></script>-->
     <script type="text/javascript" src="./js/echarts.js"></script>
     <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="./js/lib.js"></script>
@@ -116,9 +114,9 @@
                     <div>
                         <div class="l_Right detail-fav">
                             <div>
-                                <div th:if="${bookmark_status=='0'}"  class="add-bookmark"><span th:text="#{collect}">收藏</span><i
+                                <div th:if="${bookmark_status=='0'}"  class="add-bookmark"><span th:text="#{collect}"></span><i
                                         class="icon icon_fav"></i></div>
-                                <div th:if="${bookmark_status=='1'}"  class="on delete-bookmark"><span th:text="#{Favorite}">已收藏</span><i class="icon icon_fav"></i></div>
+                                <div th:if="${bookmark_status=='1'}"  class="on delete-bookmark"><span th:text="#{Favorite}"></span><i class="icon icon_fav"></i></div>
                             </div>
                         </div>
                         <h1 th:text="${good.getName()}"></h1></div>

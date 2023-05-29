@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -54,20 +53,25 @@ public class CollectController {
         return pageNumbers;
     }
     @PostMapping("/delete_bookmark")
-    public String deleteBookmark(HttpServletRequest request, Model model){
+    public String deleteBookmark(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
         String good_id=request.getParameter("goods_id");
         String user_id=request.getParameter("user_id");
         logger.debug("good_id"+good_id+"---user_id"+user_id);
         int status=collectService.deleteBookmark(good_id,Integer.parseInt(user_id));
-        String add_bookmark_status=null;
+        String delete_bookmark_status =null;
         if (status==1) {
             logger.info("删除收藏成功");
-            add_bookmark_status = "删除收藏成功";
+            delete_bookmark_status = "删除收藏成功";
         }else {
-            logger.error("删除收藏失败");
-            add_bookmark_status = "删除收藏失败";
+            delete_bookmark_status = "删除收藏失败";
+            try {
+                logger.error("删除收藏失败");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "删除收藏失败");
+            } finally {
+                response.flushBuffer();
+            }
         }
-        model.addAttribute("add_bookmark_status",add_bookmark_status);
+        model.addAttribute("add_bookmark_status", delete_bookmark_status);
         if (request.getParameter("where")!=null) {
             logger.info("回到我的收藏");
             return "redirect:/show_bookmark";
@@ -143,7 +147,7 @@ public class CollectController {
         } else {
             try {
                 logger.error("用户未登录，非法请求");
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "用户未登录，非法请求");
             } finally {
                 response.flushBuffer();
             }

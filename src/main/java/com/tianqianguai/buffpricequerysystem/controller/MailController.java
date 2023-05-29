@@ -40,7 +40,7 @@ public class MailController {
         if (user==null) {
             try {
                 logger.error("用户未登录，非法请求");
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "用户未登录，非法请求");
                 return null;
             } finally {
                 response.flushBuffer();

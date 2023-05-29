@@ -71,7 +71,7 @@ public class GoodsController {
                 .collect(Collectors.toList());
     }
     @PostMapping("change_expected_price")
-    public String change_expected_price(HttpServletRequest request, Model model) {
+    public String change_expected_price(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
         logger.info("enter change_expected_price()");
         String expected_price = request.getParameter("expected_price");
         String good_id = request.getParameter("goods_id");
@@ -83,8 +83,13 @@ public class GoodsController {
             logger.info("修改完成");
             model.addAttribute("message", "修改成功");
         }else {
-            logger.info("修改失败");
-            model.addAttribute("message", "修改失败");
+            logger.error("修改失败");
+            try {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "修改失败");
+                return null;
+            } finally {
+                response.flushBuffer();
+            }
         }
         return "redirect:/show_bookmark";
     }
@@ -126,8 +131,8 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortCategoryDesc(offset, 20, category);
             }else {
                 try {
-                    logger.error("排序sort为null");
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    logger.error("排序sort为非法参数");
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "排序sort为非法参数");
                     return null;
                 } finally {
                     response.flushBuffer();
@@ -144,8 +149,8 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortSearchDesc(search,offset, 20);
             }else {
                 try {
-                    logger.error("排序sort为null");
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    logger.error("排序sort为非法参数");
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "排序sort为非法参数");
                     return null;
                 } finally {
                     response.flushBuffer();
@@ -159,7 +164,8 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortBetweenDesc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
             }else {
                 try {
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    logger.error("非法参数排序");
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "排序sort为非法参数");
                     return null;
                 } finally {
                     response.flushBuffer();
@@ -174,7 +180,8 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortDesc(offset, 20);
             }else {
                 try {
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+                    logger.error("非法参数排序");
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "非法参数排序");
                     return null;
                 } finally {
                     response.flushBuffer();

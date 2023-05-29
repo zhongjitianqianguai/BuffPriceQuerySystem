@@ -99,9 +99,10 @@
                 <div class="w-Checkbox" name="preview_screenshots" id="preview_screenshots"
                      style="display:none"></div>
                 <div class="w-Counter" id="j_counter" style="line-height: 0;margin: 0 32px;">
-                    <div class="w-Counter-input w-Counter-input3"><span th:text="#{rmb_fuhao}"> ¥</span><input type="text" class="i_Text" name="min_price"
+                    <div class="w-Counter-input w-Counter-input3"><span th:text="#{rmb_fuhao}"></span>
+                        <input type="text" class="i_Text" name="min_price"
                                                                            th:value="${between_min=='0'?null:between_min}"
-                                                                                                             placeholder="最低价"><span th:text="#{rmb_fuhao2}">-¥</span><input
+                                                                                                             placeholder="最低价"><span th:text="#{rmb_fuhao2}"></span><input
                             type="text" class="i_Text" name="max_price" placeholder="最高价"
                             th:value="${between_max=='999999'?null:between_max}"></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
@@ -111,14 +112,14 @@
                 <div class="w-Select-Multi w-Select-scroll " style="visibility: visible; width: 98px;"
                      name="sort_by">
                     <h3 id="sort" th:if="${sort!='asc'&&sort!='desc'}" th:text="#{sort}"></h3> <i class="icon icon_drop"></i>
-                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc" th:text="#{prize}"><i class="icon icon_order"></i></span></h3>
-                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" th:text="#{prize}"><i class="icon icon_order"></i></span>
+                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc" >价格<i class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" >价格<i class="icon icon_order"></i></span>
                     </h3>
                     <ul id="sort-type" style="width: 98px;">
                         <li><h6 th:text="#{default}"></h6></li>
-                        <li id="asc"><h6><span class="w-Order_asc" th:text="#{prize}">价格<i class="icon icon_order"></i></span>
+                        <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span>
                         </h6></li>
-                        <li id="desc"><h6><span class="w-Order_des" th:text="#{prize}">价格<i class="icon icon_order"></i></span>
+                        <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
                         </h6></li>
                     </ul>
                 </div>
