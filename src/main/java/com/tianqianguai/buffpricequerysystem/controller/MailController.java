@@ -24,6 +24,7 @@ public class MailController {
     MailService mailService;
 
     public List<Integer> getPageNumbers(int currentPage, int totalPages) {
+        logger.debug("获取页码");
         List<Integer> pageNumbers = new ArrayList<Integer>();
         int start = Math.max(1, currentPage - 2);
         int end = Math.min(totalPages, currentPage + 2);
@@ -38,7 +39,7 @@ public class MailController {
         User user=(User)request.getSession().getAttribute("user");
         if (user==null) {
             try {
-                logger.debug("用户未登录，非法请求");
+                logger.error("用户未登录，非法请求");
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
                 return null;
             } finally {
@@ -53,6 +54,7 @@ public class MailController {
             offset = (Integer.parseInt(page) - 1) * 10;
         }
         List<Mail> mails=mailService.getMailByUserId(user.getId(),offset,10);
+        logger.trace(mails);
         model.addAttribute("user",user);
         model.addAttribute("mails",mails);
         model.addAttribute("page", Integer.parseInt(page));

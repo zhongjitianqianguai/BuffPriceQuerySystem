@@ -78,6 +78,7 @@ public class CollectController {
     }
     @RequestMapping("/show_bookmark")
     public String showBookmark(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
+        logger.info("enter showBookmark()");
         User user = (User) request.getSession().getAttribute("user");
         String page = request.getParameter("page");
         String search = request.getParameter("search");
@@ -90,6 +91,7 @@ public class CollectController {
         }
         if (user!=null) {
             List<Collect> collects=collectService.getCollectByUserId(user.getId());
+            logger.trace(collects);
             int totalPage = collects.size() / 10 + 1;
             model.addAttribute("user", user);
             model.addAttribute("collects", collects);
@@ -100,6 +102,7 @@ public class CollectController {
                 for (Collect collect : collects) {
                     Good good = goodsService.getGoodById(collect.getGoods_id());
                     if (good.getName().contains(search)){
+                        logger.debug(good.getName());
                         goodsTemp.add(good);
                     }
                 }
@@ -125,6 +128,7 @@ public class CollectController {
                     for (int i = offset; i < end; i++) {
                         Collect collect = collects.get(i);
                         Good good = goodsService.getGoodById(collect.getGoods_id());
+                        logger.debug(good.getName());
                         goods.add(good);
                     }
                 }
@@ -132,11 +136,12 @@ public class CollectController {
                 model.addAttribute("search", search);
                 model.addAttribute("page", Integer.parseInt(page));
                 model.addAttribute("pageNumbers", getPageNumbers(Integer.parseInt(page), totalPage));
+                logger.info("进入我的收藏页面");
                 return "collect";
             }
         } else {
             try {
-                logger.debug("用户未登录，非法请求");
+                logger.error("用户未登录，非法请求");
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
             } finally {
                 response.flushBuffer();

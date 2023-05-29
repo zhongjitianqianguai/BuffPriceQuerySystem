@@ -126,6 +126,7 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortCategoryDesc(offset, 20, category);
             }else {
                 try {
+                    logger.error("排序sort为null");
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
                     return null;
                 } finally {
@@ -143,6 +144,7 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortSearchDesc(search,offset, 20);
             }else {
                 try {
+                    logger.error("排序sort为null");
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
                     return null;
                 } finally {
@@ -218,6 +220,7 @@ public class GoodsController {
             }
         }
         List<Record> records = recordService.getGoodRecordById(goods_id);
+        logger.debug(records);
         List<Record> last7Days = new ArrayList<>();
         List<Record> lastMonth = new ArrayList<>();
         List<Record> last6Months = new ArrayList<>();
