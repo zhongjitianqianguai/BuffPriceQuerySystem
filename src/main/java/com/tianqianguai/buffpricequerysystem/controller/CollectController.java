@@ -38,7 +38,7 @@ public class CollectController {
             logger.info("收藏成功");
             add_bookmark_status = "收藏成功";
         }else {
-            logger.info("收藏失败");
+            logger.error("收藏失败");
             add_bookmark_status = "收藏失败";
         }
         model.addAttribute("add_bookmark_status",add_bookmark_status);
@@ -64,7 +64,7 @@ public class CollectController {
             logger.info("删除收藏成功");
             add_bookmark_status = "删除收藏成功";
         }else {
-            logger.info("删除收藏失败");
+            logger.error("删除收藏失败");
             add_bookmark_status = "删除收藏失败";
         }
         model.addAttribute("add_bookmark_status",add_bookmark_status);
@@ -96,6 +96,7 @@ public class CollectController {
             model.addAttribute("user", user);
             model.addAttribute("collects", collects);
             List<Good> goods=new ArrayList<>();
+            logger.trace(goods);
             if(search!=null){
                 int goodsOffset = 0;
                 List<Good> goodsTemp = new ArrayList<>();
