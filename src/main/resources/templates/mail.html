@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title th:text="#{collect_title}">我的收藏_网易BUFF饰品交易平台</title>
+<head><title th:text="#{collect_title}"></title>
     <meta property="og:image" content="https://g.fp.ps.netease.com/market/file/6391b1f3672a526e9f383c56lhtp2qta04">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
@@ -15,7 +15,7 @@
         </div>
         <div class="nav">
             <ul>
-                <li class="on"><a href="/home"><strong th:text="#{nav_text1}">饰品市场</strong></a></li>
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}"></strong></a></li>
 
             </ul>
         </div>
@@ -32,18 +32,18 @@
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
                         <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
-                        <p><a href="/logout" class="f_12px" th:text="#{logout}">退出登录</a></p></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
                 </div>
             </div>
             <div class="login-user message"><span><a href="/show_message"><i
                     class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong th:text="#{CS.GO}"><img src="./images/logo_csgo_black.png" class="sel-ico"
+                    <strong ><img src="./images/logo_csgo_black.png" class="sel-ico"
                                  data-game="csgo">CS:GO<span class="tag_status"
                                                              style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on" th:text="#{CS.GO}"><img
+                    <div class="j_drop"><p data-value="csgo" class="on" ><img
                             src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
@@ -69,20 +69,20 @@
         </div>
         <div class="my-menu">
             <ul>
-                <li class="on"><a style="background-color: #4b4d53" href="/show_message" th:text="#{message_center}"><i
+                <li class="on"><a style="background-color: #4b4d53" href="/show_message"><i
                         class="icon icon_menu icon_menu_msg"></i>消息中心<i
                         class="icon icon_new"></i></a></li>
                 <li><a style="background-color: #4b4d53" href="/show_bookmark"><i
-                        class="icon icon_menu icon_menu_fav" th:text="#{mybuying}"></i></a></li>
+                        class="icon icon_menu icon_menu_fav" ></i>我的收藏</a></li>
             </ul>
         </div>
     </div>
     <div class="cont_main">
         <div>
             <div class="block-header black">
-                <ul class="tab" id="j_mail-tab"><a href="/user-center/message?type=trade">
-                </a> <a href="/user-center/message?type=system">
-                    <li message_type="system" class="on" th:text="#{System_messages}"><i class="icon icon_new" style="display: none;"></i></li>
+                <ul class="tab" id="j_mail-tab"><a href="/show_message">
+                </a> <a href="/show_message">
+                    <li message_type="system" class="on" ><i class="icon icon_new" style="display: none;"></i>系统消息</li>
                 </a></ul>
                 <div class="clear"></div>
             </div>
@@ -107,10 +107,10 @@
                 <div class="blank20"></div>
                 <div class="pager light-theme simple-pagination">
                     <ul>
-                        <li th:if="${page==1}" th:class="disabled"><span class="current prev"></span></li>
+                        <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}"></span></li>
                         <li th:if="${page!=1}"><a
                                 th:href="'?page='+${page+(-1)}"
-                                class="page-link prev" th:text="#{previous_page}">上一页</a></li>
+                                class="page-link prev" th:text="#{previous_page}"></a></li>
                         <li th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber==page?'active':''}">
                             <a th:if="${pageNumber != page}"
                                th:href="'?page='+${pageNumber}"
