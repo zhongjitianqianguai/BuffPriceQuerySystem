@@ -99,9 +99,9 @@
                 <div class="w-Checkbox" name="preview_screenshots" id="preview_screenshots"
                      style="display:none"></div>
                 <div class="w-Counter" id="j_counter" style="line-height: 0;margin: 0 32px;">
-                    <div class="w-Counter-input w-Counter-input3"> ¥<input type="text" class="i_Text" name="min_price"
+                    <div class="w-Counter-input w-Counter-input3"><span th:text="#{rmb_fuhao}"> ¥</span><input type="text" class="i_Text" name="min_price"
                                                                            th:value="${between_min=='0'?null:between_min}"
-                                                                           placeholder="最低价">-¥<input
+                                                                                                             placeholder="最低价"><span th:text="#{rmb_fuhao2}">-¥</span><input
                             type="text" class="i_Text" name="max_price" placeholder="最高价"
                             th:value="${between_max=='999999'?null:between_max}"></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
