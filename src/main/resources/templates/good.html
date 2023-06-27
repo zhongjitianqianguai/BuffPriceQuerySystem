@@ -129,7 +129,7 @@
                     <div class="blank20"></div>
                     <div class="detail-summ">
                         <span> <label th:text="#{reference_price}"></label> <strong class="f_Strong"
-                                                                 th:text="'￥'+${good?.getNow_price()}"></strong> </span>
+                                                                 th:text="'￥'+${T(java.lang.Math).abs(good?.getNow_price())}"></strong> </span>
                         <a
                                 th:href="${'https://buff.163.com/goods/'+good.getGoods_id()}"
                                 target="_blank">去Buff市场购买<i class="icon icon_arr_right_small"></i></a></div>

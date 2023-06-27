@@ -25,6 +25,9 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -76,16 +79,16 @@ public class GoodsController {
         String expected_price = request.getParameter("expected_price");
         String good_id = request.getParameter("goods_id");
         User user = (User) request.getSession().getAttribute("user");
-        logger.debug("用户"+user+"修改了"+good_id+"商品");
+        logger.debug("用户"+user+"修改了"+good_id+"商品的预期价格");
         model.addAttribute("user", user);
         int change_status=goodsService.changeExpectedPrice(good_id, Double.parseDouble(expected_price));
         if (change_status==1){
-            logger.info("修改完成");
+            logger.info("修改商品的预期价格完成");
             model.addAttribute("message", "修改成功");
         }else {
-            logger.error("修改失败");
+            logger.error("修改商品的预期价格失败");
             try {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "修改失败");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "修改商品的预期价格失败");
                 return null;
             } finally {
                 response.flushBuffer();
@@ -233,38 +236,50 @@ public class GoodsController {
         List<Record> last6Months = new ArrayList<>();
         List<Record> lastYear = new ArrayList<>();
         List<Record> last2Years = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // 获取当前时间
+        // 获取当前时间
+        Instant currentInstant = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
 
-        // 格式化日期
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date currentDate = new Date();
+        // 计算7天前的时间
+        Instant last7DaysInstant = currentInstant.minus(7, ChronoUnit.DAYS);
 
+        // 计算一个月前的时间
+        LocalDate lastMonthDate = LocalDate.now().minusMonths(1);
+        Instant lastMonthInstant = lastMonthDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        // 计算六个月前的时间
+        LocalDate last6MonthsDate = LocalDate.now().minusMonths(6);
+        Instant last6MonthsInstant = last6MonthsDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+
+        // 计算一年前的时间
+        LocalDate lastYearDate = LocalDate.now().minusYears(1);
+        Instant lastYearInstant = lastYearDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+
+
+        // 计算两年前的时间
+        LocalDate last2YearsDate = LocalDate.now().minusYears(2);
+        Instant last2YearsInstant = last2YearsDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+
+        // 遍历所有记录
         for (Record record : records) {
-            try {
-                Date recordDate = formatter.parse(record.getTime());
+            // 将记录时间转换为Instant对象
+            Instant recordInstant = LocalDateTime.parse(record.getTime(), formatter).atZone(ZoneId.systemDefault()).toInstant();
 
-                // 计算时间差
-                long diffDays = TimeUnit.DAYS.convert(currentDate.getTime() - recordDate.getTime(), TimeUnit.MILLISECONDS);
-                long diffMonths = diffDays / 30;
-                long diffYears = diffDays / 365;
-
-                // 判断时间差是否在规定范围内
-                if (diffDays <= 7) {
-                    last7Days.add(record);
-                }
-                if (diffMonths <= 1) {
-                    lastMonth.add(record);
-                }
-                if (diffMonths <= 6) {
-                    last6Months.add(record);
-                }
-                if (diffYears <= 1) {
-                    lastYear.add(record);
-                }
-                if (diffYears <= 2) {
-                    last2Years.add(record);
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
+            // 判断记录时间是否在规定范围内
+            if (recordInstant.isAfter(last7DaysInstant)) {
+                last7Days.add(record);
+            }
+            if (recordInstant.isAfter(lastMonthInstant)) {
+                lastMonth.add(record);
+            }
+            if (recordInstant.isAfter(last6MonthsInstant)) {
+                last6Months.add(record);
+            }
+            if (recordInstant.isAfter(lastYearInstant)) {
+                lastYear.add(record);
+            }
+            if (recordInstant.isAfter(last2YearsInstant)) {
+                last2Years.add(record);
             }
         }
         model.addAttribute("all_records_last7Days", last7Days);

@@ -171,7 +171,7 @@
                         <i class="icon icon_check"></i>
 
                         <span th:class="${good.getTrend()==0.00?'tag tag_csgo_wearcategory2':(good.getTrend()>0.00?'tag tag_csgo_wearcategory4':'tag tag_csgo_wearcategory0')}"
-                              th:text="${good.getTrend()==0.00?'价格趋于平稳':(good.getTrend()>0.00?'↑ '+good.getTrend()*100+'%':'↓ '+(-good.getTrend())*100+'%')}"></span>
+                              th:text="${good.getTrend()==0.00?'价格趋势平稳':(good.getTrend()>0.00?'↑ '+good.getTrend()*100+'%':'↓ '+(-good.getTrend())*100+'%')}"></span>
 
                     </li>
 

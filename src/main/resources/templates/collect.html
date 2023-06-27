@@ -114,11 +114,11 @@
         <div class="user-record change">
             <table class="list_tb" width="100%">
                 <tr>
-                    <th width="120" th:text="${Jewelry}"></th>
+                    <th width="120" th:text="#{Jewelry}"></th>
                     <th width="350"></th>
-                    <th width="240" class="t_Left tb-Order " value="asc" id="order-by-price" th:text="#{The_lowest_currently_on_sale}"> 当前在售最低 <i
+                    <th width="240" class="t_Left tb-Order " id="order-by-price" th:text="#{The_lowest_currently_on_sale}"> 当前在售最低 <i
                             class="icon icon_order"></i></th>
-                    <th width="240" class="t_Left" th:text="#{Historical_Lowest_Price}">历史最低价格</th>
+                    <th width="240" class="t_Left" th:text="#{Historical_Lowest_Price}"></th>
                     <th width="240" class="t_Left">修改预期价格&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;取消收藏</th>
                 </tr>
                 <tr th:each="good,iterStat:${goods}">
@@ -143,7 +143,7 @@
                     </td>
                     <td class="t_Left"><a th:id="${good.getGoods_id()}" href="" class="i_Btn i_Btn_mid"
                                           th:text="'￥'+${good.getExpected_price()}"></a><span
-                            th:id="${good.getGoods_id()}" class="user-fav on delete-bookmark"><span th:text="#{Favorite}">已收藏</span><i
+                            th:id="${good.getGoods_id()}" class="user-fav on delete-bookmark"><span th:text="#{Favorite}"></span><i
                             class="icon icon_fav"></i></span></td>
                 </tr>
             </table>
