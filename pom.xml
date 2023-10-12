@@ -16,6 +16,8 @@
     <description>BuffPriceQuerySystem</description>
     <properties>
         <java.version>1.8</java.version>
+        <!--        添加的-->
+        <tomcat.version>9.0.70</tomcat.version>
     </properties>
     <dependencies>
         <dependency>
