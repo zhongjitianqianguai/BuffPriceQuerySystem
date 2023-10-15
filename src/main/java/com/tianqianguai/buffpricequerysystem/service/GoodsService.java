@@ -72,4 +72,37 @@ public class GoodsService {
         logger.debug("enter changeExpectedPrice()");
         return goodsMapper.changeExpectedPrice(goods_id,expected_price);
     }
+    public List<Good> getGoodByPriceSortCategoryUpTrendDesc(int offset, int limit, String category){
+        logger.debug("enter getGoodByPriceSortCategoryUpTrendDesc()");
+        return goodsMapper.getGoodByPriceSortCategoryUpTrendDesc(offset,limit,category);
+    }
+    public List<Good> getGoodByPriceSortCategoryDownTrendDesc(int offset, int limit, String category){
+        logger.debug("enter getGoodByPriceSortCategoryDownTrendDesc()");
+        return goodsMapper.getGoodByPriceSortCategoryDownTrendDesc(offset,limit,category);
+    }
+    public List<Good> getGoodByPriceSortSearchTrendUpDesc(String goods_name,int offset, int limit){
+        logger.debug("enter getGoodByPriceSortSearchTrendUpDesc()");
+        return goodsMapper.getGoodByPriceSortSearchTrendUpDesc(goods_name,offset,limit);
+    }
+    public List<Good> getGoodByPriceSortSearchTrendDownDesc(String goods_name,int offset, int limit){
+        logger.debug("enter getGoodByPriceSortSearchTrendDownDesc()");
+        return goodsMapper.getGoodByPriceSortSearchTrendDownDesc(goods_name,offset,limit);
+    }
+    public List<Good> getGoodByPriceSortTrendUpBetweenDesc(double minPrice, double maxPrice, int offset, int limit){
+        logger.debug("enter getGoodByPriceSortTrendUpBetweenDesc()");
+        return goodsMapper.getGoodByPriceSortTrendUpBetweenDesc(minPrice,maxPrice,offset,limit);
+    }
+    public List<Good> getGoodByPriceSortTrendDownBetweenDesc(double minPrice, double maxPrice, int offset, int limit){
+        logger.debug("enter getGoodByPriceSortTrendDownBetweenDesc()");
+        return goodsMapper.getGoodByPriceSortTrendDownBetweenDesc(minPrice,maxPrice,offset,limit);
+    }
+    public List<Good> getGoodByPriceSortTrendUpDesc(int offset, int limit){
+        logger.debug("enter getGoodByPriceSortTrendUpDesc()");
+        return goodsMapper.getGoodByPriceSortTrendUpDesc(offset,limit);
+    }
+    public List<Good> getGoodByPriceSortTrendDownDesc(int offset, int limit){
+        logger.debug("enter getGoodByPriceSortTrendDownDesc()");
+        return goodsMapper.getGoodByPriceSortTrendDownDesc(offset,limit);
+    }
+
 }

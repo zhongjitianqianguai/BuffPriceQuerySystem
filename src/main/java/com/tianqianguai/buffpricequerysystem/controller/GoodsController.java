@@ -73,19 +73,20 @@ public class GoodsController {
                 .sorted(Comparator.comparing(Record::getTime))
                 .collect(Collectors.toList());
     }
+
     @PostMapping("change_expected_price")
-    public String change_expected_price(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
+    public String change_expected_price(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
         logger.info("enter change_expected_price()");
         String expected_price = request.getParameter("expected_price");
         String good_id = request.getParameter("goods_id");
         User user = (User) request.getSession().getAttribute("user");
-        logger.debug("用户"+user+"修改了"+good_id+"商品的预期价格");
+        logger.debug("用户" + user + "修改了" + good_id + "商品的预期价格");
         model.addAttribute("user", user);
-        int change_status=goodsService.changeExpectedPrice(good_id, Double.parseDouble(expected_price));
-        if (change_status==1){
+        int change_status = goodsService.changeExpectedPrice(good_id, Double.parseDouble(expected_price));
+        if (change_status == 1) {
             logger.info("修改商品的预期价格完成");
             model.addAttribute("message", "修改成功");
-        }else {
+        } else {
             logger.error("修改商品的预期价格失败");
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "修改商品的预期价格失败");
@@ -98,21 +99,20 @@ public class GoodsController {
     }
 
     @RequestMapping("home")
-    public String show_index(HttpServletRequest request, Model model,HttpServletResponse response) throws IOException {
+    public String show_index(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
         logger.info("进入主页");
         String page = request.getParameter("page");
         String category = request.getParameter("category");
         String search = request.getParameter("search");
         String sort = request.getParameter("sort");
-        String between_min= request.getParameter("between_min");
-        String between_max= request.getParameter("between_max");
+        String between_min = request.getParameter("between_min");
+        String between_max = request.getParameter("between_max");
         User user = (User) request.getSession().getAttribute("user");
-        String user_status= (String) request.getSession().getAttribute("user_status");
+        String user_status = (String) request.getSession().getAttribute("user_status");
         model.addAttribute("user_status", user_status);
         model.addAttribute("user", user);
         model.addAttribute("between_min", between_min);
         model.addAttribute("between_max", between_max);
-        model.addAttribute("sort", sort);
         model.addAttribute("search", search);
         model.addAttribute("category", category);
         int offset = 0;
@@ -121,18 +121,25 @@ public class GoodsController {
         } else {
             offset = (Integer.parseInt(page) - 1) * 20;
         }
+
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("pageNumbers", getPageNumbers(Integer.parseInt(page), 58));
         model.addAttribute("totalPages", 58);
 
         List<Good> first_goods = null;
         if (category != null && sort != null) {
-            logger.debug("分类为"+category+"排序为"+sort);
+            logger.debug("分类为" + category + "排序为" + sort);
             if (sort.equals("asc")) {
                 first_goods = goodsService.getGoodByPriceSortCategoryAsc(offset, 20, category);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortCategoryDesc(offset, 20, category);
-            }else {
+            } else if (sort.equals("default")) {
+                first_goods = goodsService.selectGoodsIwantByCategory(offset, 20, category);
+            } else if (sort.equals("trend_up_desc")) {
+                first_goods = goodsService.getGoodByPriceSortCategoryUpTrendDesc(offset, 20, category);
+            } else if (sort.equals("trend_down_desc")) {
+                first_goods = goodsService.getGoodByPriceSortCategoryDownTrendDesc(offset, 20, category);
+            } else {
                 try {
                     logger.error("排序sort为非法参数");
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "排序sort为非法参数");
@@ -142,14 +149,20 @@ public class GoodsController {
                 }
             }
         } else if (category != null) {
-            logger.debug("分类为"+category);
+            logger.debug("分类为" + category);
             first_goods = goodsService.selectGoodsIwantByCategory(offset, 20, category);
-        } else if (search != null&&sort != null) {
-            logger.debug("搜索为"+search+"排序为"+sort);
+        } else if (search != null && sort != null) {
+            logger.debug("搜索为" + search + "排序为" + sort);
             if (sort.equals("asc")) {
-                first_goods = goodsService.getGoodByPriceSortSearchAsc(search,offset, 20);
+                first_goods = goodsService.getGoodByPriceSortSearchAsc(search, offset, 20);
             } else if (sort.equals("desc")) {
-                first_goods = goodsService.getGoodByPriceSortSearchDesc(search,offset, 20);
+                first_goods = goodsService.getGoodByPriceSortSearchDesc(search, offset, 20);
+            } else if (sort.equals("default")) {
+                first_goods = goodsService.getGoodsByName(search, offset, 20);
+            } else if (sort.equals("trend_up_desc")) {
+                first_goods = goodsService.getGoodByPriceSortSearchTrendUpDesc(search, offset, 20);
+            } else if (sort.equals("trend_down_desc")) {
+                first_goods = goodsService.getGoodByPriceSortSearchTrendDownDesc(search, offset, 20);
             }else {
                 try {
                     logger.error("排序sort为非法参数");
@@ -160,12 +173,18 @@ public class GoodsController {
                 }
             }
         } else if (sort != null && between_max != null && between_min != null) {
-            logger.debug("排序为"+sort+"价格在"+between_min+"-"+between_max+"之间");
+            logger.debug("排序为" + sort + "价格在" + between_min + "-" + between_max + "之间");
             if (sort.equals("asc")) {
-                first_goods = goodsService.getGoodByPriceSortBetweenAsc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
+                first_goods = goodsService.getGoodByPriceSortBetweenAsc(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
             } else if (sort.equals("desc")) {
-                first_goods = goodsService.getGoodByPriceSortBetweenDesc(Double.parseDouble(between_min),Double.parseDouble(between_max),offset, 20);
-            }else {
+                first_goods = goodsService.getGoodByPriceSortBetweenDesc(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
+            }else if (sort.equals("default")) {
+                first_goods = goodsService.getGoodsByPriceBetween(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
+            } else if (sort.equals("trend_up_desc")) {
+                first_goods = goodsService.getGoodByPriceSortTrendUpBetweenDesc(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
+            } else if (sort.equals("trend_down_desc")) {
+                first_goods = goodsService.getGoodByPriceSortTrendDownBetweenDesc(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
+            } else {
                 try {
                     logger.error("非法参数排序");
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "排序sort为非法参数");
@@ -175,13 +194,18 @@ public class GoodsController {
                 }
             }
         } else if (sort != null) {
-            logger.debug("排序为"+sort);
+            logger.debug("排序为" + sort);
             if (sort.equals("asc")) {
                 first_goods = goodsService.getGoodByPriceSortAsc(offset, 20);
-            }
-            else if (sort.equals("desc")) {
+            } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortDesc(offset, 20);
-            }else {
+            }else if (sort.equals("default")) {
+                first_goods = goodsService.getGoodsIwant(offset, 20);
+            } else if (sort.equals("trend_up_desc")) {
+                first_goods = goodsService.getGoodByPriceSortTrendUpDesc(offset, 20);
+            } else if (sort.equals("trend_down_desc")) {
+                first_goods = goodsService.getGoodByPriceSortTrendDownDesc(offset, 20);
+            } else {
                 try {
                     logger.error("非法参数排序");
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "非法参数排序");
@@ -190,13 +214,13 @@ public class GoodsController {
                     response.flushBuffer();
                 }
             }
-        } else if (search!=null) {
-            logger.debug("搜索项目为"+search);
-            first_goods=goodsService.getGoodsByName(search,offset,20);
+        } else if (search != null) {
+            logger.debug("搜索项目为" + search);
+            first_goods = goodsService.getGoodsByName(search, offset, 20);
 
-        } else if (between_max!=null&&between_min!=null) {
-            logger.debug("价格在"+between_min+"-"+between_max+"之间");
-            first_goods=goodsService.getGoodsByPriceBetween(Double.parseDouble(between_min),Double.parseDouble(between_max),offset,20);
+        } else if (between_max != null && between_min != null) {
+            logger.debug("价格在" + between_min + "-" + between_max + "之间");
+            first_goods = goodsService.getGoodsByPriceBetween(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
         } else {
             logger.debug("默认排序");
             first_goods = goodsService.getGoodsIwant(offset, 20);
@@ -204,6 +228,10 @@ public class GoodsController {
         model.addAttribute("first_goods", first_goods);
         logger.trace(first_goods);
         logger.info("to index");
+        if (sort == null) {
+            sort = "default";
+        }
+        model.addAttribute("sort", sort);
         return "index";
     }
 
@@ -217,10 +245,10 @@ public class GoodsController {
         Good good = goodsService.getGoodById(goods_id);
         model.addAttribute("good", good);
         User user = (User) request.getSession().getAttribute("user");
-        String user_status= (String) request.getSession().getAttribute("user_status");
+        String user_status = (String) request.getSession().getAttribute("user_status");
         model.addAttribute("user_status", user_status);
         model.addAttribute("user", user);
-        if (user!=null) {
+        if (user != null) {
             Collect collect = collectService.getCollectByUserIdAndGoodId(user.getId(), goods_id);
             logger.debug(collect);
             if (collect != null) {

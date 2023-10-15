@@ -111,16 +111,17 @@
                 </div>
                 <div class="w-Select-Multi w-Select-scroll " style="visibility: visible; width: 98px;"
                      name="sort_by">
-                    <h3 id="sort" th:if="${sort!='asc'&&sort!='desc'}" th:text="#{sort}"></h3> <i class="icon icon_drop"></i>
+                    <h3 id="sort" th:if="${sort=='default'}" th:text="#{sort}"></h3> <i class="icon icon_drop"></i>
                     <h3 th:if="${sort=='asc'}"><span class="w-Order_asc" >价格<i class="icon icon_order"></i></span></h3>
-                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" >价格<i class="icon icon_order"></i></span>
-                    </h3>
+                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" >价格<i class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='trend_up_desc'}"><span class="w-Order_des" >涨幅<i class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='trend_down_desc'}"><span class="w-Order_des" >降幅<i class="icon icon_order"></i></span></h3>
                     <ul id="sort-type" style="width: 98px;">
                         <li><h6 th:text="#{default}"></h6></li>
-                        <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span>
-                        </h6></li>
-                        <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
-                        </h6></li>
+                        <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span></h6></li>
+                        <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span></h6></li>
+                        <li id="trend_up_desc"><h6><span class="w-Order_des">涨幅<i class="icon icon_order"></i></span></h6></li>
+                        <li id="trend_down_desc"><h6><span class="w-Order_des">降幅<i class="icon icon_order"></i></span></h6></li>
                     </ul>
                 </div>
                 <div class="w-Search" id="j_search" data-expanded="false" data-loading="false" data-position="below"
@@ -183,17 +184,17 @@
                 <ul>
                     <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}"></span></li>
                     <li th:if="${page!=1}"><a
-                            th:href="'?page='+${page+(-1)}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}"
+                            th:href="'?page='+${page+(-1)}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}+${between_min==null?'':'&between_min='+between_min}+${between_max==null?'':'&between_max='+between_max}"
                             class="page-link prev" th:text="#{previous_page}"></a></li>
                     <li th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber==page?'active':''}">
                         <a th:if="${pageNumber != page}"
-                           th:href="'?page='+${pageNumber}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}"
+                           th:href="'?page='+${pageNumber}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}+${between_min==null?'':'&between_min='+between_min}+${between_max==null?'':'&between_max='+between_max}"
                            class="page-link"
                            th:text="${pageNumber}"></a>
                         <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
                     </li>
                     <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
-                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}" th:text="#{next_page}"></a>
+                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}+${between_min==null?'':'&between_min='+between_min}+${between_max==null?'':'&between_max='+between_max}" th:text="#{next_page}"></a>
                     </li>
                 </ul>
             </div>
@@ -271,7 +272,7 @@
                 alert('请至少输入一个价格区间')
                 return
             }
-            if (between_min !== '' && between_max !== '' && between_min > between_max) {
+            if (between_min !== '' && between_max !== '' && Number(between_min) > Number(between_max)) {
                 alert('最小值不能大于最大值')
                 return
             }
