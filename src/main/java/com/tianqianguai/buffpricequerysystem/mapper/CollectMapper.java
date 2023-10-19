@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CollectMapper {
-    @Insert("insert into buff_user_collect(goods_id,user_id) values(#{good_id},#{user_id})")
+    @Insert("insert into buff_user_collect(goods_id,user_id,expected_price) values(#{good_id},#{user_id},1)")
     int addBookmark(String good_id, int user_id);
     @Delete("delete from buff_user_collect where goods_id=#{good_id} and user_id=#{user_id}")
     int deleteBookmark(String good_id, int user_id);
