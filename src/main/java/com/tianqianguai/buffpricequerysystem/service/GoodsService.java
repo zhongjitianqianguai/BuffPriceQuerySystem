@@ -68,10 +68,7 @@ public class GoodsService {
         logger.debug("enter getGoodByPriceSortBetweenDesc()");
         return goodsMapper.getGoodByPriceSortBetweenDesc(minPrice,maxPrice,offset,limit);
     }
-    public int changeExpectedPrice(String goods_id,double expected_price){
-        logger.debug("enter changeExpectedPrice()");
-        return goodsMapper.changeExpectedPrice(goods_id,expected_price);
-    }
+
     public List<Good> getGoodByPriceSortCategoryUpTrendDesc(int offset, int limit, String category){
         logger.debug("enter getGoodByPriceSortCategoryUpTrendDesc()");
         return goodsMapper.getGoodByPriceSortCategoryUpTrendDesc(offset,limit,category);

@@ -74,29 +74,7 @@ public class GoodsController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("change_expected_price")
-    public String change_expected_price(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
-        logger.info("enter change_expected_price()");
-        String expected_price = request.getParameter("expected_price");
-        String good_id = request.getParameter("goods_id");
-        User user = (User) request.getSession().getAttribute("user");
-        logger.debug("用户" + user + "修改了" + good_id + "商品的预期价格");
-        model.addAttribute("user", user);
-        int change_status = goodsService.changeExpectedPrice(good_id, Double.parseDouble(expected_price));
-        if (change_status == 1) {
-            logger.info("修改商品的预期价格完成");
-            model.addAttribute("message", "修改成功");
-        } else {
-            logger.error("修改商品的预期价格失败");
-            try {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "修改商品的预期价格失败");
-                return null;
-            } finally {
-                response.flushBuffer();
-            }
-        }
-        return "redirect:/show_bookmark";
-    }
+
 
     @RequestMapping("home")
     public String show_index(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {

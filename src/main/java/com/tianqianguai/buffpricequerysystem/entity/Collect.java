@@ -4,6 +4,7 @@ public class Collect {
     int id;
     int user_id;
     String  goods_id;
+    double expected_price;
 
     public int getId() {
         return id;
@@ -29,9 +30,18 @@ public class Collect {
         this.goods_id = goods_id;
     }
 
-    public Collect(int id, int user_id, String goods_id) {
+    public double getExpected_price() {
+        return expected_price;
+    }
+
+    public void setExpected_price(double expected_price) {
+        this.expected_price = expected_price;
+    }
+
+    public Collect(int id, int user_id, String goods_id, double expected_price) {
         this.id = id;
         this.user_id = user_id;
         this.goods_id = goods_id;
+        this.expected_price = expected_price;
     }
 }

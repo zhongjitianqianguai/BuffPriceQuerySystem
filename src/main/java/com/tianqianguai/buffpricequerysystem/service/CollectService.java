@@ -31,4 +31,8 @@ public class CollectService {
         logger.debug("user_id:"+user_id+"good_id"+good_id);
         return collectMapper.getCollectByUserIdAndGoodId(user_id, good_id);
     }
+    public int changeExpectedPrice(String goods_id,double expected_price){
+        logger.debug("enter changeExpectedPrice()");
+        return collectMapper.changeExpectedPrice(goods_id,expected_price);
+    }
 }

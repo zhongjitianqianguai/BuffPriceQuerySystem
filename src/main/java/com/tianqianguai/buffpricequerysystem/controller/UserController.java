@@ -21,18 +21,44 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    CollectService collectService;
+
     @RequestMapping("show_login")
     public String Login(){
         logger.info("enter Login()");
         logger.info("to login");
         return "login";
     }
+    @RequestMapping("show_register")
+    public String Register(){
+        logger.info("enter Register()");
+        logger.info("to register");
+        return "register";
+    }
+
     @RequestMapping("logout")
     public String Logout(HttpServletRequest request) {
         logger.info("enter Logout()");
         request.getSession().setAttribute("user", null);
+        logger.info("重定向到主页");
+        return "redirect:home";
+    }
+    @PostMapping("register")
+    public String Register(HttpServletRequest request) throws ServletException {
+        logger.info("enter Register()");
+        String username = request.getParameter("name");
+        String password = request.getParameter("password");
+        logger.debug("username:"+username+"password"+password);
+        User user = userService.getUserByName(username);
+        if (user != null){
+            logger.debug("用户已存在");
+        } else {
+            //注册成功
+            logger.debug("注册成功");
+
+            int status= userService.addUser(username,password);
+            logger.debug("status:"+status);
+        }
+        request.getSession().setAttribute("user", userService.getUserByName(username));
         logger.info("重定向到主页");
         return "redirect:home";
     }

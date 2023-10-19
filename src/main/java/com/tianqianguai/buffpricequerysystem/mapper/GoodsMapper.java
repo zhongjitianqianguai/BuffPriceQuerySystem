@@ -56,6 +56,5 @@ public interface GoodsMapper {
     @Select("select * from buff_goods where now_price between #{minPrice} and #{maxPrice} order by trend asc limit #{offset},#{limit}")
     List<Good> getGoodByPriceSortTrendDownBetweenDesc(double minPrice, double maxPrice, int offset, int limit);
 
-    @Update("update buff_goods set expected_price=#{expected_price} where goods_id=#{goods_id}")
-    int changeExpectedPrice(String goods_id,double expected_price);
+
 }

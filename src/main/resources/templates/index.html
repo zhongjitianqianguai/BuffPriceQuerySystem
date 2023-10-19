@@ -20,15 +20,17 @@
         </div>
         <div th:if="${user!=null}" class="nav nav_entries">
             <div class="login-user j_drop-handler"><a href=""> <img
-                    width="32" height="32" class="has-store store-online" src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                    width="32" height="32" class="has-store store-online"
+                    src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                     onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
                 <i class="icon icon-store store-online"></i> <strong class=""
-                                                                     id="navbar-user-name" th:text="${user.getUsername()}"></strong> </a>
+                                                                     id="navbar-user-name"
+                                                                     th:text="${user.getName()}"></strong> </a>
                 <div class="drop-store j_drop">
                     <div class="store-user"><img
                             src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
                             onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
-                        <div class=""><h3 th:text="${user.getUsername()}"></h3></div>
+                        <div class=""><h3 th:text="${user.getName()}"></h3></div>
                         <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
                 </div>
             </div>
@@ -36,12 +38,12 @@
                     class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
-                                 data-game="csgo">CS:GO<span class="tag_status"
-                                                             style="display: none;"></span></strong><i
+                    <strong><img src="./images/logo_csgo2.png" class="sel-ico"
+                                 data-game="csgo">CS2<span class="tag_status"
+                                                           style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
                     <div class="j_drop"><p data-value="csgo" class="on"><img
-                            src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
+                            src="./images/logo_csgo2.png" class="sel-ico" data-game="csgo">CS2<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
                 </div>
@@ -62,12 +64,12 @@
             </ul>
             <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
                 <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
-                    <strong><img src="./images/logo_csgo_black.png" class="sel-ico"
-                                 data-game="csgo">CS:GO<span class="tag_status"
-                                                             style="display: none;"></span></strong><i
+                    <strong><img src="./images/logo_csgo2.png" class="sel-ico"
+                                 data-game="csgo">CS2<span class="tag_status"
+                                                           style="display: none;"></span></strong><i
                         class="icon icon_arr_light"></i></h3>
-                    <div class="j_drop"><p data-value="csgo" class="on" ><img
-                            src="./images/logo_csgo_black.png" class="sel-ico" data-game="csgo">CS:GO<span
+                    <div class="j_drop"><p data-value="csgo" class="on"><img
+                            src="./images/logo_csgo2.png" class="sel-ico" data-game="csgo">CS2<span
                             class="tag_status" style="display: none;"></span></p>
                     </div>
                 </div>
@@ -94,6 +96,96 @@
 
 <div class="market-list">
     <div class="l_Layout">
+        <div class="market-header black" style="background: #f3f3f3">
+            <div class="h1z1-selType type_csgo" id="j_h1z1-selType">
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=匕首"><i class="icon icon_csgo_type_knife"></i>
+                    <p value="knife">匕首</p>
+                    </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=手套"><i class="icon icon_type_hands"></i>
+                    <p value="hands">手套</p>
+                </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=步枪"><i class="icon icon_csgo_type_rifle"></i>
+                    <p value="rifle">步枪</p>
+                </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=手枪"><i class="icon icon_csgo_type_pistol"></i>
+                    <p value="pistol">手枪</p>
+
+                    </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=微型冲锋枪"><i class="icon icon_csgo_type_smg"></i>
+                    <p value="smg">微型冲锋枪</p>
+
+                    </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=霰弹枪"><i class="icon icon_csgo_type_shotgun"></i>
+                    <p value="shotgun">霰弹枪</p>
+
+
+
+                    </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=机枪"><i class="icon icon_csgo_type_machinegun"></i>
+                    <p value="machinegun">机枪</p>
+
+
+
+                    </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=印花"> <i class="icon icon_csgo_tool_sticker"></i>
+                    <p value="sticker">印花</p>
+
+                    </a>
+                </div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+                    <a href="?category=探员"><i class="icon icon_csgo_type_customplayer"></i>
+                    <p value="type_customplayer">探员</p>
+
+
+
+
+                </a></div>
+
+                <div class="item w-SelType csgo_filter" style="width: 7%;">
+
+                    <i class="icon icon_csgo_type_other"></i>
+                    <p value="other">其他</p>
+
+
+                    <ul class="cols">
+                        <a href="?category=武器箱">
+                        <li value="csgo_type_weaponcase">武器箱</li>
+                        </a>
+                        <a href="?category=音乐盒">
+                        <li value="csgo_type_musickit">音乐盒</li>
+                        </a>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="blank20"></div>
         <div class="block-header">
             <div class="l_Right">
                 <div class="w-Checkbox" name="preview_screenshots" id="preview_screenshots"
@@ -101,27 +193,34 @@
                 <div class="w-Counter" id="j_counter" style="line-height: 0;margin: 0 32px;">
                     <div class="w-Counter-input w-Counter-input3"><span th:text="#{rmb_fuhao}"></span>
                         <input type="text" class="i_Text" name="min_price"
-                                                                           th:value="${between_min=='0'?null:between_min}"
-                                                                                                             placeholder="最低价"><span th:text="#{rmb_fuhao2}"></span><input
-                            type="text" class="i_Text" name="max_price" placeholder="最高价"
-                            th:value="${between_max=='999999'?null:between_max}"></div>
+                               th:value="${between_min=='0'?null:between_min}"
+                               placeholder="最低价"><span th:text="#{rmb_fuhao2}"></span><input
+                                type="text" class="i_Text" name="max_price" placeholder="最高价"
+                                th:value="${between_max=='999999'?null:between_max}"></div>
                     <div class="w-Counter-pannel" style="display: none;"><a href="javascript:;"
-                                                                            class="i_Btn i_Btn_sub i_Btn_small" th:text="#{clean_up}"></a><a
-                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit" th:text="#{determine}"></a></div>
+                                                                            class="i_Btn i_Btn_sub i_Btn_small"
+                                                                            th:text="#{clean_up}"></a><a
+                            href="javascript:;" class="i_Btn i_Btn_main i_Btn_small" id="between_submit"
+                            th:text="#{determine}"></a></div>
                 </div>
                 <div class="w-Select-Multi w-Select-scroll " style="visibility: visible; width: 98px;"
                      name="sort_by">
-                    <h3 id="sort" th:if="${sort=='default'}" th:text="#{sort}"></h3> <i class="icon icon_drop"></i>
-                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc" >价格<i class="icon icon_order"></i></span></h3>
-                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des" >价格<i class="icon icon_order"></i></span></h3>
-                    <h3 th:if="${sort=='trend_up_desc'}"><span class="w-Order_des" >涨幅<i class="icon icon_order"></i></span></h3>
-                    <h3 th:if="${sort=='trend_down_desc'}"><span class="w-Order_des" >降幅<i class="icon icon_order"></i></span></h3>
+                    <h3 id="sort" th:if="${sort=='default'}" th:text="#{sort}"></h3> <i class="icon1 icon_drop"></i>
+                    <h3 th:if="${sort=='asc'}"><span class="w-Order_asc">价格<i class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='desc'}"><span class="w-Order_des">价格<i class="icon icon_order"></i></span>
+                    </h3>
+                    <h3 th:if="${sort=='trend_up_desc'}"><span class="w-Order_des">涨幅<i
+                            class="icon icon_order"></i></span></h3>
+                    <h3 th:if="${sort=='trend_down_desc'}"><span class="w-Order_des">降幅<i class="icon icon_order"></i></span>
+                    </h3>
                     <ul id="sort-type" style="width: 98px;">
                         <li><h6 th:text="#{default}"></h6></li>
                         <li id="asc"><h6><span class="w-Order_asc">价格<i class="icon icon_order"></i></span></h6></li>
                         <li id="desc"><h6><span class="w-Order_des">价格<i class="icon icon_order"></i></span></h6></li>
-                        <li id="trend_up_desc"><h6><span class="w-Order_des">涨幅<i class="icon icon_order"></i></span></h6></li>
-                        <li id="trend_down_desc"><h6><span class="w-Order_des">降幅<i class="icon icon_order"></i></span></h6></li>
+                        <li id="trend_up_desc"><h6><span class="w-Order_des">涨幅<i class="icon icon_order"></i></span>
+                        </h6></li>
+                        <li id="trend_down_desc"><h6><span class="w-Order_des">降幅<i
+                                class="icon icon_order"></i></span></h6></li>
                     </ul>
                 </div>
                 <div class="w-Search" id="j_search" data-expanded="false" data-loading="false" data-position="below"
@@ -182,7 +281,8 @@
             </div>
             <div class="pager card-pager light-theme simple-pagination">
                 <ul>
-                    <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}"></span></li>
+                    <li th:if="${page==1}" th:class="disabled"><span class="current prev"
+                                                                     th:text="#{previous_page}"></span></li>
                     <li th:if="${page!=1}"><a
                             th:href="'?page='+${page+(-1)}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}+${between_min==null?'':'&between_min='+between_min}+${between_max==null?'':'&between_max='+between_max}"
                             class="page-link prev" th:text="#{previous_page}"></a></li>
@@ -194,14 +294,15 @@
                         <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
                     </li>
                     <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
-                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}+${between_min==null?'':'&between_min='+between_min}+${between_max==null?'':'&between_max='+between_max}" th:text="#{next_page}"></a>
+                           th:href="'?page='+${page+1}+${category==null?'':'&category='+category}+${search==null?'':'&search='+search}+${sort==null?'':'&sort='+sort}+${between_min==null?'':'&between_min='+between_min}+${between_max==null?'':'&between_max='+between_max}"
+                           th:text="#{next_page}"></a>
                     </li>
                 </ul>
             </div>
 
         </div>
 
-</div>
+    </div>
 </div>
 </div>
 

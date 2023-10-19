@@ -6684,7 +6684,7 @@ div.rust-Select-Multi ul li div p {
     display: block;
     width: 100%;
     text-align: center;
-    background: url(https://buff.163.com/static/images/item_bg.png);
+    background: url(https://buff.163.com../images/item_bg.png);
     background-size: cover
 }
 
@@ -11421,7 +11421,7 @@ div.timepicker.disabled .i_Text {
 
 .weapon-list li .pic-cont {
     text-align: center;
-    background: url(https://buff.163.com/static/images/item_bg.png);
+    background: url(https://buff.163.com../images/item_bg.png);
     background-size: cover;
     margin: auto;
     width: 88px;
@@ -11477,7 +11477,7 @@ div.timepicker.disabled .i_Text {
 
 .weapon-list-tb .pic-cont {
     text-align: center;
-    background: url(https://buff.163.com/static/images/item_bg.png);
+    background: url(https://buff.163.com../images/item_bg.png);
     background-size: cover;
     margin: 0 auto;
     width: 88px;
@@ -15252,9 +15252,9 @@ div.timepicker.disabled .i_Text {
     bottom: 0;
     left: 0;
     right: 0;
-    background: #111419;
+    background: #929292;
     filter: alpha(opacity=80);
-    background: rgba(17, 20, 25, .8);
+    background: rgb(30, 31, 34);
     z-index: -1;
     border-radius: 2px
 }
@@ -15404,7 +15404,7 @@ div.timepicker.disabled .i_Text {
     width: 122px;
     height: 90px;
     margin-right: 14px;
-    background: url(https://buff.163.com/static/images/item_bg.png);
+    background: url(https://buff.163.com../images/item_bg.png);
     background-size: cover
 }
 
@@ -16125,7 +16125,7 @@ i.icon_new {
 }
 
 .roll_tag_win {
-    background: url(/static/images/tag_win.png) no-repeat;
+    background: url(../images/tag_win.png) no-repeat;
     color: #fff;
     height: 25px;
     line-height: 25px;
@@ -16138,7 +16138,7 @@ i.icon_new {
 }
 
 .roll_tag_lose {
-    background: url(/static/images/tag_lose.png) no-repeat;
+    background: url(../images/tag_lose.png) no-repeat;
     color: #fff;
     height: 25px;
     line-height: 25px;
@@ -16163,7 +16163,7 @@ i.icon_new {
 }
 
 a.recent-deal-img {
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
@@ -16171,7 +16171,7 @@ a.recent-deal-img {
     display: block;
     width: 100%;
     text-align: center;
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
@@ -16193,12 +16193,12 @@ a.recent-deal-img {
 }
 
 .room-album div {
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
 .roll-gifts-list li.h1z1-gift-item, .roll-gifts-list li.pubg-gift-item {
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
@@ -16260,7 +16260,7 @@ a.recent-deal-img {
 
 table .pic-cont {
     text-align: center;
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
@@ -16279,7 +16279,7 @@ table .pic-cont img {
     left: 0;
     top: 0;
     z-index: 5;
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
@@ -16287,7 +16287,7 @@ table .pic-cont img {
     width: 72px;
     text-align: center;
     display: inline-block;
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
@@ -16382,10 +16382,10 @@ table .pic-cont img {
     margin-right: 50px;
     border-style: solid;
     border-width: 0 1px 0 0;
-    -moz-border-image: url(/static/images/icon_split.png) 1 stretch;
-    -webkit-border-image: url(/static/images/icon_split.png) 1 stretch;
-    -o-border-image: url(/static/images/icon_split.png) 1 stretch;
-    border-image: url(/static/images/icon_split.png) 1 fill stretch
+    -moz-border-image: url(../images/icon_split.png) 1 stretch;
+    -webkit-border-image: url(../images/icon_split.png) 1 stretch;
+    -o-border-image: url(../images/icon_split.png) 1 stretch;
+    border-image: url(../images/icon_split.png) 1 fill stretch
 }
 
 .user-header .col > div {
@@ -17091,7 +17091,7 @@ i.icon-store.store-offline {
     display: block;
     width: 122px;
     text-align: center;
-    background: url(/static/images/item_bg.png);
+    background: url(../images/item_bg.png);
     background-size: cover
 }
 
@@ -17110,12 +17110,12 @@ i.icon-store.store-offline {
 .invi-desc .word3 {
     width: 341px;
     height: 66px;
-    background: url(/static/images/site/invite/word3.png) no-repeat;
+    background: url(../images/site/invite/word3.png) no-repeat;
     margin: 60px auto 50px
 }
 
 .i_Btn_invi_reg:link, .i_Btn_invi_reg:visited {
-    background: url(/static/images/site/invite/btn-reg-only.png) no-repeat !important
+    background: url(../images/site/invite/btn-reg-only.png) no-repeat !important
 }
 
 .i_Btn_invi_reg:active, .i_Btn_invi_reg:hover {
@@ -17440,7 +17440,7 @@ tr.has_des td {
 
 .video-content .video-play {
     position: absolute;
-    background: url(/static/images/icon_btn_play.png);
+    background: url(../images/icon_btn_play.png);
     background-size: contain;
     width: 60px;
     height: 60px;
@@ -17454,7 +17454,7 @@ tr.has_des td {
 }
 
 .pubg_recycle:not(.index):not(.invite) {
-    background-image: url(/static/images/site/header-bg_pubg2.jpg)
+    background-image: url(../images/site/header-bg_pubg2.jpg)
 }
 
 .tag_text_uncommon {
@@ -17589,7 +17589,7 @@ p.name_tag {
     display: inline-block;
     height: 15px;
     width: 15px;
-    background: url(/static/images/icon_alert.png) no-repeat center;
+    background: url(../images/icon_alert.png) no-repeat center;
     background-size: cover;
     vertical-align: middle;
     vertical-align: -3px
@@ -17923,12 +17923,14 @@ p.name_tag {
 .black .w-Key span {
     margin-bottom: 5px
 }
+.icon{background-image:url(../images/icon_csgo.less.png)}
+.icon1{background-image:url(../images/icon.less.png)}
 
 .icon_reanalysis {
     display: inline-block;
     height: 15px;
     width: 15px;
-    background: url(/static/images/icon_reanalysis.png) no-repeat center;
+    background: url(../images/icon_reanalysis.png) no-repeat center;
     background-size: cover;
     vertical-align: middle;
     vertical-align: -3px

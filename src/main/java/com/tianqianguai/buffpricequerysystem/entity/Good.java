@@ -6,7 +6,6 @@ public class Good {
     String name;
     double trend;
     double the_lowest_price;
-    double expected_price;
 
     String img_url;
     String category;
@@ -27,13 +26,7 @@ public class Good {
         this.name = name;
     }
 
-    public double getExpected_price() {
-        return expected_price;
-    }
 
-    public void setExpected_price(double expected_price) {
-        this.expected_price = expected_price;
-    }
 
     public String getImg_url() {
         return img_url;
@@ -75,12 +68,12 @@ public class Good {
         this.now_price = now_price;
     }
 
-    public Good(String goods_id, double trend,String name,double expected_price,String category, String img_url,double now_price, double the_lowest_price   ) {
+
+    public Good(String goods_id, double trend, String name,String category ,String img_url ,  double now_price,double the_lowest_price) {
         this.goods_id = goods_id;
         this.name = name;
         this.trend = trend;
         this.the_lowest_price = the_lowest_price;
-        this.expected_price = expected_price;
         this.img_url = img_url;
         this.category = category;
         this.now_price = now_price;
@@ -93,7 +86,6 @@ public class Good {
                 ", name='" + name + '\'' +
                 ", trend=" + trend +
                 ", the_lowest_price=" + the_lowest_price +
-                ", expected_price=" + expected_price +
                 ", img_url='" + img_url + '\'' +
                 ", category='" + category + '\'' +
                 ", now_price=" + now_price +
