@@ -2376,9 +2376,11 @@ a:hover .icon_game {
 .icon_csgo_type_customplayer {
     background-position: 0 -102px
 }
-
+.icon{
+    background-image: url(../images/icon.less.png)
+}
 .icon_csgo_tool_sticker, .icon_csgo_type_customplayer, .icon_csgo_type_knife, .icon_csgo_type_machinegun, .icon_csgo_type_other, .icon_csgo_type_pistol, .icon_csgo_type_rifle, .icon_csgo_type_shotgun, .icon_csgo_type_smg, .icon_csgo_type_weaponcase, .icon_type_hands {
-    background-image: url(../images/sprite/icon_csgo.less.png?20230428104018)
+    background-image: url(../images/icon_csgo.less.png)
 }
 
 .tf2-selType .icon {
@@ -17923,8 +17925,8 @@ p.name_tag {
 .black .w-Key span {
     margin-bottom: 5px
 }
-.icon{background-image:url(../images/icon_csgo.less.png)}
-.icon1{background-image:url(../images/icon.less.png)}
+
+
 
 .icon_reanalysis {
     display: inline-block;
