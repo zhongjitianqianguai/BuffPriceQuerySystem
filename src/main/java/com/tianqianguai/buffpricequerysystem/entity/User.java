@@ -5,6 +5,7 @@ public class User {
     public String name;
     public String password;
     public String email;
+    public String steam_id;
     public User(int id, String name, String password, String email) {
         this.id = id;
         this.name = name;
@@ -12,7 +13,21 @@ public class User {
         this.email=email;
     }
 
+    public User(int id, String name, String password, String email, String steam_id) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.steam_id = steam_id;
+    }
 
+    public String getSteam_id() {
+        return steam_id;
+    }
+
+    public void setSteam_id(String steam_id) {
+        this.steam_id = steam_id;
+    }
 
     public int getId() {
         return id;

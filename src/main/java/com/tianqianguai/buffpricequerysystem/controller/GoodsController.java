@@ -226,6 +226,7 @@ public class GoodsController {
         String user_status = (String) request.getSession().getAttribute("user_status");
         model.addAttribute("user_status", user_status);
         model.addAttribute("user", user);
+        System.out.println(user.getId());
         if (user != null) {
             Collect collect = collectService.getCollectByUserIdAndGoodId(user.getId(), goods_id);
             logger.debug(collect);
