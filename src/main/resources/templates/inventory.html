@@ -3,6 +3,8 @@
 <head><title th:text="#{collect_title}"></title>
     <meta property="og:image" content="https://g.fp.ps.netease.com/market/file/6391b1f3672a526e9f383c56lhtp2qta04">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="referrer" content="no-referrer">
+
     <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
@@ -82,7 +84,7 @@
                         class="icon icon_new"></i></a></li>
                 <li class="on"><a style="background-color: #132a50" href="/show_bookmark"><i
                         class="icon icon_menu icon_menu_fav"></i>我的收藏</a></li>
-                <li class="on"><a style="background-color: #132a50" href="/show_inventory"><i
+                <li class="on"><a style="background-color: #132a50" href="/show_inventory?steamId=76561198307802394"><i
                         class="icon icon_menu icon_menu_gift"></i>我的仓库</a></li>
             </ul>
         </div>
@@ -113,63 +115,53 @@
         <div class="blank20"></div>
 
         <div class="blank20"></div>
-        <div class="user-record change">
-            <table class="list_tb" width="100%" >
-                <tr>
-                    <th width="120" th:text="#{Jewelry}"></th>
-                    <th width="350"></th>
-                    <th width="240" class="t_Left tb-Order " id="order-by-price" th:text="#{The_lowest_currently_on_sale}"> 当前在售最低 <i
-                            class="icon icon_order"></i></th>
-                    <th width="240" class="t_Left" th:text="#{Historical_Lowest_Price}"></th>
-                    <th width="240" class="t_Left">修改预期价格&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;取消收藏</th>
-                </tr>
-                <tr th:each="good, iterStat: ${goods}">
-                    <td>
-                        <div class="pic-cont"><a th:href="'/goods?goods_id=928421'+${good.getGoods_id()}"> <img
-                                th:src="${good.getImg_url()}" th:alt="${good.getName()}"
-                                width="72" height="48"> </a></div>
-                    </td>
-                    <td class="t_Left name-cont"><h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}"
-                                                        th:text="${good.getName()}"></a>
-                    </h3></td>
-                    <td class="t_Left"><strong class="f_Strong" th:text="'￥'+${good.getNow_price()}"></strong>
-                        <!--                        <p class="hide-cny c_Gray f_12px">(<span class="custom-currency" data-price="7.89"-->
-                        <!--                                                                 data-type="small" data-original-currency="CNY"></span>)-->
-                        <!--                        </p>-->
-                    </td>
-                    <td class="t_Left"><strong class="f_Strong" style="color:#45536C"
-                                               th:text="'￥'+${good.getThe_lowest_price()}"></strong>
-                        <!--                        <p class="hide-cny c_Gray f_12px">(<span class="custom-currency" data-price="6"-->
-                        <!--                                                                 data-type="small" data-original-currency="CNY"></span>)-->
-                        <!--                        </p>-->
-                    </td>
-                    <td class="t_Left"><a th:id="${good.getGoods_id()}" href="" class="i_Btn i_Btn_mid"
-                                          th:text="'￥'+${collects.get(iterStat.index).getExpected_price()}"></a><span
-                            th:id="${good.getGoods_id()}" class="user-fav on delete-bookmark"><span th:text="#{Favorite}"></span><i
-                            class="icon icon_fav"></i></span></td>
-                </tr>
 
-            </table>
-            <div class="pager list-pager"></div>
-            <div class="pager list-pager light-theme simple-pagination">
-                <ul>
-                    <li th:if="${page==1}" th:class="disabled"><span class="current prev" th:text="#{previous_page}"></span></li>
-                    <li th:if="${page!=1}"><a
-                            th:href="'?page='+${page+(-1)}+${search==null?'':'&search='+search}"
-                            class="page-link prev" th:text="#{previous_page}"></a></li>
-                    <li th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber==page?'active':''}">
-                        <a th:if="${pageNumber != page}"
-                           th:href="'?page='+${pageNumber}+${search==null?'':'&search='+search}"
-                           class="page-link"
-                           th:text="${pageNumber}"></a>
-                        <span th:if="${pageNumber == page}" class="current" th:text="${pageNumber}"></span>
-                    </li>
-                    <li><a th:class="${page==totalPages?'disabled':'page-link next'}"
-                           th:href="'?page='+${page+1}+${search==null?'':'&search='+search}" th:text="#{next_page}"></a>
-                    </li>
-                </ul>
+            <div class="market-card" id="j_market_card">
+                <div class=" list_card " id="j_list_card" >
+
+                    <ul class="" style="display: flex; flex-wrap: wrap;" >
+                        <li th:each="inventoryPage:${inventoryPage}" style="flex: 0 0 23%;">
+<!--                                <a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}">-->
+                            <img class="lazy"
+                                 th:src="${inventoryPage.getPicUrl()}"
+                                 width="210" height="138">
+<!--                                </a>-->
+<!--                                <h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}"-->
+<!--                                       th:text="${inventory.getResult().get(0).getName()}"></a></h3>-->
+                                <h3><a
+                                       th:text="${inventoryPage.getName()}"></a></h3>
+                                <p>
+                                    <!--                            <strong class="f_Strong" th:text="'￥'+${good?.getNow_price()}"></strong>-->
+                                    <small class="f_Strong" th:text="'￥'+${inventoryPage?.getSteamPrice()}"></small>
+
+                        </span>
+                                </p>
+
+                                <i class="icon icon_check"></i>
+
+                            </li>
+
+
+                        </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="pager card-pager light-theme simple-pagination">
+                    <ul>
+                        <li th:if="${page==0}" class="disabled"><span class="current prev">上一页</span></li>
+                        <li th:if="${page!=0}"><a th:href="@{/show_inventory(steamId=76561198307802394, page=${page-1})}" class="page-link prev">上一页</a></li>
+                        <li th:each="i : ${#numbers.sequence(0, inventoryPage.totalPages - 1)}" th:class="${i == page ? 'active' : ''}">
+                            <a th:if="${i != page}" th:href="@{/show_inventory(steamId=76561198307802394, page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                            <span th:if="${i == page}" class="current" th:text="${i + 1}"></span>
+                        </li>
+                        <li><a th:class="${page+1==inventoryPage.totalPages?'disabled':'page-link next'}" th:href="@{/show_inventory(steamId=76561198307802394, page=${page+1})}" class="page-link next">Next</a></li>
+                    </ul>
+                </div>
+
+
+
             </div>
-        </div>
+
+
     </div>
 
     <div class="clear"></div>
@@ -178,34 +170,89 @@
 <div class="clear"></div>
 
 <div class="blank20"></div>
-
-</body>
 <script type="text/javascript" th:inline="javascript">
+    function user_login(name, password) {
+        console.log(name)
+        $.ajax({
+            url: '/login',
+            type: 'post',
+            data: {
+                name: name,
+                password: password
+            },
+            success: function (data) {
+                window.location.reload()
+            }
+        })
+    }
+
     $(() => {
+        $('#j_popup_login').hide()
+        if ([[${user_status}]] === '密码错误') {
+            $('#j_popup_login').show()
+            alert("密码错误请重新登录！！！")
+        } else if ([[${user_status}]] === '用户不存在') {
+            $('#j_popup_login').show()
+            alert("用户不存在请重新登录！！！")
+        }
+
+
+        $('#login').click(function () {
+            $('#j_popup_login').show()
+        })
+        $('#close_entry').click(function () {
+            $('#j_popup_login').hide()
+        })
         $('#search_btn_csgo').click(function () {
             let search = $('input[name="search"]').val()
             if (search === '') {
                 alert('请输入搜索内容')
                 return
             }
-            window.location.href = '/show_bookmark?search=' + search
+            window.location.href = '/home?search=' + search
         })
-        $('.i_Btn_mid').click(function () {
-            let expected_price = prompt('请输入预期价格', '5.00')
-            let goods_id = $(this).attr('id')
-            $.post('/change_expected_price', {goods_id: goods_id, expected_price: expected_price}, function (data) {
-                // console.log(data)
-                window.location.reload()
-            })
+        $('#sort').click(function () {
+            $('#sort-type').slideDown()
         })
-        $('.delete-bookmark').click(function () {
-            let goods_id = $(this).attr('id')
-            let user_id = [[${user?.getId()}]]
-            $.post('/delete_bookmark', {goods_id: goods_id, user_id: user_id, where: 'show_bookmark'}, function (data) {
-                window.location.reload()
-            })
+        $('#sort-type li').click(function () {
+            let sort_type = $(this).attr('id')
+            console.log([[${category}]])
+            if ([[${category}]] != null) {
+                window.location.href = '/home?sort=' + sort_type + '&category=' + [[${category}]]
+                return
+            } else if ([[${search}]] != null) {
+                window.location.href = '/home?sort=' + sort_type + '&search=' + [[${search}]]
+                return
+            } else if ([[${between_min}]] != null || [[${between_max}]] != null) {
+                window.location.href = '/home?sort=' + sort_type + '&between_min=' + [[${between_min}]] + '&between_max=' + [[${between_max}]]
+                return
+            }
+            window.location.href = '/home?sort=' + sort_type
+
+        })
+        $('#between_submit').click(function () {
+            let between_min = $('input[name="min_price"]').val()
+            let between_max = $('input[name="max_price"]').val()
+            if (between_min === '' && between_max === '') {
+                alert('请至少输入一个价格区间')
+                return
+            }
+            if (between_min !== '' && between_max !== '' && Number(between_min) > Number(between_max)) {
+                alert('最小值不能大于最大值')
+                return
+            }
+            if (between_min === '') {
+                between_min = 0
+            }
+            if (between_max === '') {
+                between_max = 999999
+            }
+            window.location.href = '/home?between_min=' + between_min + '&between_max=' + between_max
         })
 
     })
 </script>
+</body>
+
+
 </html>

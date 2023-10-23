@@ -6577,7 +6577,7 @@ div.rust-Select-Multi ul li div p {
 
 .list_card li .card-status {
     position: absolute;
-    width: 210px;
+    width: 208px;
     height: 92px;
     line-height: 92px;
     text-align: center;
@@ -6633,6 +6633,12 @@ div.rust-Select-Multi ul li div p {
 .list_card a:hover {
     color: #eea20e
 }
+
+
+
+
+
+
 
 .list_card_small {
     min-height: auto
@@ -16194,6 +16200,22 @@ a.recent-deal-img {
     top: 0;
     left: 0
 }
+li {
+    flex: 0 0 100%; /* 默认每行一个 */
+}
+
+@media (min-width: 600px) {
+    li {
+        flex: 0 0 50%; /* 屏幕宽度大于600px时每行两个 */
+    }
+}
+
+@media (min-width: 900px) {
+    li {
+        flex: 0 0 25%; /* 屏幕宽度大于900px时每行四个 */
+    }
+}
+
 
 .room-album div {
     background: url(../images/item_bg.png);
