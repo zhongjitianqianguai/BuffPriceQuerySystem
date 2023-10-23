@@ -3,13 +3,22 @@ package com.tianqianguai.buffpricequerysystem.entity;
 
 public class Good {
     String goods_id;
-    String name;
     double trend;
-    double the_lowest_price;
-
-    String img_url;
+    String name;
     String category;
+    String img_url;
     double  now_price;
+    double the_lowest_price;
+    String wear_tear_group;
+
+    public String getWear_tear_group() {
+        return wear_tear_group;
+    }
+
+    public void setWear_tear_group(String wear_tear_group) {
+        this.wear_tear_group = wear_tear_group;
+    }
+
     public String getGoods_id() {
         return goods_id;
     }
@@ -68,27 +77,14 @@ public class Good {
         this.now_price = now_price;
     }
 
-
-    public Good(String goods_id, double trend, String name,String category ,String img_url ,  double now_price,double the_lowest_price) {
+    public Good(String goods_id, double trend, String name, String category, String img_url, double now_price, double the_lowest_price, String wear_tear_group) {
         this.goods_id = goods_id;
-        this.name = name;
         this.trend = trend;
-        this.the_lowest_price = the_lowest_price;
-        this.img_url = img_url;
+        this.name = name;
         this.category = category;
+        this.img_url = img_url;
         this.now_price = now_price;
-    }
-
-    @Override
-    public String toString() {
-        return "Good{" +
-                "goods_id='" + goods_id + '\'' +
-                ", name='" + name + '\'' +
-                ", trend=" + trend +
-                ", the_lowest_price=" + the_lowest_price +
-                ", img_url='" + img_url + '\'' +
-                ", category='" + category + '\'' +
-                ", now_price=" + now_price +
-                '}';
+        this.the_lowest_price = the_lowest_price;
+        this.wear_tear_group = wear_tear_group;
     }
 }

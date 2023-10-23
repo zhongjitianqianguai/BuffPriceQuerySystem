@@ -75,7 +75,6 @@ public class GoodsController {
     }
 
 
-
     @RequestMapping("home")
     public String show_index(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
         logger.info("进入主页");
@@ -103,7 +102,10 @@ public class GoodsController {
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("pageNumbers", getPageNumbers(Integer.parseInt(page), 58));
         model.addAttribute("totalPages", 58);
-
+        if (Objects.equals(category, "印花")) {
+            category = null;
+            search = "印花";
+        }
         List<Good> first_goods = null;
         if (category != null && sort != null) {
             logger.debug("分类为" + category + "排序为" + sort);
@@ -141,7 +143,7 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortSearchTrendUpDesc(search, offset, 20);
             } else if (sort.equals("trend_down_desc")) {
                 first_goods = goodsService.getGoodByPriceSortSearchTrendDownDesc(search, offset, 20);
-            }else {
+            } else {
                 try {
                     logger.error("排序sort为非法参数");
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "排序sort为非法参数");
@@ -156,7 +158,7 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortBetweenAsc(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortBetweenDesc(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
-            }else if (sort.equals("default")) {
+            } else if (sort.equals("default")) {
                 first_goods = goodsService.getGoodsByPriceBetween(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
             } else if (sort.equals("trend_up_desc")) {
                 first_goods = goodsService.getGoodByPriceSortTrendUpBetweenDesc(Double.parseDouble(between_min), Double.parseDouble(between_max), offset, 20);
@@ -177,7 +179,7 @@ public class GoodsController {
                 first_goods = goodsService.getGoodByPriceSortAsc(offset, 20);
             } else if (sort.equals("desc")) {
                 first_goods = goodsService.getGoodByPriceSortDesc(offset, 20);
-            }else if (sort.equals("default")) {
+            } else if (sort.equals("default")) {
                 first_goods = goodsService.getGoodsIwant(offset, 20);
             } else if (sort.equals("trend_up_desc")) {
                 first_goods = goodsService.getGoodByPriceSortTrendUpDesc(offset, 20);
@@ -221,6 +223,91 @@ public class GoodsController {
         String goods_id = request.getParameter("goods_id");
         model.addAttribute("goods_id", goods_id);
         Good good = goodsService.getGoodById(goods_id);
+        if (!Objects.equals(good.getCategory(), "武器箱") && !Objects.equals(good.getCategory(), "胶囊") && !Objects.equals(good.getCategory(), "金色") && !Objects.equals(good.getCategory(), "全息")) {
+            String wear_tear_group = good.getWear_tear_group();
+            List<Good> goods = goodsService.getGoodsByWearTearGroup(wear_tear_group);
+            if (good.getName().contains("StatTrak")) {
+                for (Good good1 : goods) {
+                    if (good1.getName().contains("崭新出厂") && good1.getName().contains("StatTrak")) {
+                        model.addAttribute("brand_new_good", good1);
+                    } else if (good1.getName().contains("略有磨损") && good1.getName().contains("StatTrak")) {
+                        model.addAttribute("slightly_worn_good", good1);
+                    } else if (good1.getName().contains("久经沙场") && good1.getName().contains("StatTrak")) {
+                        model.addAttribute("battle_scarred_good", good1);
+                    } else if (good1.getName().contains("破损不堪") && good1.getName().contains("StatTrak")) {
+                        model.addAttribute("well_worn_good", good1);
+                    } else if (good1.getName().contains("战痕累累") && good1.getName().contains("StatTrak")) {
+                        model.addAttribute("field_tested_good", good1);
+                    }
+                }
+                String normal_group;
+                if (good.getName().contains("★")) {
+                    normal_group = good.getWear_tear_group().replace(" StatTrak™", "");
+                } else {
+                    normal_group = good.getWear_tear_group().replace("（StatTrak™）", "");
+                }
+                List<Good> normal_goods = goodsService.getGoodsByWearTearGroup(normal_group);
+                for (Good good1 : normal_goods) {
+                    if (Objects.equals(good.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""), good1.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""))) {
+                        model.addAttribute("normal_good", good1);
+                    }
+                }
+            } else {
+                for (Good good1 : goods) {
+                    if (good1.getName().contains("崭新出厂") && !good1.getName().contains("StatTrak")) {
+                        model.addAttribute("brand_new_good", good1);
+                    } else if (good1.getName().contains("略有磨损") && !good1.getName().contains("StatTrak")) {
+                        model.addAttribute("slightly_worn_good", good1);
+                    } else if (good1.getName().contains("久经沙场") && !good1.getName().contains("StatTrak")) {
+                        model.addAttribute("battle_scarred_good", good1);
+                    } else if (good1.getName().contains("破损不堪") && !good1.getName().contains("StatTrak")) {
+                        model.addAttribute("well_worn_good", good1);
+                    } else if (good1.getName().contains("战痕累累") && !good1.getName().contains("StatTrak")) {
+                        model.addAttribute("field_tested_good", good1);
+                    }
+                }
+                if (good.getName().contains("纪念品")) {
+                    String normal_group = good.getWear_tear_group().replace("（纪念品）", "");
+                    List<Good> normal_goods = goodsService.getGoodsByWearTearGroup(normal_group);
+                    for (Good good1 : normal_goods) {
+                        if (Objects.equals(good.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""), good1.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""))) {
+                            model.addAttribute("normal_good", good1);
+                        }
+                    }
+                } else {
+                    String StatTrak_group;
+                    if (good.getName().contains("★")) {
+                        StatTrak_group = good.getWear_tear_group().split("★")[0] + "★ StatTrak™" + good.getWear_tear_group().split("★")[1];
+                    } else {
+                        StatTrak_group = good.getWear_tear_group().split("\\|")[0] + "（StatTrak™）|" + good.getWear_tear_group().split("\\|")[1];
+                    }
+                    List<Good> StatTrak_goods = goodsService.getGoodsByWearTearGroup(StatTrak_group);
+                    if (!StatTrak_goods.isEmpty()) {
+                        for (Good good1 : StatTrak_goods) {
+                            if (Objects.equals(good.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""), good1.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""))) {
+                                model.addAttribute("StatTrak_good", good1);
+                            }
+                        }
+                    } else {
+                        String souvenir_group;
+                        if (good.getName().contains("★")) {
+                            souvenir_group = good.getWear_tear_group().split("★")[0] + "★ 纪念品" + good.getWear_tear_group().split("★")[1];
+                        } else {
+                            souvenir_group = good.getWear_tear_group().split("\\|")[0].replace(" ","") + "（纪念品） |" + good.getWear_tear_group().split("\\|")[1];
+                        }
+                        logger.info(souvenir_group);
+                        List<Good> souvenir_goods = goodsService.getGoodsByWearTearGroup(souvenir_group);
+                        logger.info(souvenir_goods);
+                        for (Good good1 : souvenir_goods) {
+                            if (Objects.equals(good.getName().replace("（纪念品）", "").split("\\(")[1].replace(")", ""), good1.getName().replace("（纪念品）", "").split("\\(")[1].replace(")", ""))) {
+                                model.addAttribute("souvenir_good", good1);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
         model.addAttribute("good", good);
         User user = (User) request.getSession().getAttribute("user");
         String user_status = (String) request.getSession().getAttribute("user_status");

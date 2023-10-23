@@ -5,12 +5,22 @@ public class Record {
     String goods_id;
     String time;
     double price;
+    String source;
 
-    public Record(String record_id, String goods_id, String time, double price) {
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public Record(String record_id, String goods_id, String time, double price, String source) {
         this.record_id = record_id;
         this.goods_id = goods_id;
         this.time = time;
         this.price = price;
+        this.source = source;
     }
 
     public String getRecord_id() {

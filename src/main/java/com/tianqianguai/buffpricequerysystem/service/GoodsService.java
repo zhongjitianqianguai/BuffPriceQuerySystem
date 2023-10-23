@@ -101,5 +101,8 @@ public class GoodsService {
         logger.debug("enter getGoodByPriceSortTrendDownDesc()");
         return goodsMapper.getGoodByPriceSortTrendDownDesc(offset,limit);
     }
-
+    public List<Good> getGoodsByWearTearGroup(String wearTearGroup){
+        logger.debug("enter getGoodsByWearTearGroup()");
+        return goodsMapper.getGoodsByWearTearGroup(wearTearGroup);
+    }
 }

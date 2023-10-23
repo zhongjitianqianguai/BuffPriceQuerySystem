@@ -55,6 +55,7 @@ public interface GoodsMapper {
     List<Good> getGoodByPriceSortTrendUpBetweenDesc(double minPrice, double maxPrice, int offset, int limit);
     @Select("select * from buff_goods where now_price between #{minPrice} and #{maxPrice} order by trend asc limit #{offset},#{limit}")
     List<Good> getGoodByPriceSortTrendDownBetweenDesc(double minPrice, double maxPrice, int offset, int limit);
-
+    @Select("select * from buff_goods where wear_tear_group=#{wearTearGroup}")
+    List<Good> getGoodsByWearTearGroup(String wearTearGroup);
 
 }
