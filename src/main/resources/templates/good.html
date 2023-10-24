@@ -201,6 +201,30 @@
                 </div>
 
             </div>
+            <div th:if="${good.getCategory()=='金色'||good.getCategory()=='全息'}"
+                 class="relative-goods" id="relative-goods">
+                <div class="scope-btns">
+
+
+                    <a th:if='${holo_sticker_good!=null}'
+                       th:class="${holo_sticker_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
+                       th:href="'goods?goods_id='+${holo_sticker_good.getGoods_id()}"
+                       th:style="${holo_sticker_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
+                       th:text="'全息 ¥ '+${holo_sticker_good.getNow_price()}">
+
+                    </a>
+
+
+                    <a th:if='${golden_sticker_good!=null}'
+                       th:class="${golden_sticker_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
+                       th:href="'goods?goods_id='+${golden_sticker_good.getGoods_id()}"
+                       th:style="${golden_sticker_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
+                       th:text="'金色 ¥ '+${golden_sticker_good.getNow_price()}">
+                    </a>
+
+                </div>
+
+            </div>
 
             <div class="clear"></div>
         </div>

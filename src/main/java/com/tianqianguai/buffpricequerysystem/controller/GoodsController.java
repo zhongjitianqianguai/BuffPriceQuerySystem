@@ -307,6 +307,18 @@ public class GoodsController {
 
                 }
             }
+        } else if (Objects.equals(good.getCategory(), "金色")  ) {
+            String another_sticker=good.getName().replace("（金色）","（全息）");
+            List<Good> holo_sticker_good=goodsService.getGoodsByName(another_sticker,0,1);
+            if (!holo_sticker_good.isEmpty())
+                model.addAttribute("holo_sticker_good",holo_sticker_good.get(0));
+            model.addAttribute("golden_sticker_good",good);
+        } else if (Objects.equals(good.getCategory(), "全息")) {
+            String another_sticker=good.getName().replace("（全息）","（金色）");
+            List<Good> golden_sticker_good=goodsService.getGoodsByName(another_sticker,0,1);
+            if (!golden_sticker_good.isEmpty())
+                model.addAttribute("golden_sticker_good",golden_sticker_good.get(0));
+            model.addAttribute("holo_sticker_good",good);
         }
         model.addAttribute("good", good);
         User user = (User) request.getSession().getAttribute("user");
