@@ -8,12 +8,12 @@
     <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="./js/lib.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
-
+    <link rel="stylesheet" href="./css/side_price.css">
 </head>
 <body class=" csgo  ">
 <div class="header l_Clearfix">
     <div class="header-cont l_Layout">
-        <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>
+        <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>++
         </div>
         <div class="nav">
             <ul>
@@ -127,7 +127,7 @@
                     <p><span><label th:text="#{Recent_fluctuations}"></label><span
                             th:text="${good.getTrend()*100+'%'}"></span></span>
                         <span><label th:text="#{Historical_Lowest_Price}"></label><span
-                                th:text="${good.getThe_lowest_price()}"></span></span>
+                                th:text="${good.getThe_lowest_price_buff()}"></span></span>
                         <span><label th:text="#{types_of}"></label><span th:text="${good.getCategory()}"></span></span>
                     </p>
                     <div class="blank20"></div>
@@ -135,7 +135,7 @@
                     <div class="blank20"></div>
                     <div class="detail-summ">
                         <span> <label th:text="#{reference_price}"></label> <strong class="f_Strong"
-                                                                                    th:text="'￥'+${T(java.lang.Math).abs(good?.getNow_price())}"></strong> </span>
+                                                                                    th:text="'￥'+${T(java.lang.Math).abs(good?.getNow_price_buff())}"></strong> </span>
                         <a
                                 th:href="${'https://buff.163.com/goods/'+good.getGoods_id()}"
                                 target="_blank">去Buff市场购买<i class="icon icon_arr_right_small"></i></a></div>
@@ -150,7 +150,7 @@
                        th:class="${brand_new_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
                        th:href="'goods?goods_id='+${brand_new_good.getGoods_id()}"
                        th:style="${brand_new_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
-                       th:text="'崭新出厂 ¥ '+${brand_new_good.getNow_price()}">
+                       th:text="'崭新出厂 ¥ '+${brand_new_good.getNow_price_buff()}">
 
                     </a>
 
@@ -159,43 +159,48 @@
                        th:class="${slightly_worn_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
                        th:href="'goods?goods_id='+${slightly_worn_good.getGoods_id()}"
                        th:style="${slightly_worn_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
-                       th:text="'略有磨损 ¥ '+${slightly_worn_good.getNow_price()}">
+                       th:text="'略有磨损 ¥ '+${slightly_worn_good.getNow_price_buff()}">
                     </a>
 
                     <a th:if='${battle_scarred_good!=null}'
                        th:class="${battle_scarred_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
                        th:href="'goods?goods_id='+${battle_scarred_good.getGoods_id()}"
                        th:style="${battle_scarred_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
-                       th:text="'久经沙场 ¥ '+${battle_scarred_good.getNow_price()}">
+                       th:text="'久经沙场 ¥ '+${battle_scarred_good.getNow_price_buff()}">
                     </a>
                     <a th:if='${well_worn_good!=null}'
                        th:class="${well_worn_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
                        th:href="'goods?goods_id='+${well_worn_good.getGoods_id()}"
                        th:style="${well_worn_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
-                       th:text="'破损不堪 ¥ '+${well_worn_good.getNow_price()}">
+                       th:text="'破损不堪 ¥ '+${well_worn_good.getNow_price_buff()}">
                     </a>
                     <a th:if='${field_tested_good!=null}'
                        th:class="${field_tested_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
                        th:href="'goods?goods_id='+${field_tested_good.getGoods_id()}"
                        th:style="${field_tested_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
-                       th:text="'战痕累累 ¥ '+${field_tested_good.getNow_price()}">
+                       th:text="'战痕累累 ¥ '+${field_tested_good.getNow_price_buff()}">
                     </a>
 
 
                     <a class="i_Btn i_Btn_trans_bule j_Goods-jump"
-                       data-is_change="1" style="color: #899ab9 !important;" th:if="${StatTrak_good!=null}" th:href="'goods?goods_id='+${StatTrak_good.getGoods_id()}">
+                       data-is_change="1" style="color: #899ab9 !important;" th:if="${StatTrak_good!=null}"
+                       th:href="'goods?goods_id='+${StatTrak_good.getGoods_id()}">
                         <i class="icon icon_2arrow"></i>
-                        <span  th:text="'StatTrak™ ¥' +${StatTrak_good.getNow_price()}"></span>
+                        <span th:text="'StatTrak™ ¥' +${StatTrak_good.getNow_price_buff()}"></span>
                     </a>
                     <a class="i_Btn i_Btn_trans_bule j_Goods-jump"
-                       data-is_change="1" style="color: #899ab9 !important;" th:if="${normal_good!=null}" th:href="'goods?goods_id='+${normal_good.getGoods_id()}">
+                       data-is_change="1" style="color: #899ab9 !important;" th:if="${normal_good!=null}"
+                       th:href="'goods?goods_id='+${normal_good.getGoods_id()}">
                         <i class="icon icon_2arrow"></i>
-                        <span th:if="${normal_good!=null}" th:text="'普通 ¥' +${normal_good.getNow_price()}"></span>
+                        <span th:if="${normal_good!=null}"
+                              th:text="'普通 ¥' +${normal_good.getNow_price_buff()}"></span>
                     </a>
                     <a class="i_Btn i_Btn_trans_bule j_Goods-jump"
-                       data-is_change="1" style="color: #899ab9 !important;" th:if="${souvenir_good!=null}" th:href="'goods?goods_id='+${souvenir_good.getGoods_id()}">
+                       data-is_change="1" style="color: #899ab9 !important;" th:if="${souvenir_good!=null}"
+                       th:href="'goods?goods_id='+${souvenir_good.getGoods_id()}">
                         <i class="icon icon_2arrow"></i>
-                        <span th:if="${souvenir_good!=null}" th:text="'纪念品 ¥' +${souvenir_good.getNow_price()}"></span>
+                        <span th:if="${souvenir_good!=null}"
+                              th:text="'纪念品 ¥' +${souvenir_good.getNow_price_buff()}"></span>
                     </a>
 
                 </div>
@@ -210,7 +215,7 @@
                        th:class="${holo_sticker_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
                        th:href="'goods?goods_id='+${holo_sticker_good.getGoods_id()}"
                        th:style="${holo_sticker_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
-                       th:text="'全息 ¥ '+${holo_sticker_good.getNow_price()}">
+                       th:text="'全息 ¥ '+${holo_sticker_good.getNow_price_buff()}">
 
                     </a>
 
@@ -219,7 +224,7 @@
                        th:class="${golden_sticker_good.getName().equals(good.getName())?'i_Btn i_Btn_trans_bule j_Goods-jump active':'i_Btn i_Btn_trans_bule j_Goods-jump'}"
                        th:href="'goods?goods_id='+${golden_sticker_good.getGoods_id()}"
                        th:style="${golden_sticker_good.getName().equals(good.getName())?'':'color: #899ab9 !important;'}"
-                       th:text="'金色 ¥ '+${golden_sticker_good.getNow_price()}">
+                       th:text="'金色 ¥ '+${golden_sticker_good.getNow_price_buff()}">
                     </a>
 
                 </div>
@@ -240,9 +245,12 @@
                 <div class="blank6"></div>
                 <ul class="new-tab">
 
-                    <li class="selling on"><a href="javascript:;">价格总览<i class="icon icon_top_cur"></i></a></li>
+                    <li th:class="${platform==null?'selling on':'selling'}"><a th:href="${'/goods?goods_id='+goods_id}">价格总览<i
+                            class="icon icon_top_cur"></i></a></li>
 
-                    <li class="buying"><a href="javascript:;">价格趋势</a></li>
+                    <li th:class="${platform!=null?'selling on':'selling'}"><a
+                            th:href="${'/goods?goods_id='+goods_id+'&platform=BUFF'}">价格趋势<i
+                            class="icon icon_top_cur"></i></a></li>
 
                 </ul>
                 <div class="clear"></div>
@@ -250,64 +258,496 @@
 
         </div>
         <div class="detail-tab-cont">
-            <div class="w-Switcher w-Switcher_tab" id="history-type" style="display:inline-block;margin-left:100px;">
-
-                <span value="buff" class="on">BUFF价格走势 (人民币)<i class="icon icon_top_cur"></i></span>
-
-
-            </div>
-
-            <div id="price-history-type" class="w-Select" name="buff_price_type"
-                 style="width: 100px; visibility: visible;">
-
-
-                <h3 id="price-history-type-all" th:text="#{price-history-type-all}"></h3>
-                <i class="icon icon_drop"></i>
-                <ul id="price-type" style="width: 100px;">
-
-                    <li value="1" class="on" style="width: 82px;" th:text="#{price-history-type-all}"></li>
-
-                    <li value="2" style="width: 82px;" th:text="#{Lowest_on_sale}"></li>
-
-                </ul>
-            </div>
-
-            <div id="price-history-days" class="w-Select" name="days" init="inited"
-                 style="width: 100px; visibility: visible;">
-
-
-                <h3 id="days" th:text="#{Last_7_days}"></h3>
-                <i class="icon icon_drop"></i>
-                <ul id="price-days" style="width: 100px;">
-
-                    <li value="7" data-disabled="false" class="on" style="width: 82px;" th:text="#{Last_7_days}"></li>
-
-                    <li value="30" data-disabled="false" style="width: 82px;" th:text="#{Last_month}"></li>
-
-                    <li value="180" data-disabled="false" style="width: 82px;" th:text="#{Last_6_months}"></li>
-                    <li value="365" data-disabled="false" style="width: 82px;" th:text="#{Last_year}"></li>
-                    <li value="730" data-disabled="false" style="width: 82px;" th:text="#{Last_2_year}"></li>
-
-                </ul>
-            </div>
-            <div id="tag-price-chart">
-                <div class="map_price" style="padding: 20px 100px;">
-                    <div class="chartjs-size-monitor"
-                         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                        <div class="chartjs-size-monitor-expand"
-                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+            <div th:if="${platform==null}" class="ant-pro-card-body ant-pro-card-body-direction-column">
+                <div class="ant-spin-nested-loading">
+                    <div class="ant-spin-container">
+                        <div class="ant-pro-card ant-pro-card-contain-card ant-pro-card-split">
+                            <div class="ant-pro-card-body">
+                                <div class="ant-pro-card-col ant-pro-card-split-vertical">
+                                    <div class="ant-pro-card ant-pro-statistic-card">
+                                        <div class="ant-pro-card-body">
+                                            <div class="ant-pro-statistic-card-content">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-vertical">
+                                                                <div class="ant-statistic-title"><span
+                                                                        style="color: rgb(24, 144, 255);">BUFF出售价</span>
+                                                                </div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"
+                                                                        th:text="${'￥'+good.getNow_price_buff()}"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ant-pro-card-statistic-description">
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-inline ant-pro-card-statistic-trend-down">
+                                                                                <div class="ant-statistic-title">
+                                                                                    近24小时
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-prefix"><div
+                                                                                        class="ant-pro-card-statistic-trend-icon ant-pro-card-statistic-trend-icon-down"></div></span><span
+                                                                                        class="ant-statistic-content-value">0%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    历史最低价格
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"
+                                                                                        th:text="${'￥'+good.getThe_lowest_price_buff()}"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ant-pro-card-col">
+                                    <div class="ant-pro-card ant-pro-statistic-card">
+                                        <div class="ant-pro-card-body">
+                                            <div class="ant-pro-statistic-card-content">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-vertical">
+                                                                <div class="ant-statistic-title"><span
+                                                                        style="color: rgb(24, 144, 255);">IGXE出售价</span>
+                                                                </div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"
+                                                                        th:text="${'￥'+good.getNow_price_igxe()}">￥397</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ant-pro-card-statistic-description">
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-inline">
+                                                                                <div class="ant-statistic-title">
+                                                                                    平台参考价
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"><span
+                                                                                        class="ant-statistic-content-value-int">650</span><span
+                                                                                        class="ant-statistic-content-value-decimal">.53</span></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    历史最低价格
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"
+                                                                                        th:text="${'￥'+good.getThe_lowest_price_igxe()}"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="chartjs-size-monitor-shrink"
-                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                        <div class="ant-pro-card ant-pro-card-contain-card ant-pro-card-split">
+                            <div class="ant-pro-card-body">
+                                <div class="ant-pro-card-col ant-pro-card-split-vertical">
+                                    <div class="ant-pro-card ant-pro-statistic-card">
+                                        <div class="ant-pro-card-body">
+                                            <div class="ant-pro-statistic-card-content">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-vertical">
+                                                                <div class="ant-statistic-title"><span
+                                                                        style="color: rgb(24, 144, 255);">YYYP出售价</span>
+                                                                </div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"
+                                                                        th:text="${'￥'+good.getNow_price_uu()}"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ant-pro-card-statistic-description">
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    历史最低价格
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"
+                                                                                        th:text="${'￥'+good.getThe_lowest_price_uu()}"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    短租价格
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"><span
+                                                                                        class="ant-statistic-content-value-int">0</span><span
+                                                                                        class="ant-statistic-content-value-decimal">.3</span></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    长租价格
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"><span
+                                                                                        class="ant-statistic-content-value-int">0</span><span
+                                                                                        class="ant-statistic-content-value-decimal">.24</span></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ant-pro-card-col">
+                                    <div class="ant-pro-card ant-pro-statistic-card">
+                                        <div class="ant-pro-card-body">
+                                            <div class="ant-pro-statistic-card-content">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-vertical">
+                                                                <div class="ant-statistic-title"><span
+                                                                        style="color: rgb(24, 144, 255);">C5出售价格</span>
+                                                                </div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"
+                                                                        th:text="${'￥'+good.getNow_price_c5()}"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ant-pro-card-statistic-description">
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    历史最低价格
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"
+                                                                                        th:text="${'￥'+good.getThe_lowest_price_c5()}"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    短租年收益
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value">14.44%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    长租年收益
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value">15.88%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ant-pro-card ant-pro-card-contain-card ant-pro-card-split">
+                            <div class="ant-pro-card-body">
+                                <div class="ant-pro-card-col ant-pro-card-split-vertical">
+                                    <div class="ant-pro-card ant-pro-statistic-card">
+                                        <div class="ant-pro-card-body">
+                                            <div class="ant-pro-statistic-card-content">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-vertical">
+                                                                <div class="ant-statistic-title"><span
+                                                                        style="color: rgb(24, 144, 255);">Steam出售价</span>
+                                                                </div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"
+                                                                        th:text="${'￥'+good.getNow_price_steam()}">￥655.76</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ant-pro-card-statistic-description">
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    在售数量
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"><span
+                                                                                        class="ant-statistic-content-value-int">23</span></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ant-pro-statistic-card-footer">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                <div class="ant-statistic-title">Steam求购挂刀</div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"><span
+                                                                        class="ant-statistic-content-value-int">0</span><span
+                                                                        class="ant-statistic-content-value-decimal">.79</span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                <div class="ant-statistic-title">Steam在售挂刀</div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"><span
+                                                                        class="ant-statistic-content-value-int">0</span><span
+                                                                        class="ant-statistic-content-value-decimal">.7</span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ant-pro-card-col">
+                                    <div class="ant-pro-card ant-pro-statistic-card">
+                                        <div class="ant-pro-card-body">
+                                            <div class="ant-pro-statistic-card-content">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-vertical">
+                                                                <div class="ant-statistic-title"><span
+                                                                        style="color: rgb(24, 144, 255);">Steam求购价</span>
+                                                                </div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value">￥581.27</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ant-pro-card-statistic-description">
+                                                                <div class="ant-pro-card-statistic">
+                                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                                        <div class="ant-pro-card-statistic-content">
+                                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                                <div class="ant-statistic-title">
+                                                                                    求购数量
+                                                                                </div>
+                                                                                <div class="ant-statistic-content"><span
+                                                                                        class="ant-statistic-content-value"><span
+                                                                                        class="ant-statistic-content-value-int">862</span></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ant-pro-statistic-card-footer">
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                <div class="ant-statistic-title">BUFF求购套现</div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"><span
+                                                                        class="ant-statistic-content-value-int">0</span><span
+                                                                        class="ant-statistic-content-value-decimal">.61</span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ant-pro-card-statistic">
+                                                    <div class="ant-pro-card-statistic-wrapper">
+                                                        <div class="ant-pro-card-statistic-content">
+                                                            <div class="ant-statistic ant-pro-card-statistic-layout-horizontal">
+                                                                <div class="ant-statistic-title">BUFF售价套现</div>
+                                                                <div class="ant-statistic-content"><span
+                                                                        class="ant-statistic-content-value"><span
+                                                                        class="ant-statistic-content-value-int">0</span><span
+                                                                        class="ant-statistic-content-value-decimal">.63</span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="clear"></div>
-                    <div id="myChart" style="margin-top: -10px; display: block; height: 500px; width: 1000px;"
-                         class="chartjs-render-monitor"></div>
                 </div>
             </div>
+            <div th:if="${platform!=null}">
+
+                <div id="tag-price-chart">
+                    <div class="map_price" style="padding: 20px 100px;">
+                        <div class="chartjs-size-monitor"
+                             style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                            <div class="chartjs-size-monitor-expand"
+                                 style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink"
+                                 style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="price-history-platform" class="w-Select" name="buff_price_type"
+                             style="width: 100px; visibility: visible;">
+                            <h3 id="price-history-platform-all"
+                                th:text="${platform=='all'?'所有平台总览':platform}"></h3>
+                            <i class="icon icon_drop"></i>
+                            <ul id="price-platform" style="width: 100px;">
+
+                                <li value="1" th:class="${platform=='all'?'on':''}" style="width: 82px;"><a
+                                        th:href="'/goods?goods_id='+goods_id+'&platform=all'"></a>所有价格总览
+                                </li>
+                                <li value="2" th:class="${platform=='BUFF'?'on':''}" style="width: 82px;"
+                                ><a th:href="'/goods?goods_id='+goods_id+'&platform=BUFF'"></a>BUFF
+                                </li>
+                                <li value="3" th:class="${platform=='UU'?'on':''}" style="width: 82px;"
+                                ><a th:href="'/goods?goods_id='+goods_id+'&platform=UU'"></a>悠悠有品
+                                </li>
+                                <li value="3" th:class="${platform=='IGXE'?'on':''}" style="width: 82px;"
+                                ><a th:href="'/goods?goods_id='+goods_id+'&platform=IGXE'"></a>IGXE
+                                </li>
+                                <li value="3" th:class="${platform=='C5'?'on':''}" style="width: 82px;"
+                                ><a th:href="'/goods?goods_id='+goods_id+'&platform=C5'"></a>C5
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="price-history-type" class="w-Select" name="buff_price_type"
+                             style="width: 100px; visibility: visible;">
+
+
+                            <h3 id="price-history-type-all" th:text="#{price-history-type-all}"></h3>
+                            <i class="icon icon_drop"></i>
+                            <ul id="price-type" style="width: 100px;">
+
+                                <li value="1" class="on" style="width: 82px;" th:text="#{price-history-type-all}"></li>
+
+                                <li value="2" style="width: 82px;" th:text="#{Lowest_on_sale}"></li>
+
+                            </ul>
+                        </div>
+                        <div id="price-history-days" class="w-Select" name="days" init="inited"
+                             style="width: 100px; visibility: visible;">
+
+
+                            <h3 id="days" th:text="#{Last_7_days}"></h3>
+                            <i class="icon icon_drop"></i>
+                            <ul id="price-days" style="width: 100px;">
+
+                                <li value="7" data-disabled="false" class="on" style="width: 82px;"
+                                    th:text="#{Last_7_days}"></li>
+
+                                <li value="30" data-disabled="false" style="width: 82px;" th:text="#{Last_month}"></li>
+
+                                <li value="180" data-disabled="false" style="width: 82px;"
+                                    th:text="#{Last_6_months}"></li>
+                                <li value="365" data-disabled="false" style="width: 82px;" th:text="#{Last_year}"></li>
+                                <li value="730" data-disabled="false" style="width: 82px;"
+                                    th:text="#{Last_2_year}"></li>
+
+                            </ul>
+                        </div>
+                        <div id="myChart" style="margin-top: -10px; display: block; height: 500px; width: 1000px;"
+                             class="chartjs-render-monitor"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -357,14 +797,12 @@
         let json = [[${all_records_last7Days}]];
         let data = []
         for (let i = 0; i < json.length; i++) {
-            data.push({name: json[i]['time'], value: [json[i]['time'], json[i]["price"]]})
+            data.push({name: [json[i]['source'],json[i]['time']], value: [json[i]['time'], json[i]["price"]]})
         }
         option = {
             tooltip: {
                 show: true,
                 trigger: 'axis',
-
-
             },
             xAxis: {
                 type: 'time',
@@ -386,7 +824,7 @@
             },
             series: [
                 {
-                    name: document.getElementById('price-history-type-all').innerText === '所有数据' ? '价格:' : '当天在售最低:',
+                    name: document.getElementById('price-history-type-all').innerText === '所有数据' ? '{name}价格:' : '当天在售最低:',
                     type: 'line',
                     showSymbol: false,
                     data: data
@@ -397,6 +835,18 @@
 
         $('#price-history-type-all').click(function () {
             $('#price-type').slideDown()
+        })
+        $('#price-platform li').click(function () {
+            $('#price-platform').slideUp()
+            let platform = $(this).text()
+            $('#price-history-platform-all').text($(this).text())
+            $(this).addClass("on")
+            $(this).siblings().removeClass("on")
+            $('#price-history-platform-all').attr('value', $(this).attr('value'))
+            if (platform==="悠悠有品"){
+                platform="UU"
+            }
+            window.location.href = '/goods?goods_id=' + [[${goods_id}]] + '&platform=' + platform
         })
 
         $('#price-type li').click(function () {

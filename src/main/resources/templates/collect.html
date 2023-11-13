@@ -130,13 +130,13 @@
                     <td class="t_Left name-cont"><h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}"
                                                         th:text="${good.getName()}"></a>
                     </h3></td>
-                    <td class="t_Left"><strong class="f_Strong" th:text="'￥'+${good.getNow_price()}"></strong>
+                    <td class="t_Left"><strong class="f_Strong" th:text="'￥'+${good.getNow_price_buff()}"></strong>
                         <!--                        <p class="hide-cny c_Gray f_12px">(<span class="custom-currency" data-price="7.89"-->
                         <!--                                                                 data-type="small" data-original-currency="CNY"></span>)-->
                         <!--                        </p>-->
                     </td>
                     <td class="t_Left"><strong class="f_Strong" style="color:#45536C"
-                                               th:text="'￥'+${good.getThe_lowest_price()}"></strong>
+                                               th:text="'￥'+${good.getThe_lowest_price_buff()}"></strong>
                         <!--                        <p class="hide-cny c_Gray f_12px">(<span class="custom-currency" data-price="6"-->
                         <!--                                                                 data-type="small" data-original-currency="CNY"></span>)-->
                         <!--                        </p>-->

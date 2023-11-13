@@ -221,6 +221,7 @@ public class GoodsController {
     public String show_good(HttpServletRequest request, Model model) {
         logger.info("enter show_good()");
         String goods_id = request.getParameter("goods_id");
+        String platform = request.getParameter("platform");
         model.addAttribute("goods_id", goods_id);
         Good good = goodsService.getGoodById(goods_id);
         if (!Objects.equals(good.getCategory(), "武器箱") && !Objects.equals(good.getCategory(), "胶囊") && !Objects.equals(good.getCategory(), "金色") && !Objects.equals(good.getCategory(), "全息")) {
@@ -247,9 +248,16 @@ public class GoodsController {
                     normal_group = good.getWear_tear_group().replace("（StatTrak™）", "");
                 }
                 List<Good> normal_goods = goodsService.getGoodsByWearTearGroup(normal_group);
+                logger.info(good.getName());
                 for (Good good1 : normal_goods) {
-                    if (Objects.equals(good.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""), good1.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""))) {
-                        model.addAttribute("normal_good", good1);
+                    if (!Objects.equals(good.getCategory(), "音乐盒")) {
+                        if (Objects.equals(good.getName().split("\\(")[1].replace("(纪念品)", "").replace(")", ""), good1.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""))) {
+                            model.addAttribute("normal_good", good1);
+                        }
+                    } else {
+                        if (Objects.equals(good.getName().replace("（StatTrak™）", ""), good1.getName())) {
+                            model.addAttribute("normal_good", good1);
+                        }
                     }
                 }
             } else {
@@ -279,13 +287,20 @@ public class GoodsController {
                     if (good.getName().contains("★")) {
                         StatTrak_group = good.getWear_tear_group().split("★")[0] + "★ StatTrak™" + good.getWear_tear_group().split("★")[1];
                     } else {
-                        StatTrak_group = good.getWear_tear_group().split("\\|")[0] + "（StatTrak™）|" + good.getWear_tear_group().split("\\|")[1];
+                        StatTrak_group = good.getWear_tear_group().split(" \\|")[0] + "（StatTrak™） |" + good.getWear_tear_group().split("\\|")[1];
                     }
                     List<Good> StatTrak_goods = goodsService.getGoodsByWearTearGroup(StatTrak_group);
                     if (!StatTrak_goods.isEmpty()) {
                         for (Good good1 : StatTrak_goods) {
-                            if (Objects.equals(good.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""), good1.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""))) {
-                                model.addAttribute("StatTrak_good", good1);
+                            if (!Objects.equals(good.getCategory(), "音乐盒")) {
+                                if (Objects.equals(good.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""), good1.getName().replace("(纪念品)", "").split("\\(")[1].replace(")", ""))) {
+                                    model.addAttribute("StatTrak_good", good1);
+                                }
+                            } else {
+                                if (Objects.equals(good.getName(), good1.getName().replace("（StatTrak™）", ""))) {
+                                    logger.info(good1.getName().replace("（StatTrak™）", ""));
+                                    model.addAttribute("StatTrak_good", good1);
+                                }
                             }
                         }
                     } else {
@@ -293,7 +308,7 @@ public class GoodsController {
                         if (good.getName().contains("★")) {
                             souvenir_group = good.getWear_tear_group().split("★")[0] + "★ 纪念品" + good.getWear_tear_group().split("★")[1];
                         } else {
-                            souvenir_group = good.getWear_tear_group().split("\\|")[0].replace(" ","") + "（纪念品） |" + good.getWear_tear_group().split("\\|")[1];
+                            souvenir_group = good.getWear_tear_group().split("\\|")[0].replace(" ", "") + "（纪念品） |" + good.getWear_tear_group().split("\\|")[1];
                         }
                         logger.info(souvenir_group);
                         List<Good> souvenir_goods = goodsService.getGoodsByWearTearGroup(souvenir_group);
@@ -307,18 +322,18 @@ public class GoodsController {
 
                 }
             }
-        } else if (Objects.equals(good.getCategory(), "金色")  ) {
-            String another_sticker=good.getName().replace("（金色）","（全息）");
-            List<Good> holo_sticker_good=goodsService.getGoodsByName(another_sticker,0,1);
+        } else if (Objects.equals(good.getCategory(), "金色")) {
+            String another_sticker = good.getName().replace("（金色）", "（全息）");
+            List<Good> holo_sticker_good = goodsService.getGoodsByName(another_sticker, 0, 1);
             if (!holo_sticker_good.isEmpty())
-                model.addAttribute("holo_sticker_good",holo_sticker_good.get(0));
-            model.addAttribute("golden_sticker_good",good);
+                model.addAttribute("holo_sticker_good", holo_sticker_good.get(0));
+            model.addAttribute("golden_sticker_good", good);
         } else if (Objects.equals(good.getCategory(), "全息")) {
-            String another_sticker=good.getName().replace("（全息）","（金色）");
-            List<Good> golden_sticker_good=goodsService.getGoodsByName(another_sticker,0,1);
+            String another_sticker = good.getName().replace("（全息）", "（金色）");
+            List<Good> golden_sticker_good = goodsService.getGoodsByName(another_sticker, 0, 1);
             if (!golden_sticker_good.isEmpty())
-                model.addAttribute("golden_sticker_good",golden_sticker_good.get(0));
-            model.addAttribute("holo_sticker_good",good);
+                model.addAttribute("golden_sticker_good", golden_sticker_good.get(0));
+            model.addAttribute("holo_sticker_good", good);
         }
         model.addAttribute("good", good);
         User user = (User) request.getSession().getAttribute("user");
@@ -334,70 +349,122 @@ public class GoodsController {
                 model.addAttribute("bookmark_status", "0");
             }
         }
-        List<Record> records = recordService.getGoodRecordById(goods_id);
-        logger.debug(records);
-        List<Record> last7Days = new ArrayList<>();
-        List<Record> lastMonth = new ArrayList<>();
-        List<Record> last6Months = new ArrayList<>();
-        List<Record> lastYear = new ArrayList<>();
-        List<Record> last2Years = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        // 获取当前时间
-        // 获取当前时间
-        Instant currentInstant = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
+        if (platform != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//            LocalDateTime now = LocalDateTime.now();
+            List<Record> records = null;
+            if (!Objects.equals(platform, "all")) {
+                model.addAttribute("platform", platform);
+                if (Objects.equals(platform, "UU")) {
+                    records = recordService.getGoodRecordByIdAndPlatform(goods_id, "uu");
 
-        // 计算7天前的时间
-        Instant last7DaysInstant = currentInstant.minus(7, ChronoUnit.DAYS);
+                } else if (Objects.equals(platform, "IGXE")) {
+                    records = recordService.getGoodRecordByIdAndPlatform(goods_id, "igxe");
 
-        // 计算一个月前的时间
-        LocalDate lastMonthDate = LocalDate.now().minusMonths(1);
-        Instant lastMonthInstant = lastMonthDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
-        // 计算六个月前的时间
-        LocalDate last6MonthsDate = LocalDate.now().minusMonths(6);
-        Instant last6MonthsInstant = last6MonthsDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                } else if (Objects.equals(platform, "C5")) {
+                    records = recordService.getGoodRecordByIdAndPlatform(goods_id, "c5");
 
-        // 计算一年前的时间
-        LocalDate lastYearDate = LocalDate.now().minusYears(1);
-        Instant lastYearInstant = lastYearDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                } else {
+                    records = recordService.getGoodRecordByIdAndPlatform(goods_id, "buff");
+                }
+                List<Record> last7Days = new ArrayList<>();
+                List<Record> lastMonth = new ArrayList<>();
+                List<Record> last6Months = new ArrayList<>();
+                List<Record> lastYear = new ArrayList<>();
+                List<Record> last2Years = new ArrayList<>();
+
+                // 获取当前时间
+                // 获取当前时间
+                Instant currentInstant = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
+
+                // 计算7天前的时间
+                Instant last7DaysInstant = currentInstant.minus(7, ChronoUnit.DAYS);
+
+                // 计算一个月前的时间
+                LocalDate lastMonthDate = LocalDate.now().minusMonths(1);
+                Instant lastMonthInstant = lastMonthDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                // 计算六个月前的时间
+                LocalDate last6MonthsDate = LocalDate.now().minusMonths(6);
+                Instant last6MonthsInstant = last6MonthsDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+
+                // 计算一年前的时间
+                LocalDate lastYearDate = LocalDate.now().minusYears(1);
+                Instant lastYearInstant = lastYearDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
 
-        // 计算两年前的时间
-        LocalDate last2YearsDate = LocalDate.now().minusYears(2);
-        Instant last2YearsInstant = last2YearsDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                // 计算两年前的时间
+                LocalDate last2YearsDate = LocalDate.now().minusYears(2);
+                Instant last2YearsInstant = last2YearsDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
-        // 遍历所有记录
-        for (Record record : records) {
-            // 将记录时间转换为Instant对象
-            Instant recordInstant = LocalDateTime.parse(record.getTime(), formatter).atZone(ZoneId.systemDefault()).toInstant();
+                // 遍历所有记录
+                for (Record record : records) {
+                    // 将记录时间转换为Instant对象
+                    Instant recordInstant = LocalDateTime.parse(record.getTime(), formatter).atZone(ZoneId.systemDefault()).toInstant();
 
-            // 判断记录时间是否在规定范围内
-            if (recordInstant.isAfter(last7DaysInstant)) {
-                last7Days.add(record);
+                    // 判断记录时间是否在规定范围内
+                    if (recordInstant.isAfter(last7DaysInstant)) {
+                        last7Days.add(record);
+                    }
+                    if (recordInstant.isAfter(lastMonthInstant)) {
+                        lastMonth.add(record);
+                    }
+                    if (recordInstant.isAfter(last6MonthsInstant)) {
+                        last6Months.add(record);
+                    }
+                    if (recordInstant.isAfter(lastYearInstant)) {
+                        lastYear.add(record);
+                    }
+                    if (recordInstant.isAfter(last2YearsInstant)) {
+                        last2Years.add(record);
+                    }
+                }
+                model.addAttribute("all_records_last7Days", last7Days);
+                model.addAttribute("all_records_lastMonth", lastMonth);
+                model.addAttribute("all_records_last6Months", last6Months);
+                model.addAttribute("all_records_lastYear", lastYear);
+                model.addAttribute("all_records_last2Years", last2Years);
+
+                model.addAttribute("lowest_records_last7Days", getLowestByDay(last7Days));
+                model.addAttribute("lowest_records_lastMonth", getLowestByDay(lastMonth));
+                model.addAttribute("lowest_records_last6Months", getLowestByDay(last6Months));
+                model.addAttribute("lowest_records_lastYear", getLowestByDay(lastYear));
+                model.addAttribute("lowest_records_last2Years", getLowestByDay(last2Years));
+            } else {
+                //                    case "week":
+                //                        LocalDateTime oneWeekAgo = now.minusWeeks(1);
+                //                        String formattedOneWeekAgo = oneWeekAgo.format(formatter);
+                //                        records = recordService.getGoodRecordByIdAndTime(goods_id, formattedOneWeekAgo);
+                //
+                //                        break;
+                //                    case "month":
+                //                        LocalDateTime oneMonthAgo = now.minusMonths(1);
+                //                        String formattedOneMonthAgo = oneMonthAgo.format(formatter);
+                //                        records = recordService.getGoodRecordByIdAndTime(goods_id, formattedOneMonthAgo);
+                //
+                //                        break;
+                //                    case "6month":
+                //                        LocalDateTime sixMonthAgo = now.minusMonths(6);
+                //                        String formattedSixMonthAgo = sixMonthAgo.format(formatter);
+                //                        records = recordService.getGoodRecordByIdAndTime(goods_id, formattedSixMonthAgo);
+                //                        break;
+                //                    case "year":
+                //                        LocalDateTime oneYearAgo = now.minusYears(1);
+                //                        String formattedOneYearAgo = oneYearAgo.format(formatter);
+                //                        records = recordService.getGoodRecordByIdAndTime(goods_id, formattedOneYearAgo);
+                //
+                //                        break;
+                //                    case "2years":
+                //                        LocalDateTime twoYearsAgo = now.minusYears(2);
+                //                        String formattedTwoYearsAgo = twoYearsAgo.format(formatter);
+                //                        records = recordService.getGoodRecordByIdAndTime(goods_id, formattedTwoYearsAgo);
+                //
+                //                        break;
+
+
             }
-            if (recordInstant.isAfter(lastMonthInstant)) {
-                lastMonth.add(record);
-            }
-            if (recordInstant.isAfter(last6MonthsInstant)) {
-                last6Months.add(record);
-            }
-            if (recordInstant.isAfter(lastYearInstant)) {
-                lastYear.add(record);
-            }
-            if (recordInstant.isAfter(last2YearsInstant)) {
-                last2Years.add(record);
-            }
+            model.addAttribute("platform", platform);
         }
-        model.addAttribute("all_records_last7Days", last7Days);
-        model.addAttribute("all_records_lastMonth", lastMonth);
-        model.addAttribute("all_records_last6Months", last6Months);
-        model.addAttribute("all_records_lastYear", lastYear);
-        model.addAttribute("all_records_last2Years", last2Years);
 
-        model.addAttribute("lowest_records_last7Days", getLowestByDay(last7Days));
-        model.addAttribute("lowest_records_lastMonth", getLowestByDay(lastMonth));
-        model.addAttribute("lowest_records_last6Months", getLowestByDay(last6Months));
-        model.addAttribute("lowest_records_lastYear", getLowestByDay(lastYear));
-        model.addAttribute("lowest_records_last2Years", getLowestByDay(last2Years));
 
         logger.info("to good");
         return "good";

@@ -7,9 +7,16 @@ public class Good {
     String name;
     String category;
     String img_url;
-    double  now_price;
-    double the_lowest_price;
+    double now_price_buff;
+    double the_lowest_price_buff;
     String wear_tear_group;
+    double the_lowest_price_uu;
+    double the_lowest_price_igxe;
+    double the_lowest_price_c5;
+    double now_price_uu;
+    double now_price_igxe;
+    double now_price_c5;
+    double now_price_steam;
 
     public String getWear_tear_group() {
         return wear_tear_group;
@@ -61,30 +68,93 @@ public class Good {
         this.trend = trend;
     }
 
-    public double getThe_lowest_price() {
-        return the_lowest_price;
+    public double getThe_lowest_price_buff() {
+        return the_lowest_price_buff;
     }
 
-    public void setThe_lowest_price(double the_lowest_price) {
-        this.the_lowest_price = the_lowest_price;
+    public void setThe_lowest_price_buff(double the_lowest_price_buff) {
+        this.the_lowest_price_buff = the_lowest_price_buff;
     }
 
-    public double getNow_price() {
-        return now_price;
+    public double getNow_price_buff() {
+        return now_price_buff;
     }
 
-    public void setNow_price(double now_price) {
-        this.now_price = now_price;
+    public void setNow_price_buff(double now_price_buff) {
+        this.now_price_buff = now_price_buff;
     }
 
-    public Good(String goods_id, double trend, String name, String category, String img_url, double now_price, double the_lowest_price, String wear_tear_group) {
+    public double getThe_lowest_price_uu() {
+        return the_lowest_price_uu;
+    }
+
+    public void setThe_lowest_price_uu(double the_lowest_price_uu) {
+        this.the_lowest_price_uu = the_lowest_price_uu;
+    }
+
+    public double getThe_lowest_price_igxe() {
+        return the_lowest_price_igxe;
+    }
+
+    public void setThe_lowest_price_igxe(double the_lowest_price_igxe) {
+        this.the_lowest_price_igxe = the_lowest_price_igxe;
+    }
+
+    public double getThe_lowest_price_c5() {
+        return the_lowest_price_c5;
+    }
+
+    public void setThe_lowest_price_c5(double the_lowest_price_c5) {
+        this.the_lowest_price_c5 = the_lowest_price_c5;
+    }
+
+    public double getNow_price_uu() {
+        return now_price_uu;
+    }
+
+    public void setNow_price_uu(double now_price_uu) {
+        this.now_price_uu = now_price_uu;
+    }
+
+    public double getNow_price_igxe() {
+        return now_price_igxe;
+    }
+
+    public void setNow_price_igxe(double now_price_igxe) {
+        this.now_price_igxe = now_price_igxe;
+    }
+
+    public double getNow_price_c5() {
+        return now_price_c5;
+    }
+
+    public void setNow_price_c5(double now_price_c5) {
+        this.now_price_c5 = now_price_c5;
+    }
+
+    public double getNow_price_steam() {
+        return now_price_steam;
+    }
+
+    public void setNow_price_steam(double now_price_steam) {
+        this.now_price_steam = now_price_steam;
+    }
+
+    public Good(String goods_id, double trend, String name, String category, String img_url, double now_price_buff, double the_lowest_price_buff, String wear_tear_group, double the_lowest_price_uu, double the_lowest_price_igxe, double the_lowest_price_c5, double now_price_uu, double now_price_igxe, double now_price_c5, double now_price_steam) {
         this.goods_id = goods_id;
         this.trend = trend;
         this.name = name;
         this.category = category;
         this.img_url = img_url;
-        this.now_price = now_price;
-        this.the_lowest_price = the_lowest_price;
+        this.now_price_buff = now_price_buff;
+        this.the_lowest_price_buff = the_lowest_price_buff;
         this.wear_tear_group = wear_tear_group;
+        this.the_lowest_price_uu = the_lowest_price_uu;
+        this.the_lowest_price_igxe = the_lowest_price_igxe;
+        this.the_lowest_price_c5 = the_lowest_price_c5;
+        this.now_price_uu = now_price_uu;
+        this.now_price_igxe = now_price_igxe;
+        this.now_price_c5 = now_price_c5;
+        this.now_price_steam = now_price_steam;
     }
 }

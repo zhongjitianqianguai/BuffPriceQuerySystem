@@ -1,6 +1,5 @@
 package com.tianqianguai.buffpricequerysystem.service;
 
-import com.tianqianguai.buffpricequerysystem.entity.Good;
 import com.tianqianguai.buffpricequerysystem.entity.Record;
 import com.tianqianguai.buffpricequerysystem.mapper.RecordMapper;
 import org.apache.commons.logging.Log;
@@ -17,8 +16,12 @@ public class RecordService {
 
     @Autowired
     RecordMapper recordMapper;
-    public List<Record> getGoodRecordById(String goods_id){
+    public List<Record> getGoodRecordByIdAndPlatform(String goods_id,String platform){
         logger.debug("enter getGoodRecordById()");
-        return recordMapper.getGoodRecordById(goods_id);
+        return recordMapper.getGoodRecordByIdAndPlatform(goods_id,platform);
+    }
+    public List<Record> getGoodRecordByIdAndTime(String goods_id,String time){
+        logger.debug("enter getGoodRecordByIdAndTime()");
+        return recordMapper.getGoodRecordByIdAndTime(goods_id,time);
     }
 }
