@@ -18,6 +18,7 @@ public class Good {
     double now_price_c5;
     double now_price_steam;
 
+    String update_time;
     public String getWear_tear_group() {
         return wear_tear_group;
     }
@@ -42,7 +43,13 @@ public class Good {
         this.name = name;
     }
 
+    public String getUpdate_time() {
+        return update_time;
+    }
 
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
+    }
 
     public String getImg_url() {
         return img_url;
@@ -140,7 +147,7 @@ public class Good {
         this.now_price_steam = now_price_steam;
     }
 
-    public Good(String goods_id, double trend, String name, String category, String img_url, double now_price_buff, double the_lowest_price_buff, String wear_tear_group, double the_lowest_price_uu, double the_lowest_price_igxe, double the_lowest_price_c5, double now_price_uu, double now_price_igxe, double now_price_c5, double now_price_steam) {
+    public Good(String goods_id, double trend, String name, String category, String img_url, double now_price_buff, double the_lowest_price_buff, String wear_tear_group, double the_lowest_price_uu, double the_lowest_price_igxe, double the_lowest_price_c5, double now_price_uu, double now_price_igxe, double now_price_c5, double now_price_steam, String update_time) {
         this.goods_id = goods_id;
         this.trend = trend;
         this.name = name;
@@ -156,5 +163,6 @@ public class Good {
         this.now_price_igxe = now_price_igxe;
         this.now_price_c5 = now_price_c5;
         this.now_price_steam = now_price_steam;
+        this.update_time = update_time;
     }
 }

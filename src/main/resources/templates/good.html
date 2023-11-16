@@ -128,7 +128,7 @@
                             th:text="${good.getTrend()*100+'%'}"></span></span>
                         <span><label th:text="#{Historical_Lowest_Price}"></label><span
                                 th:text="${good.getThe_lowest_price_buff()}"></span></span>
-                        <span><label th:text="#{types_of}"></label><span th:text="${good.getCategory()}"></span></span>
+                        <span><label>更新时间</label><span th:text="${good.getUpdate_time()}"></span></span>
                     </p>
                     <div class="blank20"></div>
                     <div class="line"></div>
@@ -797,7 +797,7 @@
         let json = [[${all_records_last7Days}]];
         let data = []
         for (let i = 0; i < json.length; i++) {
-            data.push({name: [json[i]['source'],json[i]['time']], value: [json[i]['time'], json[i]["price"]]})
+            data.push({name: [json[i]['source'], json[i]['time']], value: [json[i]['time'], json[i]["price"]]})
         }
         option = {
             tooltip: {
@@ -843,8 +843,8 @@
             $(this).addClass("on")
             $(this).siblings().removeClass("on")
             $('#price-history-platform-all').attr('value', $(this).attr('value'))
-            if (platform==="悠悠有品"){
-                platform="UU"
+            if (platform === "悠悠有品") {
+                platform = "UU"
             }
             window.location.href = '/goods?goods_id=' + [[${goods_id}]] + '&platform=' + platform
         })
