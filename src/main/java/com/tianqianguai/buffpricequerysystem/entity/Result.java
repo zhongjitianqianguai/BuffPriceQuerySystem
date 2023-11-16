@@ -1,6 +1,7 @@
 package com.tianqianguai.buffpricequerysystem.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Result {
     private long itemId;
@@ -32,6 +33,35 @@ public class Result {
     private Object changeMap; // 根据实际情况修改类型
     private Object purchasePrice; // 根据实际情况修改类型
     private List<Integer> tagIdList;
+    public  Good goods;
+    private int count;  // 新增的count字段
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Result result = (Result) obj;
+        return marketName.equals(result.marketName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(marketName);
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+    public Good getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Good goods) {
+        this.goods = goods;
+    }
 
     public long getItemId() {
         return itemId;

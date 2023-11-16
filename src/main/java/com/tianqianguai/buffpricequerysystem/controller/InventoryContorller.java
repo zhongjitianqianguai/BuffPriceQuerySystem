@@ -66,18 +66,39 @@ public class InventoryContorller {
     @RequestMapping("/show_inventory")
     public String Inventory(HttpServletRequest request, Model model, HttpServletResponse response,@RequestParam("steamId") String steamId, @RequestParam(value = "page", defaultValue = "0") int page) throws IOException {
         Pageable pageable = PageRequest.of(page, 20);
-        Page <Result> inventoryPage = inventoryService.getInventory(steamId, pageable);
-        User user = (User) request.getSession().getAttribute("user");
-        if (inventoryPage != null) {
-            System.out.println(inventoryPage.getContent().get(0).getSuggestPrice());
-            model.addAttribute("user", user);
-            model.addAttribute("inventoryPage", inventoryPage);
-            model.addAttribute("page", page);
-
-            return "inventory";
-        } else {
-            return "error";
+        String search = request.getParameter("search");
+        String searchbool="true";
+        System.out.println("search"+search);
+        if (search==null){
+            search="";
         }
+//        steamId = request.getParameter("steamId");
+        Page <Result> pageResults = inventoryService.getInventory(steamId, pageable,search);
+
+
+
+        if (pageResults.getContent().isEmpty()){
+            System.out.println("空搜索");
+            searchbool="false";
+
+        }
+
+        User user = (User) request.getSession().getAttribute("user");
+     //   System.out.println("test:"+pageResults.getContent().get(5).getGoods().getName());
+       // System.out.println("test:"+pageResults.getContent().get(5).getPicUrl());、
+
+        System.out.println(steamId);
+        model.addAttribute("search", search);
+        model.addAttribute("searchbool", searchbool);
+
+        model.addAttribute("user", user);
+        model.addAttribute("pageResults", pageResults);
+        model.addAttribute("steamid",steamId);
+
+        model.addAttribute("page", page);
+
+        return "inventory";
+
     }
 
 }

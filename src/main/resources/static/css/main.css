@@ -3355,7 +3355,18 @@ textarea.i_Text {
     margin: 0 6px 0 0;
     white-space: nowrap
 }
-
+.tag2 {
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 2px;
+    background: #33353B;
+    color: #fff;
+    height: 18px;
+    line-height: 17px;
+    padding: 0 6px;
+    margin: 0 6px 0 0;
+    white-space: nowrap
+}
 .tag_uncommon {
     background: #82BDFF
 }
@@ -16815,7 +16826,15 @@ i.icon-store.store-offline {
 .tag_csgo_wearcategory4 {
     background: #993A38
 }
+.tag_count{
 
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: red; /* 红底 */
+    color: black; /* 黑字 */
+    padding: 5px; /* 调整 padding 以适应长方形样式 */
+}
 .tag.exterior_wearcategory0, .w-Select.csgo-Select ul li.exterior_wearcategory0 {
     color: #397439
 }

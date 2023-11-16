@@ -7,7 +7,9 @@ public class Inventory {
     private String message;
     private List<Result> result;
 
-    // Getter and Setter methods for the above fields
+// Getter and Setter methods for the above fields
+
+
 
     public int getCode() {
         return code;

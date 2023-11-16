@@ -10,6 +10,16 @@ public class Good {
     String img_url;
     String category;
     double  now_price;
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public String getGoods_id() {
         return goods_id;
     }

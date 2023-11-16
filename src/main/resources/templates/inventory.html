@@ -16,6 +16,9 @@
     <div class="header-cont l_Layout">
         <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>
         </div>
+        <input type="text" id="steamid" th:value="${steamid}" />
+        <input type="text" id="search2" th:value="${search}" />
+        <input type="text" id="searchbool" th:value="${searchbool}" />
         <div class="nav">
             <ul>
                 <li class="on"><a href="/home"><strong th:text="#{nav_text1}"></strong></a></li>
@@ -85,7 +88,10 @@
                 <li class="on"><a style="background-color: #132a50" href="/show_bookmark"><i
                         class="icon icon_menu icon_menu_fav"></i>我的收藏</a></li>
                 <li class="on"><a style="background-color: #132a50" href="/show_inventory?steamId=76561198307802394"><i
+                        class="icon icon_menu icon_menu_invite"></i>绑定steam</a></li>
+                <li class="on"><a style="background-color: #132a50" href="/show_inventory?steamId=76561198307802394"><i
                         class="icon icon_menu icon_menu_gift"></i>我的仓库</a></li>
+
             </ul>
         </div>
     </div>
@@ -120,23 +126,31 @@
                 <div class=" list_card " id="j_list_card" >
 
                     <ul class="" style="display: flex; flex-wrap: wrap;" >
-                        <li th:each="inventoryPage:${inventoryPage}" style="flex: 0 0 23%;">
-<!--                                <a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}">-->
+                        <li th:each="pageResults:${pageResults}" style="flex: 0 0 23%;">
+                                <a th:href="'/goods?goods_id='+${pageResults.getGoods().getGoods_id()}" th:title="${pageResults.getGoods().getName()}">
                             <img class="lazy"
-                                 th:src="${inventoryPage.getPicUrl()}"
+                                 th:src="${pageResults.getGoods().getGoods_id() != '0' ? pageResults.getGoods().getImg_url() : pageResults.getPicUrl()}"
                                  width="210" height="138">
-<!--                                </a>-->
+                                </a>
 <!--                                <h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}"-->
 <!--                                       th:text="${inventory.getResult().get(0).getName()}"></a></h3>-->
-                                <h3><a
-                                       th:text="${inventoryPage.getName()}"></a></h3>
-                                <p>
+                            <h3><a  th:href="'/goods?goods_id='+${pageResults.getGoods().getGoods_id()}" th:title="${pageResults.getGoods().getName()}"
+                                    th:text="${pageResults.getGoods().getGoods_id() != '0' ? pageResults.getGoods().getName() : pageResults.getMarketName()}"></a>
+
+                            </h3>
+
+                            <p>
                                     <!--                            <strong class="f_Strong" th:text="'￥'+${good?.getNow_price()}"></strong>-->
-                                    <small class="f_Strong" th:text="'￥'+${inventoryPage?.getSteamPrice()}"></small>
-                        </span>
+                                    <small class="f_Strong" th:text="'￥'+${#numbers.formatDecimal(pageResults?.getSteamPrice()/100.0*pageResults.getCount(), 1, 2)}"></small>
+
+
                                 </p>
                                 <i class="icon icon_check"></i>
-                            </li>
+                            <span class="tag tag_csgo_wearcategory4"
+                                  th:text="'X'+' ' + ${pageResults.getCount()}"
+                            ></span>
+
+                        </li>
 
 
                         </ul>
@@ -146,11 +160,11 @@
                     <ul>
                         <li th:if="${page==0}" class="disabled"><span class="current prev">上一页</span></li>
                         <li th:if="${page!=0}"><a th:href="@{/show_inventory(steamId=76561198307802394, page=${page-1})}" class="page-link prev">上一页</a></li>
-                        <li th:each="i : ${#numbers.sequence(0, inventoryPage.totalPages - 1)}" th:class="${i == page ? 'active' : ''}">
+                        <li th:each="i : ${#numbers.sequence(0, pageResults.totalPages - 1)}" th:class="${i == page ? 'active' : ''}">
                             <a th:if="${i != page}" th:href="@{/show_inventory(steamId=76561198307802394, page=${i})}" class="page-link" th:text="${i + 1}"></a>
                             <span th:if="${i == page}" class="current" th:text="${i + 1}"></span>
                         </li>
-                        <li><a th:class="${page+1==inventoryPage.totalPages?'disabled':'page-link next'}" th:href="@{/show_inventory(steamId=76561198307802394, page=${page+1})}" class="page-link next">Next</a></li>
+                        <li><a th:class="${page+1==pageResults.totalPages?'disabled':'page-link next'}" th:href="@{/show_inventory(steamId=76561198307802394, page=${page+1})}" class="page-link next">下一页</a></li>
                     </ul>
                 </div>
 
@@ -206,7 +220,21 @@
                 alert('请输入搜索内容')
                 return
             }
-            window.location.href = '/home?search=' + search
+            var steamid = document.getElementById('steamid').value;
+            var controller_search = document.getElementById('searchbool').value;
+            // alert('steamid: ' + steamid);
+            // alert('controller_search：'+controller_search)
+            if (controller_search=="false"){
+                console.log("空搜索");
+                alert('空搜索')
+                document.getElementById('searchbool').value = 'true'; // 设置新的值
+                window.location.href = '/show_inventory?steamId=' + '76561198307802394';
+
+            }else{
+                window.location.href = '/show_inventory?search=' + search + '&steamId=' + '76561198307802394';
+            }
+
+
         })
         $('#sort').click(function () {
             $('#sort-type').slideDown()
