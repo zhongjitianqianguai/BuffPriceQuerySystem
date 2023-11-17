@@ -100,10 +100,6 @@ public class InventoryService {
 
 
 
-            // 输出每个商品名称及对应的数量
-//            for (Result result : uniqueResults) {
-//                System.out.println("商品名称: " + result.getMarketName() + ", 数量: " + result.getCount()+",价格："+result.getSteamPrice());
-//            }
             List<Result> toRemove = new ArrayList<>();
 
             if (!Search.equals("")) {
