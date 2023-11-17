@@ -115,11 +115,7 @@ public class InventoryService {
                 }
                 uniqueResults.removeAll(toRemove);
             }
-//            if (uniqueResults.isEmpty()){
-//                System.out.println("空搜索");
-//                uniqueResults=toRemove;
-//
-//            }
+
 
             // 计算当前页的开始和结束索引
             int start = (int) pageable.getOffset();
