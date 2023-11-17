@@ -104,9 +104,10 @@ public class InventoryService {
 //            for (Result result : uniqueResults) {
 //                System.out.println("商品名称: " + result.getMarketName() + ", 数量: " + result.getCount()+",价格："+result.getSteamPrice());
 //            }
+            List<Result> toRemove = new ArrayList<>();
+
             if (!Search.equals("")) {
                 System.out.println(Search);
-                List<Result> toRemove = new ArrayList<>();
                 for (Result uniresult : uniqueResults) {
                     if (!uniresult.getMarketName().toLowerCase().contains(Search.toLowerCase())) {
                         toRemove.add(uniresult);
@@ -114,6 +115,11 @@ public class InventoryService {
                 }
                 uniqueResults.removeAll(toRemove);
             }
+//            if (uniqueResults.isEmpty()){
+//                System.out.println("空搜索");
+//                uniqueResults=toRemove;
+//
+//            }
 
             // 计算当前页的开始和结束索引
             int start = (int) pageable.getOffset();
