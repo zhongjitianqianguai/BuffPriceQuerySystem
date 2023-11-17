@@ -84,8 +84,7 @@ public class InventoryContorller {
         }
 
         User user = (User) request.getSession().getAttribute("user");
-     //   System.out.println("test:"+pageResults.getContent().get(5).getGoods().getName());
-       // System.out.println("test:"+pageResults.getContent().get(5).getPicUrl());、
+
 
         System.out.println(steamId);
         model.addAttribute("search", search);
