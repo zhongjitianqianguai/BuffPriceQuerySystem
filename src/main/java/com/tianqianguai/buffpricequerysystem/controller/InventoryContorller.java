@@ -64,31 +64,36 @@ public class InventoryContorller {
                 .collect(Collectors.toList());
     }
     @RequestMapping("/show_inventory")
-    public String Inventory(HttpServletRequest request, Model model, HttpServletResponse response,@RequestParam("steamId") String steamId, @RequestParam(value = "page", defaultValue = "0") int page) throws IOException {
+    public String Inventory(HttpServletRequest request, Model model, HttpServletResponse response,@RequestParam(value = "page", defaultValue = "0") int page) throws IOException {
+
+        User user = (User) request.getSession().getAttribute("user");
         Pageable pageable = PageRequest.of(page, 20);
         String search = request.getParameter("search");
         String searchbool="true";
+        String steamidbool="true";
         System.out.println("search"+search);
         if (search==null){
             search="";
         }
-//        steamId = request.getParameter("steamId");
+        String steamId = user.getSteam_id();
+        System.out.println("steamId:"+steamId);
+        if (steamId.isEmpty()){
+            System.out.println("请检查你的steamid是否正确绑定");
+
+            steamidbool="false";
+        }
         Page <Result> pageResults = inventoryService.getInventory(steamId, pageable,search);
 
 
-
-        if (pageResults.getContent().isEmpty()){
+        if (pageResults.getContent().isEmpty() && search!=""){
             System.out.println("空搜索");
             searchbool="false";
 
         }
 
-        User user = (User) request.getSession().getAttribute("user");
-
-
-        System.out.println(steamId);
         model.addAttribute("search", search);
         model.addAttribute("searchbool", searchbool);
+        model.addAttribute("steamidbool", steamidbool);
 
         model.addAttribute("user", user);
         model.addAttribute("pageResults", pageResults);
