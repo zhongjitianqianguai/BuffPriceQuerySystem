@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head><title th:text="#{collect_title}"></title>
+    <meta property="og:image" content="https://g.fp.ps.netease.com/market/file/6391b1f3672a526e9f383c56lhtp2qta04">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="referrer" content="no-referrer">
+
+    <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
+    <link rel="stylesheet" href="./css/main.css">
+    <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="./js/lib.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+</head>
+<body class=" csgo  ">
+<div class="header l_Clearfix">
+    <div class="header-cont l_Layout">
+        <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>
+        </div>
+        <input type="hidden" id="steamid" th:value="${user.getSteam_id()}" />
+        <input type="hidden" id="search2" th:value="${search}" />
+        <input type="hidden" id="searchbool" th:value="${searchbool}" />
+        <input type="hidden" id="steamidbool" th:value="${steamidbool}" />
+        <div class="nav">
+            <ul>
+                <li class="on"><a href="/home"><strong th:text="#{nav_text1}"></strong></a></li>
+            </ul>
+        </div>
+        <div class="nav nav_entries">
+            <div class="login-user j_drop-handler"><a href=""> <img
+                    width="32" height="32" class="has-store store-online"
+                    src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                    onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
+                <i class="icon icon-store store-online"></i> <strong class=""
+                                                                     id="navbar-user-name"
+                                                                     th:text="${user.getName()}"></strong> </a>
+                <div class="drop-store j_drop">
+                    <div class="store-user"><img
+                            src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                            onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
+                        <div class=""><h3 th:text="${user.getName()}"></h3></div>
+                        <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
+                </div>
+            </div>
+            <div class="login-user message"><span><a href="/show_message"><i
+                    class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
+            <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
+                <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
+                    <strong><img src="./images/logo_csgo2.png" class="sel-ico"
+                                 data-game="csgo">CS2<span class="tag_status"
+                                                           style="display: none;"></span></strong><i
+                        class="icon icon_arr_light"></i></h3>
+                    <div class="j_drop"><p data-value="csgo" class="on" ><img
+                            src="./images/logo_csgo2.png" class="sel-ico" data-game="csgo">CS2<span
+                            class="tag_status" style="display: none;"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <ul>
+                <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}"></strong></a>
+                    <i class="icon icon_new" style="display: none;"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="loading-cover">
+    <div class="spinner loading">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<div class="blank20"></div>
+
+<div class="l_Layout">
+    <div class="cont_panel black">
+        <div class="my-thum" style="background-color: #132a50"><img
+                src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/70/h/70"
+                width="70" height="70"
+                onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
+            <h2><strong th:text="${user.getName()}"></strong></h2>
+            <div class="clear"></div>
+        </div>
+        <div class="my-menu">
+            <ul>
+                <li><a style="background-color: #132a50" href="/show_message"><i
+                        class="icon icon_menu icon_menu_msg"></i>消息中心<i
+                        class="icon icon_new"></i></a></li>
+                <li class="on"><a style="background-color: #132a50" href="/show_bookmark"><i
+                        class="icon icon_menu icon_menu_fav"></i>我的收藏</a></li>
+                <li class="on"><a style="background-color: #132a50" href="/show_usersetting"><i
+                        class="icon icon_menu icon_menu_invite"></i>账号设置</a></li>
+                <li class="on"><a style="background-color: #132a50" href="/show_inventory"><i
+                        class="icon icon_menu icon_menu_gift"></i>我的仓库</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="cont_main">
+        <div class="g-w940">
+            <div style="background-color: #132a50" class="g-market-header wiki-select black">
+                <div class="cont-tab">
+                    <ul>
+                        <li class="on"><a href="/show_bookmark">饰品收藏<i
+                                class="icon icon_top_cur"></i></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="criteria">
+                    <div class="l_Right">
+                        <div class="w-Search" id="j_search"><span> <input class="i_Text" id="search-search"
+                                                                          name="search" placeholder="输入物品名称"
+                                                                          size="30" type="text"> </span> <a
+                                id="search_btn_csgo"
+                                href="javascript:;"><i class="icon icon_search"></i>搜索</a></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="blank20"></div>
+
+        <div class="blank20"></div>
+
+            <div class="market-card" id="j_market_card">
+                <div class=" list_card " id="j_list_card" >
+
+                    <ul class="" style="display: flex; flex-wrap: wrap;" >
+                        <li th:each="pageResults:${pageResults}" style="flex: 0 0 23%;">
+                                <a th:href="'/goods?goods_id='+${pageResults.getGoods().getGoods_id()}" th:title="${pageResults.getGoods().getName()}">
+                            <img class="lazy"
+                                 th:src="${pageResults.getGoods().getGoods_id() != '0' ? pageResults.getGoods().getImg_url() : pageResults.getPicUrl()}"
+                                 width="210" height="138">
+                                </a>
+<!--                                <h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}"-->
+<!--                                       th:text="${inventory.getResult().get(0).getName()}"></a></h3>-->
+                            <h3><a  th:href="'/goods?goods_id='+${pageResults.getGoods().getGoods_id()}" th:title="${pageResults.getGoods().getName()}"
+                                    th:text="${pageResults.getGoods().getGoods_id() != '0' ? pageResults.getGoods().getName() : pageResults.getMarketName()}"></a>
+
+                            </h3>
+
+                            <p>
+                                    <!--                            <strong class="f_Strong" th:text="'￥'+${good?.getNow_price()}"></strong>-->
+                                    <small class="f_Strong" th:text="'￥'+${#numbers.formatDecimal(pageResults?.getSteamPrice()/100.0*pageResults.getCount(), 1, 2)}"></small>
+
+
+                                </p>
+                                <i class="icon icon_check"></i>
+                            <span class="tag tag_csgo_wearcategory4"
+                                  th:text="'X'+' ' + ${pageResults.getCount()}"
+                            ></span>
+
+                        </li>
+
+
+                        </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="pager card-pager light-theme simple-pagination">
+                    <ul>
+                        <li th:if="${page==0}" class="disabled"><span class="current prev">上一页</span></li>
+                        <li th:if="${page!=0}"><a th:href="@{/show_inventory( page=${page-1})}" class="page-link prev">上一页</a></li>
+                        <li th:each="i : ${#numbers.sequence(0, pageResults.totalPages - 1)}" th:class="${i == page ? 'active' : ''}">
+                            <a th:if="${i != page}" th:href="@{/show_inventory( page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                            <span th:if="${i == page}" class="current" th:text="${i + 1}"></span>
+                        </li>
+                        <li><a th:class="${page+1==pageResults.totalPages?'disabled':'page-link next'}" th:href="@{/show_inventory( page=${page+1})}" class="page-link next">下一页</a></li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+
+
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+
+<div class="blank20"></div>
+<script type="text/javascript" th:inline="javascript">
+    // 监听controller_search值变化
+
+        // 监听controller_search值变化
+
+
+
+
+    function user_login(name, password) {
+        console.log(name)
+        $.ajax({
+            url: '/login',
+            type: 'post',
+            data: {
+                name: name,
+                password: password
+            },
+            success: function (data) {
+                window.location.reload()
+            }
+        })
+    }
+
+    $(() => {
+        $('#j_popup_login').hide()
+        if ([[${user_status}]] === '密码错误') {
+            $('#j_popup_login').show()
+            alert("密码错误请重新登录！！！")
+        } else if ([[${user_status}]] === '用户不存在') {
+            $('#j_popup_login').show()
+            alert("用户不存在请重新登录！！！")
+        }
+
+
+        $('#login').click(function () {
+            $('#j_popup_login').show()
+        })
+        $('#close_entry').click(function () {
+            $('#j_popup_login').hide()
+        })
+        $('#search_btn_csgo').click(function () {
+            let search = $('input[name="search"]').val()
+            if (search === '') {
+                alert('请输入搜索内容')
+                return
+            }
+            var steamid = document.getElementById('steamid').value;
+            var controller_search = document.getElementById('searchbool').value;
+            if (controller_search == "false") {
+                document.getElementById('searchbool').value = 'true'; // 设置新的值
+                window.location.href = '/show_inventory';
+            } else {
+                window.location.href = '/show_inventory?search=' + search ;
+            }
+        })
+        window.onload = function() {
+            var controller_search = document.getElementById('searchbool').value;
+            var steamidbool = document.getElementById('steamidbool').value;
+            // console.log("steamid bool："+steamidbool)
+            if (steamidbool === "false") {
+                console.log("steamid bool")
+
+                alert('请检查你的steamid是否正确绑定');
+                window.location.href = '/show_usersetting';
+            }
+            if (controller_search == "false") {
+                // console.log("空搜索");
+                alert('空搜索');
+                window.location.href = '/show_inventory';
+            } else {
+                window.location.href = '/show_inventory?search=' + search;
+            }
+            console.log("页面加载完成");
+            //执行其他操作
+        };
+
+        $('#sort').click(function () {
+            $('#sort-type').slideDown()
+        })
+        $('#sort-type li').click(function () {
+            let sort_type = $(this).attr('id')
+            console.log([[${category}]])
+            if ([[${category}]] != null) {
+                window.location.href = '/home?sort=' + sort_type + '&category=' + [[${category}]]
+                return
+            } else if ([[${search}]] != null) {
+                window.location.href = '/home?sort=' + sort_type + '&search=' + [[${search}]]
+                return
+            } else if ([[${between_min}]] != null || [[${between_max}]] != null) {
+                window.location.href = '/home?sort=' + sort_type + '&between_min=' + [[${between_min}]] + '&between_max=' + [[${between_max}]]
+                return
+            }
+            window.location.href = '/home?sort=' + sort_type
+
+        })
+        $('#between_submit').click(function () {
+            let between_min = $('input[name="min_price"]').val()
+            let between_max = $('input[name="max_price"]').val()
+            if (between_min === '' && between_max === '') {
+                alert('请至少输入一个价格区间')
+                return
+            }
+            if (between_min !== '' && between_max !== '' && Number(between_min) > Number(between_max)) {
+                alert('最小值不能大于最大值')
+                return
+            }
+            if (between_min === '') {
+                between_min = 0
+            }
+            if (between_max === '') {
+                between_max = 999999
+            }
+            window.location.href = '/home?between_min=' + between_min + '&between_max=' + between_max
+        })
+
+    })
+</script>
+</body>
+
+
+</html>
