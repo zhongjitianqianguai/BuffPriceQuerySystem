@@ -47,7 +47,7 @@ public class InventoryContorller {
 
     public List<Record> getLowestByDay(List<Record> records) {
         logger.debug("enter getLowestByDay()");
-        //使用 Java 8 中的 Stream API 对记录进行处理，按时间分组，得到 Map<String, List<Record>> 类型的照时间字符串的前十个字符（即日期）进行分组。
+        //使用 Java 8 中的 Stream API 对记录进行处理，按时间分，得到 Map<String, List<Record>> 类型的照时间字符串的前十个字符（即日期）进行分组。
         Map <String, List<Record>> recordMap = records.stream()
                 .collect(Collectors.groupingBy(r -> r.getTime().substring(0, 10)));
         // 对于每个日期分组，选出其中价格最低的记录，存储在 List<Record> tempRecords 变量中。使用 Stream API 找出 tempRecords 中价格最低的记录，记录的最低价格使用 mapToDouble() 方法将 Record 类型的价格转换为 double 类型进行计算，并使用 orElse() 方法指定默认值为 0.0。得到 lowestPrice 变量。
