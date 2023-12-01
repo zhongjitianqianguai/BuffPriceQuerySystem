@@ -192,6 +192,11 @@
             }
             window.location.href = '/show_bookmark?search=' + search
         })
+        document.onkeydown = function(e){
+            if(e.keyCode == 13){
+                $('#search_btn_csgo').click();
+            }
+        }
         $('.i_Btn_mid').click(function () {
             let expected_price = prompt('请输入预期价格', '5.00')
             let goods_id = $(this).attr('id')

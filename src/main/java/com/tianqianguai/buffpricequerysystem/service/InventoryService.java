@@ -134,14 +134,17 @@ public class InventoryService {
 
 
 
-            for (int i = 0; i <pageResults.size() ; i++) {
-                if (inventoryMapper.getGoodsByLikeAName(pageResults.get(i).getMarketName())!=null){//如果
+            for (int i = 0; i < pageResults.size(); i++) {
+                if (inventoryMapper.getGoodsByLikeAName(pageResults.get(i).getMarketName()) != null) {
                     pageResults.get(i).setGoods(inventoryMapper.getGoodsByLikeAName(pageResults.get(i).getMarketName()));
-                }else {
-                    toRemove= (List<Result>) pageResults.get(i);
-                    pageResults.remove(toRemove) ;
+                } else {
+                    // 直接使用 remove 方法删除当前元素
+                    pageResults.remove(i);
+                    // 减少索引，以避免跳过下一个元素
+                    i--;
                 }
             }
+
             // 创建并返回一个Page对象
             return new PageImpl<>(pageResults, pageable, uniqueResults.size());
         } else {

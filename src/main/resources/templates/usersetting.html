@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head><title th:text="#{collect_title}"></title>
+  <meta property="og:image" content="https://g.fp.ps.netease.com/market/file/6391b1f3672a526e9f383c56lhtp2qta04">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <link rel="shortcut icon" href="//g.fp.ps.netease.com/market/file/59b156975e6027bce06e8f6ceTyFGdsj">
+  <link rel="stylesheet" href="./css/usersetting.css">
+  <script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="./css/usersetting.css?eee5de14">
+  <style>
+    @media (prefers-color-scheme: dark){
+      .news-detail-footer {
+        color: rgba(235, 235, 245, 0.6) !important;
+      }
+    }
+
+    .j_search-result-list {
+      background: #2D2F3E !important;
+    }
+
+    .custom_sticker_search_input-result-list {
+      background: #fff !important;
+    }
+
+    .j_search-result-list, .custom_sticker_search_input-result-list {
+      z-index: 100 !important;
+      margin: 0;
+      border: 1px solid rgba(0,0,0,.12);
+      padding: 0;
+      box-sizing: border-box;
+      max-height: 320px;
+      overflow-y: auto;
+      color: #000 !important;
+      list-style: none;
+      box-shadow: 0 2px 2px rgba(0,0,0,.16)
+    }[data-position=below] .j_search-result-list, [data-position=below] .custom_sticker_search_input-result-list {
+       margin-top: -1px;
+       border-top-color: transparent;
+       border-radius: 0 0 2px 2px;
+       padding-bottom: 8px;
+     }[data-position=above] .j_search-result-list, [data-position=above] .custom_sticker_search_input-result-list {
+        margin-bottom: -1px;
+        border-bottom-color: transparent;
+        border-radius: 2px 2px 0 0;
+        padding-top: 8px;
+      }
+    .autocomplete-result {
+      cursor: default;
+      padding: 12px 4px 12px 4px;
+      font-size: 12px;
+      text-align: left;
+      white-space:nowrap;
+    }
+    .j_search-result-list .autocomplete-result {
+      color: #fff !important;
+    }
+    .j_search-result-list .autocomplete-result:hover,
+    .j_search-result-list .autocomplete-result[aria-selected=true] {
+      background-color: #3A455A;
+    }
+
+    .custom_sticker_search_input-result-list .autocomplete-result {
+      color: #515151 !important;
+    }
+    .custom_sticker_search_input-result-list .autocomplete-result:hover,
+    .custom_sticker_search_input-result-list .autocomplete-result[aria-selected=true] {
+      background-color: #F8F8F8;
+    }
+
+
+    .card_banzhuan li a img {
+      width: unset!important;
+    }
+    .banzhuan .with-gallery img {
+      border: 0;
+      position: relative;
+    }
+    body.banzhuan {
+      background-image: url(/static/images/site/header-bg_badlanders.jpg);
+    }
+
+    .list_card_badlanders .tagBox {
+      position: absolute;
+      right: 8px;
+      top: 0px;
+    }
+    .list_card_badlanders .tagBoxB {
+      position: absolute;
+      top: 102px;
+      right: 6px;
+    }
+    .list-pager-time-range-tips {
+      padding-bottom: 30px;
+    }
+  </style>
+
+  <script type="application/javascript">
+    var loadMessageError2 = function(){
+      // message加载失败降级到nginx,产品可以在load事件重新初始化
+      var cdnPath = 'https://dl.reg.163.com/webzj/ngx/message.js';
+      var script = document.createElement('script');
+      script.src = cdnPath;
+      document.body.appendChild(script);
+    }
+    var loadMessageError1 = function(){
+      // message加载失败降级备份cdn域名,产品可以在load事件重新初始化
+      var cdnPath = 'https://webzj.netstatic.net/webzj_cdn101/message4.js';
+      var script = document.createElement('script');
+      script.src = cdnPath;
+      script.onerror=loadMessageError2
+      document.body.appendChild(script);
+    }
+  </script>
+</head>
+<body class=" csgo  ">
+<div class="header l_Clearfix">
+  <div class="header-cont l_Layout">
+    <div class="logo"><a href="/home"><img src="./images/logo.png" width="77" height="21"></a>
+    </div>
+    <div class="nav">
+      <ul>
+        <li class="on"><a href="/home"><strong th:text="#{nav_text1}"></strong></a></li>
+      </ul>
+    </div>
+    <div class="nav nav_entries">
+      <div class="login-user j_drop-handler"><a href=""> <img
+              width="32" height="32" class="has-store store-online"
+              src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+              onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
+        <i class="icon icon-store store-online"></i> <strong class=""
+                                                             id="navbar-user-name"
+                                                             th:text="${user.getName()}"></strong> </a>
+        <div class="drop-store j_drop">
+          <div class="store-user"><img
+                  src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                  onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02?fop=imageView/2/w/54/h/54';this.onerror=null">
+            <div class=""><h3 th:text="${user.getName()}"></h3></div>
+            <p><a href="/logout" class="f_12px" th:text="#{logout}"></a></p></div>
+        </div>
+      </div>
+      <div class="login-user message"><span><a href="/show_message"><i
+              class="icon icon_message"></i></a></span> <i class="icon icon_new" style="display: none;"></i></div>
+      <div class="game-select" style="margin-right: -10px; margin-left: -2px;">
+        <div class="header-switcher j_drop-handler global-games" id="j_game-switcher" data-current="csgo"><h3>
+          <strong><img src="./images/logo_csgo2.png" class="sel-ico"
+                       data-game="csgo">CS2<span class="tag_status"
+                                                 style="display: none;"></span></strong><i
+                class="icon icon_arr_light"></i></h3>
+          <div class="j_drop"><p data-value="csgo" class="on" ><img
+                  src="./images/logo_csgo2.png" class="sel-ico" data-game="csgo">CS2<span
+                  class="tag_status" style="display: none;"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <ul>
+        <li class="" id="j_mybuying"><a href="/show_bookmark"><strong th:text="#{mybuying}"></strong></a>
+          <i class="icon icon_new" style="display: none;"></i></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="loading-cover">
+  <div class="spinner loading">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+<div class="blank20"></div>
+
+<div class="l_Layout">
+  <div class="cont_panel black">
+    <div class="my-thum" style="background-color: #132a50"><img
+            src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/70/h/70"
+            width="70" height="70"
+            onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
+      <h2><strong th:text="${user.getName()}"></strong></h2>
+      <div class="clear"></div>
+    </div>
+    <div class="my-menu">
+      <ul>
+        <li><a style="background-color: #132a50" href="/show_message"><i
+                class="icon icon_menu icon_menu_msg"></i>消息中心<i
+                class="icon icon_new"></i></a></li>
+        <li class="on"><a style="background-color: #132a50" href="/show_bookmark"><i
+                class="icon icon_menu icon_menu_fav"></i>我的收藏</a></li>
+        <li class="on"><a style="background-color: #132a50" href="/show_usersetting"><i
+                class="icon icon_menu icon_menu_invite"></i>账号设置</a></li>
+        <li class="on"><a style="background-color: #132a50" href="/show_inventory"><i
+                class="icon icon_menu icon_menu_gift"></i>我的仓库</a></li>
+
+      </ul>
+    </div>
+  </div>
+  <input type="hidden" id="passwordbool" th:value="${passwordbool}" />
+  <div class="cont_main">
+
+
+
+    <style type="text/css">
+      .user_nickname .name_tab2 {
+        display: none;
+      }
+      tr.trade_url td {
+        border: 0px;
+      }
+    </style>
+    <div class="user-setting">
+      <h3>基本设置</h3>
+      <table class="list_tb" width="100%">
+        <tbody><tr>
+          <td class="t_Left c_Gray" width="120">头像</td>
+          <td class="t_Left">
+            <img
+                    width="32" height="32" class="has-store store-online"
+                    src="https://g.fp.ps.netease.com/market/file/629985b63521f683551165fcLjskqS9c04?fop=imageView/2/w/54/h/54"
+                    onerror="this.src='https://g.fp.ps.netease.com/market/file/5c4994af8b7427196aca7aeblbTq8TJS02';this.onerror=null">
+          </td>
+        </tr>
+        <tr class="user_nickname">
+          <td class="t_Left c_Gray">昵称</td>
+          <td class="t_Left">
+            <span class="name_tab1" th:text="${user.getName()}"></span>
+            <span class="name_tab2">
+                <input type="text" name="nickname" class="i_Text" size="20" th:value="${user.getName()}" placeholder="">
+                <div class="tip f_12px c_Gray"><br><strong>(请勿带有辱骂、广告、诱导等其他违反法规的词汇，违者帐号将作封禁处理)</strong></div>
+            </span>
+          </td>
+          <td class="t_Right">
+            <div class="name_tab1">
+              <a href="javascript:;" class="change_name i_Btn i_Btn_small" id="change_name">修改昵称</a>
+            </div>
+            <div class="name_tab2">
+              <a href="javascript:;" class="change_name_cancel i_Btn i_Btn_sub i_Btn_small">取消</a>
+              <a href="javascript:;" class="change_name_confirm i_Btn i_Btn_small">确定</a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="blank20"></div>
+      <div class="blank20"></div>
+      <h3>安全设置</h3>
+      <table class="list_tb" width="100%">
+        <tbody>
+        <tr>
+          <td class="t_Left c_Gray" width="120">邮箱帐号</td>
+          <td class="t_Left">
+            <span id="status" class="c_Green"><i class="icon icon_status_success"></i>已绑定</span>
+            <span id="mobile" class="c_DGray" th:text="${user.getEmail()}">
+    </span>
+            <span id="mobile_input" style="display: none;">
+      <input type="text" id="input_email" name="mobile" class="i_Text" size="20" placeholder="请输入新的手机号码" th:value="${user.getEmail()}">
+    </span>
+          </td>
+          <td class="t_Right">
+            <div id="change_mobile">
+              <a href="javascript:;" class="i_Btn i_Btn_small">更换邮箱</a>
+            </div>
+            <div id="confirm_change" style="display: none;">
+              <a href="javascript:;" class="i_Btn i_Btn_small">确认更换</a>
+              <a href="javascript:;" class="i_Btn i_Btn_small">取消</a>
+            </div>
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <td class="t_Left c_Gray">密码设置</td>
+          <td class="t_Left">
+            <span id="password" class="c_DGray">********</span>
+            <span id="password_input" style="display: none;">
+      <input type="password" id="old_password" name="old_password" class="i_Text" size="20" placeholder="请输入旧密码" autocomplete="off">
+      <input type="password" id="new_password" name="new_password" class="i_Text" size="20" placeholder="请输入新的密码" autocomplete="off">
+    </span>
+          </td>
+          <td class="t_Right">
+            <div id="change_password">
+              <a href="javascript:;" class="i_Btn i_Btn_small">修改密码</a>
+            </div>
+            <div id="confirm_change_password" style="display: none;">
+              <a href="javascript:;" class="i_Btn i_Btn_small">确认更换</a>
+              <a href="javascript:;" class="i_Btn i_Btn_small">取消</a>
+            </div>
+          </td>
+        </tr>
+
+
+
+
+
+        <tr class="steam_bind">
+          <td class="t_Left c_Gray">Steam ID</td>
+          <td class="t_Left">
+            <span id="status2" class="c_Green"><i class="icon icon_status_success"></i>已绑定</span>
+            <span id="steamid" class="c_DGray" th:text="${user.getSteam_id()}">
+    </span>
+            <span id="steamid_input" style="display: none;">
+      <input type="text" id="input_steamid" name="mobile" class="i_Text" size="20" placeholder="请输入你的steamid" th:value="${user.getSteam_id()}">
+    </span>
+          </td>
+          <td class="t_Right">
+            <div id="change_steamid">
+              <a href="javascript:;" class="i_Btn i_Btn_small">更换SteamID</a>
+            </div>
+            <div id="confirm_steamid" style="display: none;">
+              <a href="javascript:;" class="i_Btn i_Btn_small">确认更换</a>
+              <a href="javascript:;" class="i_Btn i_Btn_small">取消</a>
+            </div>
+          </td>
+        </tr>
+
+
+
+
+
+
+        </tbody></table>
+      <div class="blank20"></div>
+      <div class="blank20"></div>
+
+    </div>
+    <!-- 设置自助解绑弹层开始 -->
+    <div class="popup popup_guide" id="j_popup_unbind" style="width:600px;">
+      <a class="popup-close" href="javascript:;" onclick="window.location.reload();">×</a>
+      <div class="popup-header"><h2>解绑Steam</h2></div>
+      <div class="popup-cont">
+        <div class="guide-steps">
+          <div class="step-1 on">
+            <span>1</span>
+            <h5>验证当前Steam ID</h5>
+          </div>
+          <div class="step-line step-line-12"></div>
+          <div class="step-2">
+            <span>2</span>
+            <h5>短信验证</h5>
+          </div>
+          <div class="step-line step-line-23"></div>
+          <div class="step-3">
+            <span>3</span>
+            <h5>解绑成功</h5>
+          </div>
+          <p class="clear"></p>
+        </div>
+        <div class="guide-desc guide-desc-1" style="display:;">
+          <div class="guide-block guide-block_unbind" style="height:auto;">
+            <p>解除绑定需先使用当前SteamID进行验证</p>
+            <br>
+            <p><a href="javascript:" class="i_Btn" id="btn-verify-steam">前往验证</a></p>
+          </div>
+          <ul class="c_Gray f_12px t_Left f_line24" >
+            <li>· 访问相关页面遇到问题？建议使用网易UU加速器。<a href="/help#steam_network" class="c_Blue">查看解决方法</a></li>
+            <li>· 惩罚与Steam帐号绑定，即使更换绑定的BUFF帐号，惩罚也会继承到新的帐号内</li>
+          </ul>
+        </div>
+        <div class="guide-desc guide-desc-2" style="display:none;">
+          <div class="guide-block">
+            <p class="c_Gray f_12px">请进行安全确认，输入<span id="mobile"></span>手机收到的验证码</p>
+            <p class="t_Left"><input type="text" class="i_Text" placeholder="输入验证码" name="authcode"><a href="javascript:" class="i_Btn i_Btn_hollow i_Btn_disabled" id="resend_authcode">获取验证码</a></p>
+          </div>
+          <p><a href="javascript:;" class="i_Btn i_Btn_long i_Btn_disabled" id="verify_authcode">确认</a></p>
+        </div>
+        <!-- 解绑成功提示 -->
+        <div class="guide-desc guide-desc-success" style="display:none;">
+          <div class="guide-block guide-block_success">
+            <p style="line-height:70px;">已成功解绑，你可以在账号设置中重新进行绑定操作</p>
+          </div>
+          <p><a href="javascript:;" class="i_Btn i_Btn_long" onclick="window.location.reload();">完成</a></p>
+        </div>
+        <!-- 解绑错误提示 -->
+        <div class="guide-desc guide-desc-failed" style="display:none;">
+          <div class="guide-block guide-block_failed">
+            <p >解绑错误提示</p>
+            <p><a href="#">查看解决方法</a><i class="icon icon_arr_right_small"></i></p>
+          </div>
+          <p ><a href="javascript:;" class="i_Btn i_Btn_long" onclick="Popup.hide()">完成</a></p>
+        </div>
+      </div>
+    </div>
+    <!-- 设置自助解绑弹层结束 -->
+    <div class="popup" id="j_popup_bind_authcode">
+      <a class="popup-close" href="javascript:;">×</a>
+      <div class="popup-cont">
+        <h2>输入验证码</h2>
+        <div class="popup-desc">
+          <p>请进行安全确认，输入<span id="mobile"></span>手机收到的验证码</p>
+          <p class="t_Center">
+            <input type="text" class="i_Text" name="authcode" placeholder="请输入验证码" size="38">
+          </p>
+        </div>
+      </div>
+      <div class="popup-btns">
+        <a href="javascript:;" class="i_Btn i_Btn_sub i_Btn_disabled" id="resend_authcode">获取验证码</a><a href="javascript:;" class="i_Btn i_Btn_main i_Btn_disabled" id="verify_authcode">确定</a>
+      </div>
+    </div>
+    <!-- 修改密码 start -->
+    <div class="popup" id="j_popup_password" style="width: 360px;">
+      <a class="popup-close" href="javascript:;" onclick="Popup.hide()">×</a>
+      <div class="popup-cont">
+        <div class="popup-qrbox">
+          <i class="icon icon_qr"></i>
+          <img src="/static/images/qr-code.png" width="175" height="175" >
+        </div>
+        <p class="t_Center"><span class="c_Gray">请到&nbsp;</span><i class="icon icon_logo"></i>&nbsp;BUFF APP&nbsp;<span class="c_Gray">用户中心修改密码</span></p>
+      </div>
+    </div>
+    <!-- 修改密码 end -->
+    <!-- 更换手机 start -->
+    <div class="popup" id="j_popup_change_mobile" style="width: 360px;">
+      <a class="popup-close" href="javascript:;" onclick="Popup.hide()">×</a>
+      <div class="popup-cont">
+        <div class="popup-qrbox">
+          <i class="icon icon_qr"></i>
+          <img src="/static/images/qr-code.png" width="175" height="175" >
+        </div>
+        <p class="t_Center"><span class="c_Gray">请到&nbsp;</span><i class="icon icon_logo"></i>&nbsp;BUFF APP&nbsp;<span class="c_Gray">帐号与安全更换手机</span></p>
+      </div>
+    </div>
+    <!-- 更换手机 end -->
+    <!-- 检视图外显背景图预览 start -->
+    <div class="popup popup_goodsbg" id="j_popup_goodsbg" style="width:710px;">
+      <a class="popup-close" href="javascript:;" onclick="Popup.hide()">×</a>
+      <div class="popup-header"><h2>点击更换饰品预览背景图</h2></div>
+      <div class="popup-cont">
+        <ul class="goodsbg-list">
+
+          <li  data-index="1">
+            <img src="https://spect.fp.ps.netease.com/file/613abf62daecfa07b62bd7034vsCWlS303">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="2">
+            <img src="https://spect.fp.ps.netease.com/file/613abf62607fd1831bfef7b40jjDyhFH03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="3">
+            <img src="https://spect.fp.ps.netease.com/file/613abf628a8ae97fee37dbb6dWmZ3RXH03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="4">
+            <img src="https://spect.fp.ps.netease.com/file/613abf6383c18c66a1820e5725wElDud03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  class="on"  data-index="5">
+            <img src="https://spect.fp.ps.netease.com/file/613abf6309463c49b9c8aa93Mt9e2tVQ03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="6">
+            <img src="https://spect.fp.ps.netease.com/file/613abf633f368d69f24b5fbbKLgHloaQ03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="7">
+            <img src="https://spect.fp.ps.netease.com/file/613abf64a37d2c96ab09e829MSMcHxkI03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="8">
+            <img src="https://spect.fp.ps.netease.com/file/613abf644ae8631c721dede0MlSULql503">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="9">
+            <img src="https://spect.fp.ps.netease.com/file/613abf64c68de2523b86c5fb5mIfhpkk03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="10">
+            <img src="https://spect.fp.ps.netease.com/file/613abf65cdb1560a2a547515e7pjYMit03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="11">
+            <img src="https://spect.fp.ps.netease.com/file/613abf65607fd1b592328420bazTiId603">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+          <li  data-index="12">
+            <img src="https://spect.fp.ps.netease.com/file/613abf6509463c528a397bf3Hj0z26aj03">
+            <i class="icon icon_check_small"></i>
+          </li>
+
+        </ul>
+      </div>
+      <div class="blank20"></div>
+    </div>
+    <!-- 检视图外显背景图预览 end -->
+    <!-- KYC认证 start -->
+    <div class="popup" id="j_popup_kyc_cert" style="width: 500px;">
+      <a class="popup-close" href="javascript:;" onclick="Popup.hide()">×</a>
+      <div class="popup-header"><h2>KYC认证</h2></div>
+      <div class="popup-cont" id="bas-widget-container">
+      </div>
+    </div>
+    <!-- KYC认证 end -->
+
+    <!-- 认证方式选择 start -->
+    <div class="popup" id="j_popup_cert_mode_select" style="width: 500px;">
+      <a class="popup-close" href="javascript:;" onclick="Popup.hide()">×</a>
+      <div class="popup-header"><h2>Verification</h2></div>
+      <div class="popup-cont" id="bas-widget-container">
+      </div>
+    </div>
+    <!-- 认证方式选择 end -->
+
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+
+<div class="blank20"></div>
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+  $(document).ready(function() {
+    // 检查#steamid是否为空
+    function checkSteamID() {
+      if ($('#steamid').text().trim() === '') {
+        // 如果为空，将状态改为红色的未绑定
+        $('#status2').html('<i class="icon icon_status_error"></i>未绑定').removeClass('c_Green').addClass('c_Red');
+      } else {
+        // 如果不为空，将状态改为绿色的已绑定
+        $('#status2').html('<i class="icon icon_status_success"></i>已绑定').removeClass('c_Red').addClass('c_Green');
+      }
+    }
+
+    // 在页面加载时运行checkSteamID函数
+    checkSteamID();
+
+    // 当点击更换SteamID按钮时
+    $('#change_steamid a').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+
+      // 隐藏steamid和change_steamid
+      $('#steamid, #change_steamid').hide();
+      // 显示steamid_input和confirm_steamid
+      $('#steamid_input, #confirm_steamid').show();
+      // 将已绑定文字改为修改中，并改变颜色为黄色
+      $('#status2').html('<i class="icon icon_status_success"></i>修改中').removeClass('c_Green').addClass('c_Yellow');
+    });
+
+    // 当点击取消按钮时
+    $('#confirm_steamid a:last-child').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+
+      // 显示steamid和change_steamid
+      $('#steamid, #change_steamid').show();
+      // 隐藏steamid_input和confirm_steamid
+      $('#steamid_input, #confirm_steamid').hide();
+      // 检查#steamid是否为空，并设置正确的状态
+      $('#status2').removeClass('c_Yellow').addClass('c_Green')
+      checkSteamID();
+    });
+
+    // 当点击确认更换按钮时
+    $('#confirm_steamid a:first-child').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+      // 显示steamid和change_steamid
+      $('#steamid, #change_steamid').show();
+      // 隐藏steamid_input和confirm_steamid
+      $('#steamid_input, #confirm_steamid').hide();
+      // 检查#steamid是否为空，并设置正确的状态
+      checkSteamID();
+      var steamid=$('#input_steamid').val().trim();
+      // 这里可以添加你的代码来处理SteamID的更换
+
+      window.location.href = '/update_usersetting?steamid=' + steamid
+    });
+
+  });
+
+
+  $(document).ready(function() {
+    // 当点击修改密码按钮时
+    $('#change_password a').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+      // 清空old_password和new_password输入框的值
+      $('#old_password, #new_password').val('');
+      // 隐藏password和change_password
+      $('#password, #change_password').hide();
+      // 显示password_input和confirm_change_password
+      $('#password_input, #confirm_change_password').show();
+    });
+
+    // 当点击取消按钮时
+    $('#confirm_change_password a:last-child').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+      // 清空old_password和new_password输入框的值
+      $('#old_password, #new_password').val('');
+      // 显示password和change_password
+      $('#password, #change_password').show();
+      // 隐藏password_input和confirm_change_password
+      $('#password_input, #confirm_change_password').hide();
+    });
+
+    // 当点击确认更换按钮时
+    $('#confirm_change_password a:first-child').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+
+      // 获取旧密码和新密码
+      var oldPassword = $('#old_password').val().trim();
+      var newPassword = $('#new_password').val().trim();
+
+      // 显示password和change_password
+      $('#password, #change_password').show();
+      // 隐藏password_input和confirm_change_password
+      $('#password_input, #confirm_change_password').hide();
+      // 这里可以添加你的代码来处理密码的更换
+      // ...
+
+      window.location.href = '/update_usersetting?newPassword=' + newPassword + '&oldPassword=' + oldPassword;
+
+      // 清空old_password和new_password输入框的值
+    });
+  });
+
+
+  $(document).ready(function() {
+    // 检查#mobile是否为空
+    function checkMobile() {
+      if ($('#mobile').text().trim() === '') {
+        // 如果为空，将状态改为红色的未绑定
+        $('#status').html('<i class="icon icon_status_error"></i>未绑定').removeClass('c_Green').addClass('c_Red');
+      } else {
+        // 如果不为空，将状态改为绿色的已绑定
+        $('#status').html('<i class="icon icon_status_success"></i>已绑定').removeClass('c_Red').addClass('c_Green');
+      }
+    }
+
+    // 在页面加载时运行checkMobile函数
+    checkMobile();
+
+    // 当点击更换手机按钮时
+    $('#change_mobile a').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+
+      // 隐藏mobile和change_mobile
+      $('#mobile, #change_mobile').hide();
+      // 显示mobile_input和confirm_change
+      $('#mobile_input, #confirm_change').show();
+      // 将已绑定文字改为修改中，并改变颜色为黄色
+      $('#status').html('<i class="icon icon_status_success"></i>修改中').removeClass('c_Green').addClass('c_Yellow');
+    });
+
+    // 当点击取消按钮时
+    $('#confirm_change a:last-child').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+
+      // 显示mobile和change_mobile
+      $('#mobile, #change_mobile').show();
+      // 隐藏mobile_input和confirm_change
+      $('#mobile_input, #confirm_change').hide();
+      // 检查#mobile是否为空，并设置正确的状态
+      $('#status').removeClass('c_Yellow').addClass('c_Green')
+      checkMobile();
+    });
+
+// 当点击确认更换按钮时
+    $('#confirm_change a:first-child').click(function(event) {
+      // 阻止超链接的默认行为
+      event.preventDefault();
+      // 显示mobile和change_mobile
+      $('#mobile, #change_mobile').show();
+      // 隐藏mobile_input和confirm_change
+      $('#mobile_input, #confirm_change').hide();
+      // 检查#mobile是否为空，并设置正确的状态
+      checkMobile();
+      var email=$('#input_email').val().trim();
+      // 这里可以添加你的代码来处理手机号码的更换
+      // ...
+      window.location.href = '/update_usersetting?email=' + email
+    });
+
+  });
+
+  $(() => {
+
+    window.onload = function() {
+      var passwordbool = document.getElementById('passwordbool').value;
+      if (passwordbool == "false") {
+        $('#old_password, #new_password').val('');
+        console.log("旧密码错误");
+        alert('旧密码错误');
+        window.location.href = '/show_usersetting';
+      }
+      //执行其他操作
+    };
+    $('#search_btn_csgo').click(function () {
+      let search = $('input[name="search"]').val()
+      if (search === '') {
+        alert('请输入搜索内容')
+        return
+      }
+      window.location.href = '/show_bookmark?search=' + search
+    })
+
+
+
+    // 当点击修改昵称按钮时
+    $('.change_name').click(function() {
+      // 隐藏name_tab1
+      $('.name_tab1').hide();
+      // 显示name_tab2
+      $('.name_tab2').show();
+    });
+
+    // 当点击取消按钮时
+    $('.change_name_cancel').click(function() {
+      // 显示name_tab1
+      $('.name_tab1').show();
+      // 隐藏name_tab2
+      $('.name_tab2').hide();
+    });
+
+    // 当点击确定按钮时
+    $('.change_name_confirm').click(function() {
+      // 这里可以添加你的代码来处理昵称的修改
+      // ...
+      let nickname = $('input[name="nickname"]').val()
+
+      // 显示name_tab1
+      $('.name_tab1').show();
+      // 隐藏name_tab2
+      $('.name_tab2').hide();
+      window.location.href = '/update_usersetting?nickname=' + nickname
+
+    });
+    $('.delete-bookmark').click(function () {
+      let goods_id = $(this).attr('id')
+      let user_id = [[${user?.getId()}]]
+      $.post('/delete_bookmark', {goods_id: goods_id, user_id: user_id, where: 'show_bookmark'}, function (data) {
+        window.location.reload()
+      })
+    })
+
+  })
+</script>
+</html>

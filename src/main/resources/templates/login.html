@@ -5039,6 +5039,13 @@
             let the_password = $('#password').val()
             $(window.parent.user_login(the_name, the_password));
         })
+        document.onkeydown = function(e){
+            if(e.keyCode == 13){
+                $('#submitBtn').click();
+            }
+        }
+
+
     })
 </script>
 

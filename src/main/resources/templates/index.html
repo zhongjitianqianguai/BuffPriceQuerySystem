@@ -258,15 +258,16 @@
                         <h3><a th:href="'/goods?goods_id='+${good.getGoods_id()}" th:title="${good.getName()}"
                                th:text="${good.getName()}"></a></h3>
 
-                        <p>
-                            <!--                            <strong class="f_Strong" th:text="'￥'+${good?.getNow_price_buff()}"></strong>-->
-                            <small class="f_Strong" th:text="'￥'+${good?.getNow_price_buff()}"></small>
+
+                        <p style="display: flex; justify-content: space-between;">
+                            <small  class="f_Strong" th:text="'￥'+${good?.getNow_price_buff()}" style="font-size: 16px;"></small>
                             <span class="l_Right f_12px f_Bold c_Gray"
                                   th:text="'历史最低价格:'+${good.getThe_lowest_price_buff()}">
+            </span>
 
-
-                    </span>
+                            <input type="hidden" class="price" th:value="${good.getThe_lowest_price_buff()}">
                         </p>
+
 
                         <i class="icon icon_check"></i>
 
@@ -323,6 +324,33 @@
     }
 
     $(() => {
+        window.onload = function() {
+            // 使用querySelectorAll方法选择所有的.price元素
+            let inputs = document.querySelectorAll('.price');
+
+            // 使用forEach方法遍历所有的.price元素
+            inputs.forEach(function(input) {
+                // 获取good.getThe_lowest_price_buff()的值
+                let price = input.value;
+
+                // 检测长度
+                if (price.length > 5) {
+                    // 如果长度大于5，缩小字体
+                    input.parentElement.querySelector('.c_Gray').style.fontSize = '9px';
+                } else if(price.length > 10){
+                    input.parentElement.querySelector('.c_Gray').style.fontSize = '6px';
+                }else {
+                    // 否则，保持原字体大小
+                    input.parentElement.querySelector('.c_Gray').style.fontSize = '12px';
+                }
+            });
+        }
+
+
+
+// 检测长度
+
+
         $('#j_popup_login').hide()
         if ([[${user_status}]] === '密码错误') {
             $('#j_popup_login').show()
