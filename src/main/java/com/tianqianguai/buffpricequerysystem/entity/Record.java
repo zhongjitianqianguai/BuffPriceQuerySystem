@@ -1,7 +1,6 @@
 package com.tianqianguai.buffpricequerysystem.entity;
 
 public class Record {
-    String record_id;
     String goods_id;
     String time;
     double price;
@@ -15,20 +14,11 @@ public class Record {
         this.source = source;
     }
 
-    public Record(String record_id, String goods_id, String time, double price, String source) {
-        this.record_id = record_id;
+    public Record( String goods_id, String time, double price, String source) {
         this.goods_id = goods_id;
         this.time = time;
         this.price = price;
         this.source = source;
-    }
-
-    public String getRecord_id() {
-        return record_id;
-    }
-
-    public void setRecord_id(String record_id) {
-        this.record_id = record_id;
     }
 
     public String getGoods_id() {
@@ -55,13 +45,5 @@ public class Record {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Record{" +
-                "record_id='" + record_id + '\'' +
-                ", goods_id='" + goods_id + '\'' +
-                ", time='" + time + '\'' +
-                ", price=" + price +
-                '}';
-    }
+
 }
