@@ -18,10 +18,10 @@ public class RecordService {
     RecordMapper recordMapper;
     public List<Record> getGoodRecordByIdAndPlatform(String goods_id,String platform){
         logger.debug("enter getGoodRecordById()");
-        return recordMapper.getGoodRecordByIdAndPlatform(goods_id,platform);
+        return recordMapper.getGoodRecordByIdAndPlatform(Integer.parseInt(goods_id),platform);
     }
     public List<Record> getGoodRecordByIdAndTime(String goods_id,String time){
         logger.debug("enter getGoodRecordByIdAndTime()");
-        return recordMapper.getGoodRecordByIdAndTime(goods_id,time);
+        return recordMapper.getGoodRecordByIdAndTime(Integer.parseInt(goods_id),time);
     }
 }

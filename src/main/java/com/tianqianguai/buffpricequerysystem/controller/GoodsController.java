@@ -98,7 +98,7 @@ public class GoodsController {
         } else {
             offset = (Integer.parseInt(page) - 1) * 20;
         }
-
+        System.out.println(offset);
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("pageNumbers", getPageNumbers(Integer.parseInt(page), 58));
         model.addAttribute("totalPages", 58);
