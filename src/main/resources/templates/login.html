@@ -5012,7 +5012,7 @@
 </div>
 <script type="text/javascript" th:inline="javascript">
     $(() => {
-        $('#name').change(function () {
+        $("#name").bind("input propertychange change",function(event){
             if ($('#name').val() === ''||$('#password').val() === '') {
                 $('#submitBtn').removeClass('u-loginbtn btncolor tabfocus ')
                 $('#submitBtn').addClass('u-loginbtn btncolor tabfocus u-loginbtn-gary ')
@@ -5020,16 +5020,16 @@
                 $('#submitBtn').removeClass('u-loginbtn btncolor tabfocus u-loginbtn-gary ')
                 $('#submitBtn').addClass('u-loginbtn btncolor tabfocus ')
             }
-        })
-        $('#password').change(function () {
+        });
+        $("#password").bind("input propertychange change",function(event){
             if ($('#name').val() === ''||$('#password').val() === '') {
                 $('#submitBtn').removeClass('u-loginbtn btncolor tabfocus ')
-                $('#submitBtn').addClass('u-loginbtn btncolor tabfocus u-loginbtn-gary' )
+                $('#submitBtn').addClass('u-loginbtn btncolor tabfocus u-loginbtn-gary ')
             } else {
                 $('#submitBtn').removeClass('u-loginbtn btncolor tabfocus u-loginbtn-gary ')
                 $('#submitBtn').addClass('u-loginbtn btncolor tabfocus ')
             }
-        })
+        });
 
         $('#submitBtn').click(function () {
             if ($('#name').val() === ''||$('#password').val() === '') {

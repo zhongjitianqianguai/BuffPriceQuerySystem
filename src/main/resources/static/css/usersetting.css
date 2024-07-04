@@ -9613,7 +9613,7 @@ div.timepicker.disabled .i_Text {
     top: 50%;
     z-index: 500;
     width: 360px;
-    border-radius: 2px
+    border-radius: 2px;
 }
 
 .popup .popup-close {

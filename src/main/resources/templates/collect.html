@@ -146,7 +146,7 @@
                         <!--                        </p>-->
                     </td>
                     <td class="t_Left"><a th:id="${good.getGoods_id()}" href="" class="i_Btn i_Btn_mid"
-                                          th:text="'￥'+${collects.get(iterStat.index).getExpected_price()}"></a><span
+                                          th:text="'￥'+${collects.get(iterStat.index+(page-1)*10).getExpected_price()}"></a><span
                             th:id="${good.getGoods_id()}" class="user-fav on delete-bookmark"><span th:text="#{Favorite}"></span><i
                             class="icon icon_fav"></i></span></td>
                 </tr>
@@ -193,7 +193,7 @@
             window.location.href = '/show_bookmark?search=' + search
         })
         document.onkeydown = function(e){
-            if(e.keyCode == 13){
+            if(e.keyCode === 13){
                 $('#search_btn_csgo').click();
             }
         }
@@ -201,7 +201,10 @@
             let expected_price = prompt('请输入预期价格', '5.00')
             let goods_id = $(this).attr('id')
             $.post('/change_expected_price', {goods_id: goods_id, expected_price: expected_price}, function (data) {
-                // console.log(data)
+                if (data) {
+                    sleep(1)
+                    window.location.reload()
+                }
                 window.location.reload()
             })
         })
