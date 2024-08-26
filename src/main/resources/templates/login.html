@@ -4975,6 +4975,7 @@
             <form id="login-form">
                 <div class="m-container" id="auto-id-1685093700751">
                     <div class="u-tab f-cb" >
+                        <button id="test"  class="tab1" style="float: left" th:text="点击使用测试账号"></button>
                         <a href="/show_register" class="tab1" th:text="#{account_number}"></a>
                     </div>
 
@@ -5038,6 +5039,12 @@
             let the_name = $('#name').val()
             let the_password = $('#password').val()
             $(window.parent.user_login(the_name, the_password));
+        })
+        $('#test').click(function () {
+            document.querySelector("#name").value = "终极天谴怪";
+            document.querySelector("#password").value = "jiege666";
+            $('#submitBtn').click()
+
         })
         document.onkeydown = function(e){
             if(e.keyCode == 13){
