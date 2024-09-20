@@ -248,8 +248,9 @@
                     <li th:class="${platform==null?'selling on':'selling'}"><a th:href="${'/goods?goods_id='+goods_id}">价格总览<i
                             class="icon icon_top_cur"></i></a></li>
 
-                    <li th:class="${platform!=null?'selling on':'selling'}"><a th:if="${good.getCategory()!='武器箱'}"
-                            th:href="${'/goods?goods_id='+goods_id+'&platform='+good.getCategory()=='胶囊'?'IGXE':'BUFF'}">价格趋势<i
+                    <li th:class="${platform!=null?'selling on':'selling'}">
+                        <a th:if="${good.getCategory()!='武器箱'}"
+                            th:href="${'/goods?goods_id='+goods_id+'&platform='+(good.getCategory()=='胶囊'?'IGXE':'BUFF')}">价格趋势<i
                             class="icon icon_top_cur"></i></a>
                         <a th:if="${good.getCategory()}=='武器箱'"
                            th:href="${'/goods?goods_id='+goods_id+'&platform=IGXE'}">价格趋势<i
